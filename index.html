@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Interaktiver Frequenzmischer (Drei Diagramme, korrigierte Skalierung)</title>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.25/dist/katex.min.css"
+        integrity="sha384-WcoG4HRXMzYzfCgiyfrySxx90XSl2rxY5mnVY5TwtWE6KLrArNKn0T/mOgNL0Mmi" crossorigin="anonymous">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.25/dist/katex.min.js"
+        integrity="sha384-J+9dG2KMoiR9hqcFao0IBLwxt6zpcyN68IgwzsCSkbreXUjmNVRhPFTssqdSGjwQ"
+        crossorigin="anonymous"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.25/dist/contrib/auto-render.min.js"
+        integrity="sha384-hCXGrW6PitJEwbkoStFjeJxv+fSOOQKOPbJxSfM6G5sWZjAyWhXiTIIAmQqnlLlh"
+        crossorigin="anonymous"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            renderMathInElement(document.body, {
+                delimiters: [
+                    { left: '$$', right: '$$', display: true },
+                    { left: '$', right: '$', display: false },
+                    { left: '\\(', right: '\\)', display: false },
+                    { left: '\\[', right: '\\]', display: true }
+                ],
+                throwOnError: false
+            })
+        });
+    </script>
+
+    <script>
+        // Einfache JS-Implementierung der komplexen Multiplikation für die FFT
+        class Complex {
+            constructor(re, im) {
+                this.re = re || 0
+                this.im = im || 0
+            }
+            add(b) { return new Complex(this.re + b.re, this.im + b.im) }
+            sub(b) { return new Complex(this.re - b.re, this.im - b.im) }
+            mul(b) {
+                return new Complex(
+                    this.re * b.re - this.im * b.im,
+                    this.re * b.im + this.im * b.re
+                )
+            }
+        }
+
+        // Basierend auf dem Cooley-Tukey-Algorithmus (radix-2)
+        function fft_js(input) {
+            const N = input.length
+            if (N <= 1) return input
+
+            // Rekursion für gerade/ungerade Indizes
+            const even = fft_js(input.filter((_, i) => i % 2 === 0))
+            const odd = fft_js(input.filter((_, i) => i % 2 !== 0))
+
+            const result = new Array(N)
+            for (let k = 0; k < N / 2; k++) {
+                // Twiddle factor (komplexer Einheitswurzel)
+                const t = new Complex(0, -2 * Math.PI * k / N)
+                const t_exp = new Complex(Math.cos(t.im), Math.sin(t.im))
+
+                const term = odd[k].mul(t_exp)
+                result[k] = even[k].add(term)
+                result[k + N / 2] = even[k].sub(term)
+            }
+            return result
+        }
+
+        // Wrapper-Funktion für die FFT, um nur die Amplitude zurückzugeben
+        function calculateFFT(data) {
+            const N_fft = 1024
+            const data_padded = [...data.slice(0, N_fft)]
+
+            const complex_input = data_padded.map(val => new Complex(val, 0))
+
+            const complex_output = fft_js(complex_input)
+            const amplitude_spectrum = []
+
+            for (let k = 0; k < N_fft / 2; k++) {
+                const re = complex_output[k].re
+                const im = complex_output[k].im
+                const magnitude = Math.sqrt(re * re + im * im) * (2 / N_fft)
+                amplitude_spectrum.push({ f: k * (SAMPLE_RATE / N_fft), A: magnitude })
+            }
+            return amplitude_spectrum
+        }
+    </script>
+
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+
+        h1, h2 {
+            color: #333;
+        }
+
+        .controls {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .control-group {
+            background-color: #fff;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            display: block;
+            margin-top: 10px;
+            font-weight: bold;
+        }
+
+        input[type="range"] {
+            width: 90%;
+            margin-top: 5px;
+        }
+
+        .vis-container {
+            margin-top: 20px;
+            background-color: #fff;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .line {
+            fill: none;
+            stroke-width: 2px;
+        }
+
+        .axis path, .axis line {
+            fill: none;
+            stroke: #888;
+            shape-rendering: crispEdges;
+        }
+
+        .axis text {
+            font-size: 10px;
+        }
+
+        .bar {
+            fill: steelblue;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Interaktiver Frequenzmischer ($\sin(\omega_1 t) \cdot \sin(\omega_2 t + \phi)$)</h1>
+
+    <div class="controls">
+        <div class="control-group">
+            <h2>Signal 1 ($S_1$)</h2>
+            <label>Frequenz $f_1$ (Hz):</label>
+            <input type="range" id="f1_slider" min="10" max="100" value="50" step="1"><span id="f1_val">50</span> Hz<br>
+            <label>Amplitude $A_1$:</label>
+            <input type="range" id="A1_slider" min="0.1" max="2" value="1.0" step="0.1"><span id="A1_val">1.0</span>
+        </div>
+
+        <div class="control-group">
+            <h2>Signal 2 ($S_2$)</h2>
+            <label>Frequenz $f_2$ (Hz):</label>
+            <input type="range" id="f2_slider" min="10" max="100" value="40" step="1"><span id="f2_val">40</span> Hz<br>
+            <label>Amplitude $A_2$:</label>
+            <input type="range" id="A2_slider" min="0.1" max="2" value="0.8" step="0.1"><span id="A2_val">0.8</span><br>
+            <label>Phase $\phi$ (°):</label>
+            <input type="range" id="phi_slider" min="0" max="360" value="90" step="1"><span id="phi_val">90</span> °
+        </div>
+    </div>
+    
+    <div class="vis-container">
+        <h2>Zeitverlauf Eingangssignale ($S_1$ (blau), $S_2$ (grün))</h2>
+        <svg id="s_in_vis" width="840" height="250"></svg>
+    </div>
+
+    <div class="vis-container">
+        <h2>Zeitverlauf Mischsignal ($S_{out}$ (rot))</h2>
+        <svg id="s_out_vis" width="840" height="250"></svg>
+    </div>
+    
+    <div class="vis-container">
+        <h2>Frequenzspektrum (FFT von $S_{out}$)</h2>
+        <svg id="fft_vis" width="840" height="300"></svg>
+    </div>
+
+    <script>
+        // Allgemeine Konstanten
+        const SAMPLE_RATE = 2048
+        const DURATION = 1.0
+        const N_POINTS = SAMPLE_RATE * DURATION
+        const T_VIS = 0.2 // Visualisiere nur 0.2 Sekunden für den Zeitverlauf
+        
+        // Konstante für maximale Amplitude der Slider (Max-Wert im HTML-Input ist 2.0)
+        const MAX_A_SLIDER = 2.0;
+
+        // --- D3.js Setup ---
+        const margin = { top: 20, right: 20, bottom: 40, left: 50 }
+        const width = 840 - margin.left - margin.right
+        const height_time = 250 - margin.top - margin.bottom 
+        const height_fft = 300 - margin.top - margin.bottom
+
+        // Funktion zum Erstellen eines SVG-Containers
+        function setupSVG(id, height) {
+            return d3.select(id)
+                .attr("viewBox", `0 0 840 ${height + margin.top + margin.bottom}`)
+                .append("g")
+                .attr("transform", `translate(${margin.left},${margin.top})`)
+        }
+
+        // S_IN Visualisierung
+        const svgSIn = setupSVG("#s_in_vis", height_time)
+        const ySIn = d3.scaleLinear().range([height_time, 0])
+        
+        // S_OUT Visualisierung
+        const svgSOut = setupSVG("#s_out_vis", height_time)
+        const ySOut = d3.scaleLinear().range([height_time, 0])
+        
+        // Allgemeine Zeit-Skala für beide Zeit-Plots
+        const xTime = d3.scaleLinear().range([0, width])
+        
+        // Allgemeiner Liniengenerator
+        const lineGenerator = d3.line()
+            .x(d => xTime(d.t))
+            .y(d => d.scale(d.S))
+
+        // FFT-Visualisierung (Spektrum)
+        const svgFFT = setupSVG("#fft_vis", height_fft)
+        const xFFT = d3.scaleLinear().range([0, width])
+        const yFFT = d3.scaleLinear().range([height_fft, 0])
+
+
+        // --- Hauptlogik ---
+
+        function updateVisualization() {
+            // 1. Werte aus Slidern lesen
+            const f1 = parseFloat(document.getElementById('f1_slider').value)
+            const A1 = parseFloat(document.getElementById('A1_slider').value)
+            const f2 = parseFloat(document.getElementById('f2_slider').value)
+            const A2 = parseFloat(document.getElementById('A2_slider').value)
+            const phi_deg = parseFloat(document.getElementById('phi_slider').value)
+            const phi_rad = phi_deg * (Math.PI / 180)
+
+            // 2. Slider-Anzeigen aktualisieren
+            document.getElementById('f1_val').textContent = f1
+            document.getElementById('A1_val').textContent = A1.toFixed(1)
+            document.getElementById('f2_val').textContent = f2
+            document.getElementById('A2_val').textContent = A2.toFixed(1)
+            document.getElementById('phi_val').textContent = phi_deg
+
+            const S_out_full = [] 
+            const S1_vis = []   
+            const S2_vis = []   
+            const S_out_vis = [] 
+
+            // 3. Signale berechnen
+            for (let i = 0; i < N_POINTS; i++) {
+                const t = i / SAMPLE_RATE
+                const S1 = A1 * Math.sin(2 * Math.PI * f1 * t)
+                const S2 = A2 * Math.sin(2 * Math.PI * f2 * t + phi_rad)
+                const S_out = S1 * S2
+
+                S_out_full.push(S_out)
+                if (t <= T_VIS) {
+                    S_out_vis.push({ t: t, S: S_out, scale: ySOut })
+                    S1_vis.push({ t: t, S: S1, scale: ySIn })
+                    S2_vis.push({ t: t, S: S2, scale: ySIn })
+                }
+            }
+            
+            xTime.domain([0, T_VIS])
+
+            // --- 4. Zeit-Plot für Eingänge (S1, S2) ---
+            svgSIn.selectAll("*").remove() 
+            
+            // Y-Achse auf den maximalen Amplituden-Wert FIXIEREN (2.0), 
+            // damit die relative Änderung der Kurvenhöhe sichtbar wird.
+            const max_in_y = MAX_A_SLIDER * 1.05; 
+            ySIn.domain([-max_in_y, max_in_y]) 
+
+            // Achsen und Labels
+            svgSIn.append("g").attr("transform", `translate(0,${height_time})`).call(d3.axisBottom(xTime).ticks(10))
+            svgSIn.append("g").call(d3.axisLeft(ySIn).ticks(5))
+            svgSIn.append("text").attr("transform", `translate(${width / 2}, ${height_time + margin.bottom - 5})`).style("text-anchor", "middle").text("Zeit t (s)");
+            svgSIn.append("text").attr("transform", "rotate(-90)").attr("y", 0 - margin.left).attr("x", 0 - (height_time / 2)).attr("dy", "1em").style("text-anchor", "middle").text("Amplitude");
+
+            // Null-Linie
+            svgSIn.append("line").attr("x1", 0).attr("y1", ySIn(0)).attr("x2", width).attr("y2", ySIn(0)).attr("stroke", "#ccc").attr("stroke-dasharray", "4")
+
+            // S1 (Blau, gestrichelt)
+            svgSIn.append("path").datum(S1_vis).attr("class", "line").attr("d", lineGenerator).attr("stroke", "blue").attr("stroke-dasharray", "4").style("opacity", 0.7).append("title").text(`Signal 1 (S1) - A: ${A1.toFixed(1)}, f: ${f1} Hz`)
+
+            // S2 (Grün, gestrichelt)
+            svgSIn.append("path").datum(S2_vis).attr("class", "line").attr("d", lineGenerator).attr("stroke", "green").attr("stroke-dasharray", "4").style("opacity", 0.7).append("title").text(`Signal 2 (S2) - A: ${A2.toFixed(1)}, f: ${f2} Hz, phi: ${phi_deg}°`)
+            
+            
+            // --- 5. Zeit-Plot für Ausgang (S_out) ---
+            svgSOut.selectAll("*").remove() 
+            // Y-Achse DYNAMISCH für den Ausgang (max A = A1 * A2)
+            const max_out_y = (A1 * A2) * 1.05 
+            ySOut.domain([-max_out_y, max_out_y])
+
+            // Achsen und Labels
+            svgSOut.append("g").attr("transform", `translate(0,${height_time})`).call(d3.axisBottom(xTime).ticks(10))
+            svgSOut.append("g").call(d3.axisLeft(ySOut).ticks(5))
+            svgSOut.append("text").attr("transform", `translate(${width / 2}, ${height_time + margin.bottom - 5})`).style("text-anchor", "middle").text("Zeit t (s)");
+            svgSOut.append("text").attr("transform", "rotate(-90)").attr("y", 0 - margin.left).attr("x", 0 - (height_time / 2)).attr("dy", "1em").style("text-anchor", "middle").text("Amplitude");
+
+            // Null-Linie
+            svgSOut.append("line").attr("x1", 0).attr("y1", ySOut(0)).attr("x2", width).attr("y2", ySOut(0)).attr("stroke", "#ccc").attr("stroke-dasharray", "4")
+
+            // S_out (Rot, durchgezogen)
+            svgSOut.append("path").datum(S_out_vis).attr("class", "line").attr("d", lineGenerator).attr("stroke", "red").attr("stroke-width", 3).style("opacity", 1.0).append("title").text(`Mischsignal (Sout) - Max A: ${(A1 * A2).toFixed(2)}`)
+
+
+            // --- 6. FFT Spektrum berechnen und zeichnen ---
+            const fft_data = calculateFFT(S_out_full)
+
+            svgFFT.selectAll("*").remove() 
+
+            // Grenzen für Frequenz und Amplitude
+            const f_max_vis = Math.max(f1, f2) + 50 
+            const max_amplitude = d3.max(fft_data, d => d.A) * 1.1
+
+            xFFT.domain([0, f_max_vis])
+            yFFT.domain([0, max_amplitude])
+
+            // Achsen und Labels
+            svgFFT.append("g").attr("transform", `translate(0,${height_fft})`).call(d3.axisBottom(xFFT).ticks(10))
+            svgFFT.append("g").call(d3.axisLeft(yFFT).ticks(5))
+            svgFFT.append("text").attr("transform", `translate(${width / 2}, ${height_fft + margin.bottom - 5})`).style("text-anchor", "middle").text("Frequenz f (Hz)");
+            svgFFT.append("text").attr("transform", "rotate(-90)").attr("y", 0 - margin.left).attr("x", 0 - (height_fft / 2)).attr("dy", "1em").style("text-anchor", "middle").text("Amplitude |H(f)|");
+
+            // Balken-Breite
+            const f_res = SAMPLE_RATE / 1024 
+            const barWidth = width / (f_max_vis / f_res)
+
+            // Balken zeichnen
+            svgFFT.selectAll(".bar")
+                .data(fft_data.filter(d => d.f <= f_max_vis))
+                .enter().append("rect")
+                .attr("class", "bar")
+                .attr("x", d => xFFT(d.f))
+                .attr("y", d => yFFT(d.A))
+                .attr("width", barWidth * 0.8)
+                .attr("height", d => height_fft - yFFT(d.A))
+                .append("title")
+                .text(d => `Frequenz: ${d.f.toFixed(1)} Hz, Amplitude: ${d.A.toFixed(3)}`)
+
+            // Markierung für Summen- und Differenzfrequenz
+            const f_sum = f1 + f2
+            const f_diff = Math.abs(f1 - f2);
+
+            [
+                { f: f_diff, label: "Diff.", color: "green" },
+                { f: f_sum, label: "Summe", color: "purple" }
+            ].forEach(mark => {
+                if (mark.f > 0 && mark.f <= f_max_vis) {
+                    svgFFT.append("line")
+                        .attr("x1", xFFT(mark.f)).attr("y1", 0)
+                        .attr("x2", xFFT(mark.f)).attr("y2", height_fft)
+                        .attr("stroke", mark.color).attr("stroke-dasharray", "2")
+
+                    const freq_text = mark.f > 1 ? mark.f.toFixed(1) : mark.f.toFixed(2);
+                    
+                    svgFFT.append("text")
+                        .attr("x", xFFT(mark.f)).attr("y", -5)
+                        .attr("fill", mark.color).attr("text-anchor", "middle")
+                        .text(`${mark.label} (${freq_text} Hz)`)
+                }
+            })
+        }
+
+        // --- Event Listener initialisieren ---
+        document.querySelectorAll('input[type="range"]').forEach(slider => {
+            slider.addEventListener('input', updateVisualization)
+        })
+
+        // Initialen Plot zeichnen
+        updateVisualization()
+
+    </script>
+</body>
+
+</html>
