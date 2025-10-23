@@ -1,0 +1,251 @@
+\documentclass[12pt,a4paper,ngerman]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{tkz-euclide}
+\usepackage[T1]{fontenc}
+
+%\usepackage[]{ntheorem}
+%\usepackage[amsthm,thmmarks]{ntheorem}
+\usepackage{amsmath}
+%\usepackage{amsthm}
+\usepackage{hyperref}
+\usepackage{cleveref}
+
+\usepackage{amsthm}
+\usepackage{thmtools}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{babel}
+\usepackage{textcomp}
+
+\newtheoremstyle{mytheorem}
+  {} % Space above (default: 3pt)
+  {} % Space below (default: 3pt)
+  {\itshape} % Body font: set to italic (standard for plain theorem style)
+  {} % Indent amount
+  {\bfseries} % Head font: set to bold
+  {.} % Punctuation after theorem head (e.g., Theorem 1.1.)
+  {.5em} % Space after theorem head (e.g., .5em or " " for normal interword space)
+  {\thmname{#1}\thmnumber{ #2}\thmnote{ (\textbf{#3})}}
+
+
+\theoremstyle{definition}
+\newtheorem{defn}{Definition}
+\newtheorem*{example}{Beispiel}
+
+\theoremstyle{plain}
+\theoremstyle{mytheorem}
+\newtheorem{theorem}{Satz}
+\newtheorem{lemma}{Lemma}
+\newtheorem*{axiom}{Axiom}
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Prim}{\mathbb{P}}
+\newcommand{\Nnull}{\mathbb{N}_0}
+
+%*****************************************
+\usepackage{adjustbox}
+%\usepackage{stackengine}
+%\usepackage{paralist}
+\usepackage{xfp}
+\usepackage{siunitx} % Wichtig für Zahlenformatierung
+\usepackage{xparse}
+\usepackage{xstring}
+
+
+\usepackage{svg}
+
+\theoremstyle{definition}
+\newtheorem*{auf}{Aufgabe}
+
+\usepackage{circuitikz}[european]
+
+
+%\newcommand{\frage}[6]{%
+%  \item[#1] #2
+%  \begin{enumerate}
+%    \item #3
+%    \item #4
+%    \item #5
+%    \item #6
+%  \end{enumerate}
+%}
+
+\newcommand{\qgrafic}[1]{%
+\begin{center}
+    \begin{tikzpicture}[scale=1.3]
+        \input{pic/#1_q.tex}        
+    \end{tikzpicture}
+\end{center}    
+}
+
+
+\newcommand{\agrafic}[2]{%
+\begin{center}
+    \begin{tikzpicture}[scale=1.5]
+        \input{pic/#1_#2.tex}        
+    \end{tikzpicture}
+\end{center}    
+}
+
+
+\ExplSyntaxOn
+\NewDocumentCommand{\frage}{ m m m m m m m m }{
+  \item[#1] #2
+    \tl_if_eq:nnTF {#7} {true} {
+        \qgrafic{#1}
+    }{}
+
+\tl_if_eq:nnTF {#8} {true} {
+\begin{enumerate}
+    \item \agrafic{#1}{a}
+    \item \agrafic{#1}{b}
+    \item \agrafic{#1}{c}    
+    \item \agrafic{#1}{d}    
+  \end{enumerate}        
+} {
+  \begin{enumerate}
+    \item #3
+    \item #4
+    \item #5
+    \item #6
+  \end{enumerate}      
+}
+
+
+  %\begin{enumerate}
+%    \item \tl_if_eq:nnTF {#8} {true} {        
+%        \agrafic{#1}{a}
+%    }{#3}
+%    \item \tl_if_eq:nnTF {#8} {true} {        
+%        \agrafic{#1}{b}
+%    }{#4}
+%    \item \tl_if_eq:nnTF {#8} {true} {        
+%        \agrafic{#1}{c}
+%    }{#5}
+%    \item \tl_if_eq:nnTF {#8} {true} {        
+%        \agrafic{#1}{d}
+%    }{#6}
+%  \end{enumerate}    
+}
+\ExplSyntaxOff
+
+\newcommand{\DEnumber}[1]{%
+    \num[
+        parse-numbers=true,          % Wichtig: Erzwingt die Analyse der Zahl
+        output-decimal-marker={,},   % Für das Komma als Dezimaltrennzeichen
+        group-separator={\,},        % Optional: Dünner Zwischenraum als Tausender-Trennzeichen
+        scientific-notation=false    % Sicherstellen, dass keine wissenschaftliche Notation verwendet wird
+    ]{#1}%
+}
+
+\newcommand{\calc}[1]{%
+  \DEnumber{\fpeval{#1}}
+}
+
+\newcommand{\mischer}[3]{%
+    \item[#1]\
+    \begin{itemize}
+        \item \DEnumber{#2} MHz + \DEnumber{#3} MHz = \calc{#2+#3} MHz
+        \item \DEnumber{#2} MHz + \DEnumber{#3} MHz = \calc{#2-#3} MHz
+    \end{itemize}  
+}
+
+\author{Thomas Fritzsche}
+\title{Lernmaterial für den Amateurfunkkurs der Klasse E von A02}
+\begin{document}
+
+%\maketitle
+\section{Mischer}
+In einem Mischer werden zwei Eingangssignale zu einem Ausgangssignal gemischt. Das Blockschaltdiagramm eines Mischers sieht aus wie eine Waschmaschine.
+Beim Mischen entsteht aus den beiden Eingangsfrequenzen die Summe und Differenz Frequenz:
+
+%$$f_{\text{out 1}} = f_{\text{in 1}} + f_{\text{in 2}} \textrm{\ und\ }f_{\text{out 2}} = | f_{\text{in 1}} - f_{\text{in 2}} |$$
+%Als Blockschaltdiagramm sieht es folgendermaßen aus:
+\begin{center}
+\begin{adjustbox}{margin=10pt}
+\begin{circuitikz}
+\draw (0,0) node[mixer,boxed] (M) {}; 
+\draw[->] (-2, 0)node[left] {$f_{\text{in 1}}$} -- (M.w); 
+\draw[->] (0, -2)node[below] {$f_{\text{in 2}}$} -- (M.s); 
+\draw[->] (M.out) -- (2, 0) node[right,text width=5cm] {
+$\begin{aligned}
+      &f_{\text{out 1}} = f_{\text{in 1}} + f_{\text{in 2}}\\
+      &f_{\text{out 2}} = | f_{\text{in 1}} - f_{\text{in 2}} | 
+    \end{aligned}$
+    }; 
+\end{circuitikz}
+\end{adjustbox}
+\end{center}
+
+\subsection{Lösungen:}
+\begin{description}
+    \mischer{EF201}{31.7}{21}
+    \mischer{EF202}{38.7}{28}
+    \mischer{EF203}{39}{30}
+    \mischer{EF204}{145}{136}
+    \mischer{EF205}{145}{136}
+    \item[EF206] Sie sollte gut abgeschirmt sein.    
+\end{description}  
+
+\section{Konverter und Transverter}
+
+\begin{description}
+\item[Konverter] setzen das Signal nur in eine Richtung um (entweder im Sendepfad oder im Empfangspfad).
+\item[Transverter] verfügen über eine interne Sende-/Empfangsumschaltung und setzen das Signal in Sende- und Empfangsrichtung um (ähnlich wie ein Transceiver).
+\end{description}  
+
+
+    \begin{tikzpicture}[scale=1]
+        \input{pic/Ni104_d.tex}
+    \end{tikzpicture}
+
+
+
+
+Darf eine Amateurfunkstelle auch an Bord eines Schiffes, welches sich in internationalen Gewässern befindet, betrieben werden?
+
+%\begin{enumerate}
+%    \renewcommand{\labelenumi}{(\alph{enumi})}    
+%    \item Ja, mit der Zustimmung des Schiffsführers
+%    \item Ja, mit der Zustimmung eines beliebigen Crewmitglieds
+%    \item Ja, mit einer Genehmigung der BNetzA
+%    \item Ja, mit einer Genehmigung des Bundesamtes für Seeschifffahrt und Hydrographie
+%\end{enumerate}
+
+%\begin{description}
+%\input{tex_fragen/VE706.tex}
+%\end{description}
+
+%\input{tex_sections/11S4.tex}
+%\input{tex_sections/1S1.tex}
+
+\begin{description}
+\include{tex_fragen/AC511.tex}
+%\frage{AC511}
+%    {Welche wesentlichen Ausgangsfrequenzen erzeugt die in der Abbildung dargestellte Stufe?}
+%    {10,7 MHz und 52,7 MHz}
+%    {42 MHz und 63,4 MHz}
+%    {21 MHz und 63,4 MHz}
+%    {21,4 MHz und 105,4 MHz}
+%    {false}{true}
+\end{description}
+
+%\begin{description}
+%\frage{EF201}
+%    {Welche wesentlichen Ausgangsfrequenzen erzeugt die in der Abbildung dargestellte Stufe?}
+%    {10,7 MHz und 52,7 MHz}
+%    {42 MHz und 63,4 MHz}
+%    {21 MHz und 63,4 MHz}
+%    {21,4 MHz und 105,4 MHz}
+%    {true}{true}
+%\end{description}
+
+
+
+%\input{bild.tex}
+% svg2tikz --codeonly --output=bild.tex bild.svg
+% svg2tikz --codeonly --output=bild.tex bild.svg
+\end{document}

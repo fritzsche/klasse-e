@@ -1,7 +1,7 @@
 # vs code
 .vscode
 cspell.json
-DS_Store
+.DS_Store
 # TeX
 *.aux
 *.fdb_latexmk
