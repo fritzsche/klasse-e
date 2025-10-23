@@ -53,7 +53,7 @@
 \usepackage{siunitx} % Wichtig für Zahlenformatierung
 \usepackage{xparse}
 \usepackage{xstring}
-
+\usepackage{enumitem}
 
 \usepackage{svg}
 
@@ -83,11 +83,11 @@
 
 
 \newcommand{\agrafic}[2]{%
-\begin{center}
-    \begin{tikzpicture}[scale=1.5]
-        \input{pic/#1_#2.tex}        
-    \end{tikzpicture}
-\end{center}    
+%  \begin{center}
+      \begin{tikzpicture}[scale=1.5]
+          \input{pic/#1_#2.tex}        
+      \end{tikzpicture}
+%  \end{center}     
 }
 
 
@@ -99,12 +99,20 @@
     }{}
 
 \tl_if_eq:nnTF {#8} {true} {
-\begin{enumerate}
-    \item \agrafic{#1}{a}
-    \item \agrafic{#1}{b}
-    \item \agrafic{#1}{c}    
-    \item \agrafic{#1}{d}    
-  \end{enumerate}        
+\begin{center}
+\begin{tabular}{cc}
+  (A) \adjustbox{valign=c}{\agrafic{#1}{a}} & (B) \adjustbox{valign=c}{\agrafic{#1}{b}} \\
+  (C) \adjustbox{valign=c}{\agrafic{#1}{c}} & (D) \adjustbox{valign=c}{\agrafic{#1}{d}} \\
+\end{tabular}
+\end{center}
+
+
+%\begin{enumerate}[label=(\Alph*)]
+%    \item \adjustbox{valign=c}{\agrafic{#1}{a}} 
+%    \item \adjustbox{valign=c}{\agrafic{#1}{b}} 
+%    \item \adjustbox{valign=c}{\agrafic{#1}{c}} 
+%    \item \adjustbox{valign=c}{\agrafic{#1}{d}}   
+%  \end{enumerate}        
 } {
   \begin{enumerate}
     \item #3
@@ -219,7 +227,7 @@ Darf eine Amateurfunkstelle auch an Bord eines Schiffes, welches sich in interna
 %\input{tex_fragen/VE706.tex}
 %\end{description}
 
-%\input{tex_sections/11S4.tex}
+\input{tex_sections/11S4.tex}
 %\input{tex_sections/1S1.tex}
 
 \begin{description}

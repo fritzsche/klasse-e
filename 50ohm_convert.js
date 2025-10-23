@@ -94,16 +94,27 @@ function processConversionJob(job) {
         sectionQuestionsMap.get(key).push(q);
     });
 
-    // 5. Dateien generieren
+// 5. Dateien generieren
     let generatedFilesCount = 0;
 
     sections.forEach(sektion => {
         // Erzeuge den Key, der mit dem Fragen-Key übereinstimmt
         const key = `${sektion.chapter}-${sektion.section}`;
-        const fragenListe = sectionQuestionsMap.get(key);
-        
+        let fragenListe = sectionQuestionsMap.get(key); // Beachten Sie 'let' statt 'const'
+
         if (fragenListe && fragenListe.length > 0) {
             
+            // ----------------------------------------------------------------------
+            // ✅ KORREKTUR: Sortieren der Fragenliste nach der Fragenummer ('number')
+            // ----------------------------------------------------------------------
+            fragenListe.sort((a, b) => {
+                // Wir nehmen an, die Fragenummer (z.B. NA102) ist ein String, der
+                // numerische und nicht-numerische Teile enthält.
+                // Ein einfacher String-Vergleich (localeCompare) ist hier die beste Wahl.
+                return a.number.localeCompare(b.number);
+            });
+            // ----------------------------------------------------------------------
+
             // Definiere die Sektions-ID für den Dateinamen (z.B. 1-1, oder nutze den Titel)
             // Hier nutzen wir eine Kombination aus Kapitel- und Sektionsnummer für einen eindeutigen Namen:
             const sektionID = `${sektion.chapter}S${sektion.section}`; 
