@@ -106,9 +106,11 @@
 }
 
 \newcommand{\agrafic}[2]{%
+\resizebox{!}{3cm}{
   \begin{tikzpicture}[scale=1.5]
       \input{pic/#1_#2.tex}        
   \end{tikzpicture}
+}
 }
 
 
@@ -263,6 +265,13 @@ $\begin{aligned}
     Es geht um den Satellitenbetrieb über die hohe Frequenz von 2,4 GHz. Wir müssen also die Sendefrequenz vervielfachen und damit vervielfachen wir auch Frequenzabweichungen.
 \end{sol}
 
+\begin{sol}{ED403}
+    Die Antwort sollte klar sein, die alternativen Antworten (B),(C),(D) machen überhaupt keinen Sinn.
+\end{sol}
+
+\begin{sol}{EF307}
+    Hier geht es um Audio Signale vom Mikrofon. Das Menschliche Ohr kann bis maximal ca. 20k Hz hören, allerdings verwenden wird im Amateurfunk nur die untersten 2700Hz davon um nicht unnötig Bandbreite zu verschwenden. Die untersten 300Hz können wir nicht hören, deshalb kann ein Mikrofonverstärker mit der Kennlinie (A) auch als extra Filter dienen. 
+\end{sol}
 
 \subsection{Konverter und Transverter}
 \begin{ohmchapter}
@@ -274,7 +283,34 @@ $\begin{aligned}
   Wenn also eine \qq{Sende-/Empfangsumschaltung} vorhanden ist, dann ist es ein Transverter.
 \end{ohmchapter}
 
+\begin{sol}{ED401}
+ Die Frage ist einfach zu beantworten, hat aber mal wider viele ähnlich Antworten.
+ Zunächst schließen wir Antwort (C) und (D) aus, da wir ja mit dem Verstärker die Ausgangsleistung erhöhen wollen. Der unterschied von (A) und (B) ist nur ab eine Spannungsquelle notwendig ist und auch dies ist einleuchtend, dass für ein Verstärkung Energie zugeführt werden muss. Deshalb brauchen wir ein Spannungsquelle.  
+\end{sol}
+
+\begin{sol}{ED401}
+ Die Frage ist einfach zu beantworten, hat aber mal wider viele ähnlich Antworten.
+ Zunächst schließen wir Antwort (C) und (D) aus, da wir ja mit dem Verstärker die Ausgangsleistung erhöhen wollen. Der unterschied von (A) und (B) ist nur ab eine Spannungsquelle notwendig ist und auch dies ist einleuchtend, dass für ein Verstärkung Energie zugeführt werden muss. Deshalb brauchen wir ein Spannungsquelle.  
+\end{sol}
+
+\begin{sol}{ED402}
+ In der Schaltung finden wir ganz Zentral den Transistor, der ja typisch ist für den Verstärker, also schließen wir schon mal (D) aus. Weiterhin finden wir das Schaltzeichen eines Lautsprechers im Schema, es geht also um Audio (NF).   
+\end{sol}
+
+\begin{sol}{EF308}
+  Bereits aus der Frage erfahren wir, dass es um einen NF-Verstärker geht, auch wenn zur Verwirrung noch Mixer und Bandpass eingezeichnet sind. Die Bezeichnungen SSB und LSB/USB lässt uns erkennen, dass es um das gewünschte Audiospektrum von ca. 2,5KHz geht.
+\end{sol}
+
+\begin{sol}{EF403}
+ Wichtig ist, dass wir uns merken, dass ein SSB Verstärker die Signale \textbf{linear} verstärken soll. Er muss dabei z.B. die gesamte Bandbreite des Signals gleichmäßig abdecken und sollte nicht bei gewünschten Frequenzen (SSB) oder Amplituden einbrechen (die Amplitude eines SSB Signals hängt von der Lautstärke des NF Signals ab).
+\end{sol}
+
+\begin{sol}{EF405}
+  Die Stromversorgung in einem Sender, sollte niederohmig sein, um eine stabile und effiziente Energieversorgung der Senderendstufe zu gewährleisten. Die Antwort (C) und (D) macht ebenso keinen Sinn. Also merken wir uns, dass wir keine HF in der Stromzufuhr haben wollen. Bei Netzversorgung würden wir ja sonst auch die HF über das Stromnetz in der ganzen Nachbarschaft verteilen.
+\end{sol}
+
 \subsection{Verstärker}
 \begin{ohmchapter}
+Der Transistor ist für moderne Verstärker das Entscheidende Bauelement, dass uns hilft die Schaltungen aufeinander halten zu können. Für viele Jahre wurden auch Röhren verwendet, die auch heute noch viele Amateurfunker verwenden. Allerdings kommen sie nicht mehr im Fragenkatalog vor.
 \end{ohmchapter}  
 \end{document}
