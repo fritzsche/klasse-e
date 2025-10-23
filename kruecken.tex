@@ -17,6 +17,9 @@
 \usepackage{babel}
 \usepackage{textcomp}
 
+\usepackage{adjustbox}
+
+
 \newtheoremstyle{mytheorem}
   {} % Space above (default: 3pt)
   {} % Space below (default: 3pt)
@@ -105,6 +108,11 @@
 \end{center}    
 }
 
+% Automatic layout switcher
+\newsavebox{\tempbox}
+\newlength{\imgwidth}
+
+
 \newcommand{\agrafic}[2]{%
 \resizebox{!}{3cm}{
   \begin{tikzpicture}[scale=1.5]
@@ -124,10 +132,33 @@
 
 \tl_if_eq:nnTF {#8} {true} {
 \begin{center}
-\begin{tabular}{cc}
-  (A) \adjustbox{valign=c}{\agrafic{#1}{a}} & (B) \adjustbox{valign=c}{\agrafic{#1}{b}} \\
-  (C) \adjustbox{valign=c}{\agrafic{#1}{c}} & (D) \adjustbox{valign=c}{\agrafic{#1}{d}} \\
-\end{tabular}
+
+  \sbox{\tempbox}{\adjustbox{valign=c}{\agrafic{#1}{a}}}%
+  \settowidth{\imgwidth}{\usebox{\tempbox}}%
+
+%  \begin{tabular}{cc}
+%  (A) \adjustbox{valign=c}{\agrafic{#1}{a}} & (B) \adjustbox{valign=c}{\agrafic{#1}{b}} \\
+%  (C) \adjustbox{valign=c}{\agrafic{#1}{c}} & (D) \adjustbox{valign=c}{\agrafic{#1}{d}} \\
+%\end{tabular}
+  % If two side-by-side images exceed 0.9 of text width, switch to 1x4
+  \ifdim 2\imgwidth>0.9\linewidth
+    % ---------- Wide layout: 1×4 ----------
+    \begin{enumerate}[label=(\Alph*)]
+      \item \adjustbox{valign=c}{\agrafic{#1}{a}}
+      \item \adjustbox{valign=c}{\agrafic{#1}{b}}
+      \item \adjustbox{valign=c}{\agrafic{#1}{c}}
+      \item \adjustbox{valign=c}{\agrafic{#1}{d}}
+    \end{enumerate}
+  \else
+    % ---------- Normal layout: 2×2 ----------
+    \begin{tabular}{cc}
+      (A) \adjustbox{valign=c}{\agrafic{#1}{a}} &
+      (B) \adjustbox{valign=c}{\agrafic{#1}{b}} \\
+      (C) \adjustbox{valign=c}{\agrafic{#1}{c}} &
+      (D) \adjustbox{valign=c}{\agrafic{#1}{d}} \\
+    \end{tabular}
+  \fi
+
 \end{center}
 
 
@@ -298,7 +329,7 @@ $\begin{aligned}
 \end{sol}
 
 \begin{sol}{EF308}
-  Bereits aus der Frage erfahren wir, dass es um einen NF-Verstärker geht, auch wenn zur Verwirrung noch Mixer und Bandpass eingezeichnet sind. Die Bezeichnungen SSB und LSB/USB lässt uns erkennen, dass es um das gewünschte Audiospektrum von ca. 2,5KHz geht.
+  Bereits aus der Frage erfahren wir, dass es um einen NF-Verstärker geht, auch wenn zur Verwirrung noch Mixer und Bandpass eingezeichnet sind. Die Bezeichnungen SSB und LSB/USB lässt uns erkennen, dass es um das gewünschte Audiospektrum von ca. 2,5 kHz geht.
 \end{sol}
 
 \begin{sol}{EF403}
@@ -313,4 +344,114 @@ $\begin{aligned}
 \begin{ohmchapter}
 Der Transistor ist für moderne Verstärker das Entscheidende Bauelement, dass uns hilft die Schaltungen aufeinander halten zu können. Für viele Jahre wurden auch Röhren verwendet, die auch heute noch viele Amateurfunker verwenden. Allerdings kommen sie nicht mehr im Fragenkatalog vor.
 \end{ohmchapter}  
+
+
+\section{Modulation}
+\subsection{Unmodulierter Träger}
+
+
+\begin{sol}{EE101}
+  In (A) haben wir einen unmodulierten Sinus. (B) ist Frequenzmoduliert (C) ist Phasenmoduliert und (D) ist Amplitudenmoduliert. Schau Dir einfach an was sich abweichend von einem Sinus Signal in den Diagrammen ändert.
+\end{sol}
+
+\begin{ohmchapter}
+\end{ohmchapter}  
+
+\subsection{Einseitenbandmodulation (SSB)}
+
+\begin{sol}{EE201}
+  SSB unterscheidet sich von AM dadurch, dass nur eins von den beiden Seitenbändern hat und keinen Träger. In Bezug auf die Bandbreite ist es deshalb nur etwa halb so breit. Ansonsten unterscheidet sich SSB von AM nicht, Du kannst mit einem SSB Empfänger AM Empfangen, in dem Du deinen Empfänger auf jeweils eines der Seitenbänder einstellst.
+\end{sol}
+
+\begin{sol}{EE202}
+  Die Bandbreite des NF Signals überträgt sich auf das HF Signal. Praktisch für Dich in der Prüfung, es gibt einige Fragen zur Bandbreite von NF und/oder SSB die nur minimal abweichen. Bei 2,4 kHz - 2,7 kHz liegst Du also fast immer richtig.
+
+\end{sol}
+
+\begin{sol}{EE203}
+  Wir addieren, da das Signal im oberen Seitenband liegt (USB). Pass mit MHz bzw. KHz auf!
+  
+  Rechnung: 21,250Mhz + 1 kHz = 21,251 MHz 
+\end{sol}
+
+\begin{sol}{EE204}
+  Wir subtrahieren, da das Signal im unteren Seitenband liegt (LSB). Pass mit MHz bzw. kHz auf!
+  
+  Rechnung: 3,65 Mhz + 2 kHz = 3,648 MHz 
+\end{sol}
+
+
+\begin{sol}{EE205}
+  Die Amplitude des NF Signal regelt bei SSB die Ausgangsleistung. Wenn wir die Ausgangsleistung reduzieren wollen sollten wir die Amplitude des NF Signals reduzieren.
+\end{sol}
+\begin{sol}{EE206}
+  Die Amplitude des NF Signal regelt bei SSB die Ausgangsleistung. Wenn unsere Mikrofonverstärkung nicht ausreicht haben wir auch nur eine geringe Ausgangsleistung.
+\end{sol}
+\begin{sol}{EE207}
+  CW hat eine deutliche geringere Bandbreite als Sprachsignale via SSB oder AM. Deshalb ist es deutlich effektiver und erfreut sich großer Beliebtheit der der Welt des Amateurfunk.
+\end{sol}
+
+\begin{sol}{EF310}
+Wie bei vielen anderen SSB Fragen ist die Antwort um 2,5 kHz richtig, also (A)!
+\end{sol}
+
+
+\begin{sol}{EJ210}
+Wie bei vielen anderen SSB Fragen ist die Antwort um 2,5 kHz richtig, also (A). In dieser Frage liegt der Wert bei 2,7 kHz noch ca. 300 Hz zum (gefilterten) Träger Abstand sind. Dies entspricht den tiefen NF Frequenzen die wir Menschen nicht hören können.
+\end{sol}
+
+\begin{sol}{EJ215}
+ Eine zu hohe Mikrofonverstärkung führt zu einer Übersteuerung der Verstärkerendstufe und zu Splatter auf die Nachbarfrequenzen.  Zudem machen wir es unserem Filter schwerer die Frequenzen außerhalb des Bandpass-Filter zu unterdrücken.
+\end{sol}
+
+\begin{ohmchapter}
+\end{ohmchapter}  
+
+
+
+\subsection{Frequenzmodulation (FM)}
+\begin{sol}{EE301}
+  In diesem Bild ändert sich die Frequenz des Signals, wie sehen also FM.
+\end{sol}
+
+\begin{sol}{EE302}
+  Schon beim Empfang von FM Rundfunk hast Du bestimmt bemerkt, dass FM klarer klingt. Das liegt u.A. daran dass FM nicht von der Amplitude abhängt, die von vielen Einflüssen z.B. in der Atmosphäre (QRN / QRM) beeinflusst wird.
+  Früher haben auch die Zündung in Automotoren für Störungen in AM gesorgt, die mit FM nicht auftreten.
+\end{sol}
+
+\begin{sol}{EE303}
+  FM wie in Frage EE302.
+\end{sol}
+
+\begin{sol}{EE304}
+  Der Frequenzhub gibt an wie weit das FM Signal vom Träger abweichen kann/soll. Deshalb ist führt ein großer Frequenzhub auch zu einer großen HF Bandbreite.
+\end{sol}
+
+\begin{sol}{EE305}
+ Wir müssen den Frequenzhub reduzieren.
+\end{sol}
+
+\begin{sol}{EE306}
+  Wie der Name Frequenzmodulation (FM) bereits impliziert wird die Lautstärke (NF Amplitude) über die Trägerfrequenzauslenkung moduliert.  
+\end{sol}
+
+\begin{ohmchapter}
+\end{ohmchapter}  
+
+\subsection{Bandbreite}
+\begin{sol}{EA105}
+  In Hertz (Hz).
+\end{sol}
+
+\begin{ohmchapter}
+\end{ohmchapter}  
+
+\subsection{Dynamikkompressor}
+
+\begin{sol}{EF306}
+  Da SSB von der Amplitude des NF (Audio) Signals abhängt, gebt der Dynamikkompressor schwache Audio Anteile an um ein stärkeres und klarer verständlicheres Signal zu erzeugen. Ist der Dynamikkompressor zu hoch eingestellt klingt das Signal aber unnatürlich und übermoduliert.
+\end{sol} 
+\begin{ohmchapter}
+\end{ohmchapter}  
+
 \end{document}
