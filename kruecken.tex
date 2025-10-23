@@ -56,6 +56,7 @@
 \usepackage{enumitem}
 
 \usepackage{svg}
+%\usepackage{array}
 
 \theoremstyle{definition}
 \newtheorem*{auf}{Aufgabe}
@@ -121,8 +122,6 @@
     \item #6
   \end{enumerate}      
 }
-
-
   %\begin{enumerate}
 %    \item \tl_if_eq:nnTF {#8} {true} {        
 %        \agrafic{#1}{a}
@@ -139,6 +138,18 @@
 %  \end{enumerate}    
 }
 \ExplSyntaxOff
+
+\newenvironment{ohmchapter}
+{
+
+}
+{
+
+  \subsubsection*{Lösungen}
+  \input{tex_sections/\arabic{section}S\arabic{subsection}.tex}
+}
+
+
 
 \newcommand{\DEnumber}[1]{%
     \num[
@@ -165,8 +176,18 @@
 \title{Lernmaterial für den Amateurfunkkurs der Klasse E von A02}
 \begin{document}
 
-%\maketitle
-\section{Mischer}
+\setcounter{section}{7}
+\section{Grundlegende Schaltungen}
+\setcounter{subsection}{3}
+
+\subsection{Mischer (Klasse E)}
+
+\begin{ohmchapter}
+
+
+
+
+
 In einem Mischer werden zwei Eingangssignale zu einem Ausgangssignal gemischt. Das Blockschaltdiagramm eines Mischers sieht aus wie eine Waschmaschine.
 Beim Mischen entsteht aus den beiden Eingangsfrequenzen die Summe und Differenz Frequenz:
 
@@ -187,8 +208,10 @@ $\begin{aligned}
 \end{circuitikz}
 \end{adjustbox}
 \end{center}
+\end{ohmchapter}
 
-\subsection{Lösungen:}
+
+\subsubsection{Lösungen:}
 \begin{description}
     \mischer{EF201}{31.7}{21}
     \mischer{EF202}{38.7}{28}
@@ -198,23 +221,13 @@ $\begin{aligned}
     \item[EF206] Sie sollte gut abgeschirmt sein.    
 \end{description}  
 
-\section{Konverter und Transverter}
-
-\begin{description}
-\item[Konverter] setzen das Signal nur in eine Richtung um (entweder im Sendepfad oder im Empfangspfad).
-\item[Transverter] verfügen über eine interne Sende-/Empfangsumschaltung und setzen das Signal in Sende- und Empfangsrichtung um (ähnlich wie ein Transceiver).
-\end{description}  
-
-
-    \begin{tikzpicture}[scale=1]
-        \input{pic/Ni104_d.tex}
-    \end{tikzpicture}
-
-
-
-
-Darf eine Amateurfunkstelle auch an Bord eines Schiffes, welches sich in internationalen Gewässern befindet, betrieben werden?
-
+\subsection{Konverter und Transverter}
+\begin{ohmchapter}
+  \begin{description}
+  \item[Konverter] setzen das Signal nur in eine Richtung um (entweder im Sendepfad oder im Empfangspfad).
+  \item[Transverter] verfügen über eine interne Sende-/Empfangsumschaltung und setzen das Signal in Sende- und Empfangsrichtung um (ähnlich wie ein Transceiver).
+  \end{description}  
+\end{ohmchapter}
 %\begin{enumerate}
 %    \renewcommand{\labelenumi}{(\alph{enumi})}    
 %    \item Ja, mit der Zustimmung des Schiffsführers
@@ -227,11 +240,14 @@ Darf eine Amateurfunkstelle auch an Bord eines Schiffes, welches sich in interna
 %\input{tex_fragen/VE706.tex}
 %\end{description}
 
-\input{tex_sections/11S4.tex}
+
+
+
+%\input{tex_sections/8S4.tex}
 %\input{tex_sections/1S1.tex}
 
-\begin{description}
-\include{tex_fragen/AC511.tex}
+%\begin{description}
+%\include{tex_fragen/AC511.tex}
 %\frage{AC511}
 %    {Welche wesentlichen Ausgangsfrequenzen erzeugt die in der Abbildung dargestellte Stufe?}
 %    {10,7 MHz und 52,7 MHz}
@@ -239,7 +255,7 @@ Darf eine Amateurfunkstelle auch an Bord eines Schiffes, welches sich in interna
 %    {21 MHz und 63,4 MHz}
 %    {21,4 MHz und 105,4 MHz}
 %    {false}{true}
-\end{description}
+%\end{description}
 
 %\begin{description}
 %\frage{EF201}

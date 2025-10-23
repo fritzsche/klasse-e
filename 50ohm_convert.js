@@ -4,7 +4,7 @@ import path from 'path';
 // --- Konfiguration: Array von Konvertierungs-Jobs ---
 const conversionJobs = [
     {
-        jsonPath: '50Ohm/50Ohm_NE.json',
+        jsonPath: '50Ohm/50Ohm_E.json',
         outputDir: 'tex_sections'
     },
     // Hier könnten später weitere JSON-Dateien hinzugefügt werden:
