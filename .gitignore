@@ -1,3 +1,15 @@
+# vs code
+.vscode
+cspell.json
+DS_Store
+# TeX
+*.aux
+*.fdb_latexmk
+*.fls
+*.out
+*.synctex.gz
+*.dvi
+
 # Logs
 logs
 *.log
