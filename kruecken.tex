@@ -60,6 +60,13 @@
 \usepackage{environ}
 \usepackage{textcmds}
 
+\usepackage[HTML]{xcolor}
+
+\definecolor{c00a0dc}{HTML}{00A0DC}
+\definecolor{cbdbdbd}{HTML}{0BBDBD}
+\definecolor{ce05022}{HTML}{E05022}
+
+\definecolor{c7fcfed}{HTML}{C7FCFE}
 \usepackage{svg}
 %\usepackage{array}
 
@@ -98,6 +105,14 @@
   \else
     % Nichts tun oder eine Warnung ausgeben
   \fi
+}
+
+\newcommand{\pic}[2][1]{%
+\begin{center}
+    \begin{tikzpicture}[scale=#1]
+        \input{bilder/#2.tex}        
+    \end{tikzpicture}
+\end{center}    
 }
 
 \newcommand{\qgrafic}[1]{%
@@ -355,6 +370,8 @@ Der Transistor ist für moderne Verstärker das Entscheidende Bauelement, dass u
 \end{sol}
 
 \begin{ohmchapter}
+  Der unmodulierter Träger entspricht im zeitlichen Verlauf eine Sinus Funktion.
+
 \end{ohmchapter}  
 
 \subsection{Einseitenbandmodulation (SSB)}
@@ -405,6 +422,10 @@ Wie bei vielen anderen SSB Fragen ist die Antwort um 2,5 kHz richtig, also (A). 
 \end{sol}
 
 \begin{ohmchapter}
+  Wir haben die SSB Modulation bereits im Klasse N Kurs kennengelernt. Ein SSB Signal entspricht im Grunde der Amplitudenmodulation AM, bei der der Träger und ein Seitenband unterdrückt werden.
+  
+  Im Amateurfunk verwenden wir in der Regel die Audio Frequenzen von 300 Hz bis 3000 Hz, dies entspricht also in etwa 2.7 kHz. Auch die Bandbreite des ausgesendeten HF Seitenbandes ist in etwas so groß. Es gibt im Katalog viele Fragen zur Bandbreite von SSB oder des NF Signals die Du alle mit der Antwort um die 2.5-3 kHz richtig beantwortest.
+  \pic[1.3]{ssb}
 \end{ohmchapter}  
 
 
@@ -436,6 +457,9 @@ Wie bei vielen anderen SSB Fragen ist die Antwort um 2,5 kHz richtig, also (A). 
 \end{sol}
 
 \begin{ohmchapter}
+  Wie der Name Frequenzmodulation (FM) bereits verrät wird beim FM die Frequenz des HF Trägers moduliert (verändert). Der Hub gibt an wie weit die Frequenz von der Grundfrequenz abgelenkt wird. Hier wird das NF Signal und die entsprechende Auslenkung des HF Trägers gezeigt:
+  \pic[0.8]{fm}
+  Da FM über die Frequenz moduliert wird ist FM \textbf{unempfindlicher gegenüber Amplitudenstörungen}. 
 \end{ohmchapter}  
 
 \subsection{Bandbreite}
