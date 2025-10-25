@@ -9,6 +9,7 @@ cspell.json
 *.out
 *.synctex.gz
 *.dvi
+*.toc
 
 # Logs
 logs
