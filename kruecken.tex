@@ -68,6 +68,9 @@
 \definecolor{ce5e5e5}{HTML}{E5E5E5}
 \definecolor{c7fcfed}{HTML}{C7FCFE}
 \usepackage{svg}
+
+\usepackage{siunitx}
+\sisetup{locale = DE}
 %\usepackage{array}
 
 \theoremstyle{definition}
@@ -234,6 +237,10 @@ Deshalb kann dieses Dokument inhaltliche Fehler, sachlich falsche Aussagen entha
 Das Ziel des Dokuments ist auch nicht ein möglichst genaue Fachliche Darstellung der Themen, sondern vielmehr Lernhilfen zu geben, damit die Fragen in der Amateurfunkprüfung der Klasse E richtig beantwortet werden können.
 
 Da sich Funker immer per \qq{Du} ansprechen, will ich in diesem Dokument auch nicht anders machen.
+
+Dieses Dokument verwendet die Kapitalstruktur der DARC Lernplattform \url{http://50ohm.de}. Du kannst also alle Inhalte dort nachlesen. In diesem Dokument fassen wir die Inhalte absichtlich nur sehr knapp zusammen. Wir beschränken uns auf die nach Inhalte die im Fragekatalog vorkommen. 
+
+Wenn es sich nicht im ein triviale definition handelt wird die Lösung jeder Frage im Detail im Block "Lösungsansatz erklärt.
 
 \setcounter{section}{7}
 \section{Grundlegende Schaltungen}
@@ -558,10 +565,10 @@ Sehr \textbf{schmalbandige Störungen} (QRM) können mit einem Kerbfilter auch \
 Der Zähler zeigt MHz an. Dies bezieht sich auf den Punkt hinter der Ziffer 5.
 Wir Zählen die Stellen durch:
 \begin{itemize}
-  \item 5 - MHz
-  \item 0 - 100 kHz
-  \item 0 - 10 kHz
-  \item 1 (mit X) - \textbf{1 kHz}
+  \item $5 \cdot \SI{1} {\mega\hertz}$
+  \item $0 \cdot \SI{100} {\kilo\hertz}$
+  \item $0 \cdot \SI{10} {\kilo\hertz}$  
+  \item  $\underbrace{1 \cdot \SI{1} {\kilo\hertz}}_{\text{Stelle mit X}}$
 \end{itemize}
 \end{sol} 
 
@@ -569,19 +576,19 @@ Wir Zählen die Stellen durch:
 Der Zähler zeigt MHz an. Dies bezieht sich auf den Punkt hinter der Ziffer 5.
 Wir Zählen die Stellen durch:
 \begin{itemize}
-  \item 5 * 1 MHz
-  \item 0 * 100 kHz
-  \item 0 * 10 kHz
-  \item 1 * 1 kHz
-  \item 3 * 100 Hz
-  \item 7 (mit X) * \textbf{10 Hz}
+  \item $5 \cdot \SI{1} {\mega\hertz}$
+  \item $0 \cdot \SI{100} {\kilo\hertz}$
+  \item $0 \cdot \SI{10} {\kilo\hertz}$
+  \item $1 \cdot \SI{10} {\kilo\hertz}$
+  \item $3 \cdot \SI{100} {\hertz}$
+  \item $\underbrace{7 \cdot \SI{10} {\hertz}}_{\text{Stelle mit X}}$
 \end{itemize}
 \end{sol} 
 
 \begin{sol}{EI504}
- Ein 10:1 Frequenzteiler hat die Frequenz um einen einen Faktor 10 reduziert, aus 10 MHz wurde 1 MHz in der Anzeige.
+ Ein 10:1 Frequenzteiler hat die Frequenz um einen einen Faktor 10 reduziert, aus \SI{10}{\mega\hertz} wurde \SI{1}{\mega\hertz} in der Anzeige.
  Für die Aufgabe müssen wir den angezeigten Wert mit 10 multiplizieren.
- $$ 14,5625 MHz * 10 = 145,625 MHz $$
+ $$ \SI{14,5625}{\mega\hertz} \cdot 10 = \SI{145,625}{\mega\hertz}$$
  Check: die Frequent liegt im 2-Meter Amateurfunkband.
 \end{sol}  
 
