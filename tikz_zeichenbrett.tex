@@ -1,0 +1,30 @@
+\documentclass[12pt]{standalone}
+\usepackage[siunitx]{circuitikz} 
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{amsmath}
+
+\begin{document}
+\begin{circuitikz}
+%\draw[style=help lines] (-3,-3) grid (10,5);    
+\draw (0,0) node[antenna,name=a]{} 
+to[amp,boxed, name=HF,l_=HF,>] 
+++(2,0) node[mixer,boxed,anchor=west](m){}
+(m.east) to[amp,boxed, name=ZF,l_=ZF,>] ++(2,0) node[mixer,boxed,anchor=west](m2){}
+(m2.east) to[amp,boxed, name=NF,l_=NF,>] ++(2,0)
+node[loudspeakershape,rotate=-90,anchor=south](sp){} 
+(sp.south) node[inputarrow]{}
+(m2.west) node[inputarrow]{}
+(m.west)  node[inputarrow]{}
+(m.south) node[inputarrow,rotate=90]{} --
+ ++(0,-1)  node[vallpassshape, box, anchor=north](VFO){}
+ (VFO.east)  node[anchor=west](){VFO}
+(m2.south) node[inputarrow,rotate=90]{} --
+ ++(0,-1)  node[allpassshape, box, anchor=north](BFO){} 
+ (BFO.east)  node[anchor=west](){BFO}
+; 
+
+\end{circuitikz}
+
+\end{document}    

@@ -65,7 +65,7 @@
 \definecolor{c00a0dc}{HTML}{00A0DC}
 \definecolor{cbdbdbd}{HTML}{0BBDBD}
 \definecolor{ce05022}{HTML}{E05022}
-
+\definecolor{ce5e5e5}{HTML}{E5E5E5}
 \definecolor{c7fcfed}{HTML}{C7FCFE}
 \usepackage{svg}
 %\usepackage{array}
@@ -151,10 +151,6 @@
   \sbox{\tempbox}{\adjustbox{valign=c}{\agrafic{#1}{a}}}%
   \settowidth{\imgwidth}{\usebox{\tempbox}}%
 
-%  \begin{tabular}{cc}
-%  (A) \adjustbox{valign=c}{\agrafic{#1}{a}} & (B) \adjustbox{valign=c}{\agrafic{#1}{b}} \\
-%  (C) \adjustbox{valign=c}{\agrafic{#1}{c}} & (D) \adjustbox{valign=c}{\agrafic{#1}{d}} \\
-%\end{tabular}
   % If two side-by-side images exceed 0.9 of text width, switch to 1x4
   \ifdim 2\imgwidth>0.9\linewidth
     % ---------- Wide layout: 1×4 ----------
@@ -191,20 +187,7 @@
     \item #6
   \end{enumerate}      
 }
-  %\begin{enumerate}
-%    \item \tl_if_eq:nnTF {#8} {true} {        
-%        \agrafic{#1}{a}
-%    }{#3}
-%    \item \tl_if_eq:nnTF {#8} {true} {        
-%        \agrafic{#1}{b}
-%    }{#4}
-%    \item \tl_if_eq:nnTF {#8} {true} {        
-%        \agrafic{#1}{c}
-%    }{#5}
-%    \item \tl_if_eq:nnTF {#8} {true} {        
-%        \agrafic{#1}{d}
-%    }{#6}
-%  \end{enumerate}    
+
 }
 \ExplSyntaxOff
 
@@ -238,8 +221,19 @@
 }
 
 \author{Thomas Fritzsche}
-\title{Lernmaterial für den Amateurfunkkurs der Klasse E von A02}
+\title{Lernkrücken für den Amateurfunkkurs der Klasse E von A02}
 \begin{document}
+\maketitle
+\tableofcontents
+
+\section*{Einleitung}
+In diesem Dokument stellen wir einige Informationen für den Klasse E Aufbaukurs des Ortsverbands A02 zusammen.
+Es sei darauf hingewiesen, dass der Author ein Funkamateur im wahrsten Sinne des Wortes ist, und als Amateur keine berufliche Ausbildung im Bereich der hier dargestellten Amateurfunkthemen hat. 
+
+Deshalb kann dieses Dokument inhaltliche Fehler, sachlich falsche Aussagen enthalten. Der Author ist dafür nicht haftbar.
+Das Ziel des Dokuments ist auch nicht ein möglichst genaue Fachliche Darstellung der Themen, sondern vielmehr Lernhilfen zu geben, damit die Fragen in der Amateurfunkprüfung der Klasse E richtig beantwortet werden können.
+
+Da sich Funker immer per \qq{Du} ansprechen, will ich in diesem Dokument auch nicht anders machen.
 
 \setcounter{section}{7}
 \section{Grundlegende Schaltungen}
@@ -428,8 +422,6 @@ Wie bei vielen anderen SSB Fragen ist die Antwort um 2,5 kHz richtig, also (A). 
   \pic[1.3]{ssb}
 \end{ohmchapter}  
 
-
-
 \subsection{Frequenzmodulation (FM)}
 \begin{sol}{EE301}
   In diesem Bild ändert sich die Frequenz des Signals, wie sehen also FM.
@@ -477,5 +469,124 @@ Wie bei vielen anderen SSB Fragen ist die Antwort um 2,5 kHz richtig, also (A). 
 \end{sol} 
 \begin{ohmchapter}
 \end{ohmchapter}  
+\section{Empfänger}
+\subsection{Detektorempfänger}
+\begin{ohmchapter}
+  Das in Frage EF101 gezeigte Schaltbild zeigt bereits alles was einen Detektorempfänger ausmacht. Wir haben keine externe Spannungsversorgung. Die Antenne fängt das HF Signal ein. Variabler Kondensator und eine Induktivität (Spule) bilden ein \textbf{Parallelschwingkreis} und selektieren die gewünschte Frequenz.
+  Das Signal wird über eine Diode \textbf{gleichgerichtet}. Durch die Trägheit eines (hochohmigen) Kopfhörers wird ein hörbares NF Signal erzeugt.
+  Die Nachteile sind klar: ohne Verstärker können nur sehr starke (AM) Stationen empfangen werden. Der Parallelschwingkreis ist sehr ungenau es wird ein großer Teil des Frequenzspektrums empfangen.
+   Dennoch auch heute noch ein faszinierendes Bastelprojekt.
+  
+\end{ohmchapter}  
 
+
+\begin{sol}{EF102}
+  Die Zwischenfrequenz eines Überlagerungsempfänger hat hat den Vorzeit, dass mit speziellen Filtern eine höhere \textbf{Trennschärfe} erreicht werden kann.s
+\end{sol} 
+
+\begin{sol}{EF208}
+ Der Direktempfänger mischt das HF Signal direkt auf Audiofrequenz NF. Im Mischer wird die Tatsache ausgenutzt, dass die Differenz der Frequenzen im gemischten Ausgang erzeugt wird. 
+ Wenn jetzt Empfangsfrequenz und HF annähernd die selbe Frequenz haben kommt man also in der Differenz in den NF Bereich.
+\end{sol} 
+
+
+\subsection{Überlagerungsempfänger (Einfachsuper)}
+\begin{ohmchapter}
+  Wir haben im letzten Kapitel mit dem Detektorempfänger ein Beispieleines sogenannten \textbf{Geradeausempfänger} kennengelernt.
+  Hier entsteht die Audio Frequenz direkt aus der HF. 
+  Üblicher weise wird die HF direkt auf Audio Frequenz gemischt. Deshalb spricht man auch von einem \textbf{Direktüberlagerungsempfänger}.
+  Es ist jedoch üblich zunächst auf eine feste \textbf{Zwischenfrequenz} zu mischen. Diese Art von Empfänger nennt man Überlagerungsempfänger.
+  Der Vorteil besteht einer festen Zwischenfrequenz besteht darin, dass speziell für diese Zwischenfrequenz optimierte Filter verwendet werden können, z.B. für CW mit nur 300 Hz oder SSB mit 2400 Hz. Dadurch ergibt sich eine bessere \textbf{Trennschärfe}.
+  \par
+  \pic[0.8]{receiver} 
+\end{ohmchapter}  
+\subsection{Trennschärfe I }
+\begin{ohmchapter}
+Je kleiner die Empfangsbandbreite ist, desto enger ist auch mein Filter und das Signal wird deutlich besser. D.h. eine schmale Empfängerbandbreite führt zu einer hohen \textbf{Trennschärfe}. Für guten Empfang ist also eine schmale Bandbreite von Vorteil. Deshalb sind schmalbandige Übertragungsverfahren effektiver. Vergleiche z.B. CW mit SSB. 
+\end{ohmchapter}  
+
+\subsection{BFO I}
+\begin{sol}{EF217}
+  Seht starke Signale können einen Empfänger überlasten und müssen gedämpft werden. Dazu verwenden wir ein \textbf{Dämpfungsglied}.
+\end{sol} 
+
+
+\subsection{Vorverstärker und Dämpfungsglied}
+
+\begin{ohmchapter}
+Mit dem BFO wird in Überlagerungsempfänger die ZF auf Audio gemischt und damit hörbar gemacht.
+\end{ohmchapter}  
+
+\begin{sol}{EF218}
+Im UHF (Ultra Hoch Frequenz) sind die Verluste auf den Zuleitungen besonders hoch. Im schlimmsten Fall ist das Nutzsignal durch diese Dämpfung bereits komplett im Rauschen verschwunden. Deshalb werden HF (Vor-)Verstärker im UHF Bereit möglichst direkt an der Antenne montiert.
+\end{sol} 
+
+\begin{ohmchapter}
+\end{ohmchapter}  
+
+\subsection{Automatische Verstärkungsregelung (AGC) I}
+\begin{ohmchapter}
+  \textbf{AGC} steht für Automatic Gain Control oder auf Deutsch auch Automatische Verstärkerregelung. 
+
+  Sie steuert der HF Verstärker automatisch nach. Wenn sehr starte Signale empfangen werden reduziert die AGC die Verstärker Leistung, wenn die Signale schwach sind regelt die AGC die Verstärkung nach oben.
+  Dadurch wird das NF signal stabiler.
+
+  Achtung: Die AGC regelt den Empfänger. Es gibt eine Verstärkerregelung für den Sender (ALC), diese solltest Du in der Prüfung nicht verwechseln.
+\end{ohmchapter}  
+
+\subsection{Notch-Filter}
+\begin{sol}{EF216}
+Der Notchfilter ist ein Kerb-filter, d.h. er filtert nur einen kleinen Teil des Frequenzspektrums heraus, lässt den übrigen Teil des NF Spektrums durch. Es ist also die Kerbenform von (A).
+\end{sol} 
+\begin{ohmchapter}
+Sehr \textbf{schmalbandige Störungen} (QRM) können mit einem Kerbfilter auch \textbf{Notch-filter} eliminiert werden.
+\end{ohmchapter}  
+
+
+
+\subsection{Rauschunterdrückung}
+\begin{ohmchapter}
+  Die \textbf{Rauschunterdrückung}, auch auf Englisch als Noise Reduction(NR) benannt dient der Unterdrückung von Rauschen.
+  Der \textbf{Noise Blanker} hingegen eliminiert impulsartige Störungen, wie sie z.B. früher von Motor Zündungen erzeugt wurden.
+\end{ohmchapter}  
+
+
+\subsection{Frequenzmessung I}
+
+
+\begin{sol}{EI502}
+Der Zähler zeigt MHz an. Dies bezieht sich auf den Punkt hinter der Ziffer 5.
+Wir Zählen die Stellen durch:
+\begin{itemize}
+  \item 5 - MHz
+  \item 0 - 100 kHz
+  \item 0 - 10 kHz
+  \item 1 (mit X) - \textbf{1 kHz}
+\end{itemize}
+\end{sol} 
+
+\begin{sol}{EI503}
+Der Zähler zeigt MHz an. Dies bezieht sich auf den Punkt hinter der Ziffer 5.
+Wir Zählen die Stellen durch:
+\begin{itemize}
+  \item 5 * 1 MHz
+  \item 0 * 100 kHz
+  \item 0 * 10 kHz
+  \item 1 * 1 kHz
+  \item 3 * 100 Hz
+  \item 7 (mit X) * \textbf{10 Hz}
+\end{itemize}
+\end{sol} 
+
+\begin{sol}{EI501}
+ Ein 10:1 Frequenzteiler hat die Frequenz um einen einen Faktor 10 reduziert, aus 10 MHz wurde 1 MHz.
+ Für die Aufgabe müssen wir den Angezeigten Wert mit 10 multiplizieren.
+ $$ 14,5625 MHz * 10 = 145,625 MHz $$
+ Check: die Frequent liegt im 2-Meter Amateurfunkband.
+\end{sol}  
+
+
+\begin{ohmchapter}
+Frequenzzähler sind nützliche Messgeräte die, wie der Name bereits andeutet, um die Frequent eines Signals zu messen. Genauer gesagt: die Frequenz eines unmodulierten Hochfrequenzsignals.  Dies kann z.B. genutzt werden um die Frequenz z.B. eines lokalen Oszillator (LO) zu bestimmen.  
+\end{ohmchapter}  
 \end{document}
