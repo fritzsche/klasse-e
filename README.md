@@ -18,8 +18,8 @@ Bei ein Rechtecksignal aus Oberwellen:
 https://fritzsche.github.io/klasse-e/rechteck.html
 
 
-How a LPF works:
-https://fritzsche.github.io/klasse-e/rechteck.html
+Ein LPF im Einsatz:
+https://fritzsche.github.io/klasse-e/lpf.html
 
 
 
