@@ -8,7 +8,7 @@ Jupyter  Notebook:
 
 https://github.com/fritzsche/klasse-e/blob/main/mischer.ipynb
 
-# Sender
+## Sender
 
 Welche Oberwellen haben Signale:
 https://fritzsche.github.io/klasse-e/oberwelle.html
