@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Frequenz- und Oberwellen-Visualizer</title>
+    <!-- Lade Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Spezifische Stile für die Canvas-Elemente */
+        .plot-canvas {
+            width: 100%;
+            height: 300px;
+            background-color: #0d1117;
+            /* Dunkler Hintergrund für die Plots */
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Definiere die Inter-Schriftart */
+        body {
+            font-family: "Inter", sans-serif;
+        }
+    </style>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'primary': '#4f46e5',
+                        'secondary': '#10b981',
+                        'dark-bg': '#0a0d11',
+                        'card-bg': '#161b22',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+
+<body class="bg-dark-bg text-gray-100 p-4 md:p-8">
+
+    <div class="max-w-7xl mx-auto">
+        <header class="text-center mb-10">
+            <h1 class="text-3xl md:text-4xl font-extrabold text-primary mb-2">Signal- und Spektrum-Visualizer</h1>
+            <p class="text-gray-400">Veranschaulicht Signale im Zeitbereich und ihre Oberwellen im Frequenzspektrum.</p>
+        </header>
+
+        <!-- Steuerelemente -->
+        <div class="bg-card-bg p-6 rounded-xl shadow-lg mb-8 grid grid-cols-1 md:grid-cols-3 gap-6">
+            <!-- Grundfrequenz-Steuerung -->
+            <div>
+                <label for="frequency" class="block text-sm font-medium text-gray-300 mb-2">Grundfrequenz (Hz): <span
+                        id="freq_value" class="font-semibold text-secondary">4</span></label>
+                <input type="range" id="frequency" min="1" max="10" value="4" step="1"
+                    class="w-full h-2 bg-gray-700 rounded-lg appearance-none cursor-pointer range-lg"
+                    oninput="document.getElementById('freq_value').textContent = this.value; updateVisualization()">
+            </div>
+            <!-- Signalart-Auswahl -->
+            <div class="md:col-span-2">
+                <label class="block text-sm font-medium text-gray-300 mb-2">Signalart wählen:</label>
+                <div class="flex space-x-4">
+                    <button id="sine_btn" onclick="setWaveform('sine')"
+                        class="flex-1 px-4 py-2 rounded-lg font-semibold transition duration-200 bg-primary hover:bg-indigo-600">
+                        Sinus
+                    </button>
+                    <button id="square_btn" onclick="setWaveform('square')"
+                        class="flex-1 px-4 py-2 rounded-lg font-semibold transition duration-200 bg-gray-700 hover:bg-gray-600">
+                        Rechteck
+                    </button>
+                    <button id="sawtooth_btn" onclick="setWaveform('sawtooth')"
+                        class="flex-1 px-4 py-2 rounded-lg font-semibold transition duration-200 bg-gray-700 hover:bg-gray-600">
+                        Sägezahn
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Plots -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <!-- Zeitbereich (Time Domain) -->
+            <div class="space-y-4">
+                <h2 class="text-xl font-bold text-gray-200">1. Signal im Zeitbereich (y(t))</h2>
+                <canvas id="timeCanvas" class="plot-canvas"></canvas>
+                <p class="text-sm text-gray-400">Die gewählte Wellenform bei der Grundfrequenz.</p>
+            </div>
+
+            <!-- Frequenzbereich (Frequency Domain - Spectrum) -->
+            <div class="space-y-4">
+                <h2 class="text-xl font-bold text-gray-200">2. Amplitudenspektrum (Oberwellen)</h2>
+                <canvas id="freqCanvas" class="plot-canvas"></canvas>
+                <p class="text-sm text-gray-400">Das Spektrum zeigt die Energie an den Oberschwingungen (nach DFT).</p>
+            </div>
+        </div>
+
+        <div id="message_box" class="mt-8 p-4 bg-yellow-900/50 text-yellow-300 rounded-lg text-sm hidden"></div>
+
+    </div>
+
+    <script>
+        // --- Konfiguration und Initialisierung ---
+        const SAMPLE_RATE = 1000 // Abtastrate für die Generierung
+        const N_SAMPLES = 512    // Anzahl der Samples für die Visualisierung und DFT
+        let waveformType = 'sine'
+        let timeCanvas, freqCanvas, timeCtx, freqCtx
+        let buttonMap // Wird nun erst in DOMContentLoaded initialisiert
+
+        document.addEventListener('DOMContentLoaded', () => {
+            timeCanvas = document.getElementById('timeCanvas')
+            freqCanvas = document.getElementById('freqCanvas')
+
+            // Initialisiere buttonMap, nachdem die Elemente garantiert im DOM sind
+            buttonMap = {
+                'sine': document.getElementById('sine_btn'),
+                'square': document.getElementById('square_btn'),
+                'sawtooth': document.getElementById('sawtooth_btn'),
+            }
+
+            // Stelle sicher, dass die Canvas-Größen dem CSS entsprechen
+            const canvasHeight = 300
+            const canvasWidth = timeCanvas.parentElement.clientWidth
+
+            timeCanvas.width = canvasWidth
+            timeCanvas.height = canvasHeight
+            freqCanvas.width = canvasWidth
+            freqCanvas.height = canvasHeight
+
+            timeCtx = timeCanvas.getContext('2d')
+            freqCtx = freqCanvas.getContext('2d')
+
+            // Setze den initialen Button-Zustand
+            setWaveform('sine')
+            updateVisualization()
+        })
+
+        // Event-Handler für die Signalart-Auswahl
+        function setWaveform(type) {
+            waveformType = type
+            // Aktualisiere Button-Stile (buttonMap ist nun global verfügbar und initialisiert)
+            for (const key in buttonMap) {
+                const btn = buttonMap[key]
+                if (key === type) {
+                    btn.className = 'flex-1 px-4 py-2 rounded-lg font-semibold transition duration-200 bg-primary hover:bg-indigo-600'
+                } else {
+                    btn.className = 'flex-1 px-4 py-2 rounded-lg font-semibold transition duration-200 bg-gray-700 hover:bg-gray-600'
+                }
+            }
+            updateVisualization()
+        }
+
+        // --- Signalgenerierungsfunktionen ---
+
+        /** Generiert eine Sinuswelle */
+        function generateSine(f, A, N, fs) {
+            const signal = new Array(N)
+            for (let n = 0; n < N; n++) {
+                const t = n / fs
+                signal[n] = A * Math.sin(2 * Math.PI * f * t)
+            }
+            return signal
+        }
+
+        /** Generiert eine Rechteckwelle (mit Fourier-Synthese für saubere Darstellung) */
+        function generateSquare(f, A, N, fs, harmonics = 9) {
+            const signal = new Array(N).fill(0)
+            for (let n = 0; n < N; n++) {
+                const t = n / fs
+                let value = 0
+                // Summe der ungeraden Harmonischen
+                for (let k = 1; k <= harmonics; k += 2) {
+                    value += (A * (4 / Math.PI)) * (1 / k) * Math.sin(2 * Math.PI * (k * f) * t)
+                }
+                signal[n] = value
+            }
+            return signal
+        }
+
+        /** Generiert eine Sägezahnwelle (mit Fourier-Synthese) */
+        function generateSawtooth(f, A, N, fs, harmonics = 9) {
+            const signal = new Array(N).fill(0)
+            for (let n = 0; n < N; n++) {
+                const t = n / fs
+                let value = 0
+                // Summe aller Harmonischen (ungerade und gerade)
+                for (let k = 1; k <= harmonics; k++) {
+                    value += (A * (2 / Math.PI)) * (Math.pow(-1, k + 1) / k) * Math.sin(2 * Math.PI * (k * f) * t)
+                }
+                signal[n] = value
+            }
+            return signal
+        }
+
+        // --- Diskrete Fourier Transformation (DFT) ---
+
+        /**
+         * Führt eine Diskrete Fourier-Transformation (DFT) durch und gibt das Amplitudenspektrum zurück.
+         * @param {number[]} signal - Das Eingangssignal (reelle Zahlen).
+         * @returns {number[]} Array von Amplituden (Magnitude) für die ersten N/2 Frequenz-Bins.
+         */
+        function calculateDFT(signal) {
+            const N = signal.length
+            const spectrum = new Array(Math.floor(N / 2)).fill(0)
+
+            for (let k = 0; k < N / 2; k++) { // Frequenz-Bin-Index
+                let real = 0
+                let imag = 0
+
+                for (let n = 0; n < N; n++) { // Zeit-Sample-Index
+                    const angle = (2 * Math.PI * k * n) / N
+                    real += signal[n] * Math.cos(angle)
+                    imag -= signal[n] * Math.sin(angle) // Minuszeichen wegen Euler-Identität
+                }
+
+                // Amplitude (Magnitude) = sqrt(Real² + Imag²)
+                spectrum[k] = Math.sqrt(real * real + imag * imag) / N * 2 // Normalisierung und Fokus auf Einseitenband
+            }
+            // Der DC-Term (Index 0) wird nur einfach normalisiert
+            if (N > 0) spectrum[0] = spectrum[0] / 2
+
+            return spectrum
+        }
+
+
+        // --- Visualisierungsfunktionen ---
+
+        /** Zeichnet das Signal im Zeitbereich */
+        function drawTimeDomain(ctx, canvas, signal) {
+            const W = canvas.width
+            const H = canvas.height
+            const N = signal.length
+            const PADDING = 20
+
+            // Löschen
+            ctx.fillStyle = '#0d1117'
+            ctx.fillRect(0, 0, W, H)
+
+            // Achsen zeichnen
+            ctx.strokeStyle = '#444c56'
+            ctx.lineWidth = 1
+            // X-Achse (Mitte)
+            ctx.beginPath()
+            ctx.moveTo(PADDING, H / 2)
+            ctx.lineTo(W - PADDING, H / 2)
+            ctx.stroke()
+            // Y-Achse
+            ctx.beginPath()
+            ctx.moveTo(PADDING, PADDING)
+            ctx.lineTo(PADDING, H - PADDING)
+            ctx.stroke()
+
+            // Signal zeichnen
+            ctx.strokeStyle = '#10b981' // Sekundärfarbe (Grün)
+            ctx.lineWidth = 2
+            ctx.beginPath()
+
+            const plotHeight = H - 2 * PADDING
+            const plotWidth = W - 2 * PADDING
+
+            // Finde den maximalen absoluten Wert für die Skalierung (Amplitude)
+            const maxAbs = 1 // Wir normalisieren die Amplitude auf 1
+
+            for (let i = 0; i < N; i++) {
+                // Skaliere X: Sample-Index zu Pixel-Position
+                const x = PADDING + (i / N) * plotWidth
+                // Skaliere Y: Amplitude [-maxAbs, maxAbs] zu Pixel-Position [H-PADDING, PADDING]
+                const y = H - PADDING - ((signal[i] / maxAbs + 1) / 2) * plotHeight
+
+                if (i === 0) {
+                    ctx.moveTo(x, y)
+                } else {
+                    ctx.lineTo(x, y)
+                }
+            }
+            ctx.stroke()
+
+            // Beschriftungen
+            ctx.fillStyle = '#94a3b8'
+            ctx.font = '10px Inter'
+            ctx.fillText('Amplitude', 5, 15)
+            ctx.fillText('Zeit (Samples)', W - 90, H - 5)
+        }
+
+        /** Zeichnet das Amplitudenspektrum (Frequenzbereich) */
+        function drawFrequencyDomain(ctx, canvas, spectrum, f_base) {
+            const W = canvas.width
+            const H = canvas.height
+            const PADDING = 20
+            const MAX_HARMONICS = 10 // Zeige maximal die ersten 10 Oberwellen (Harmonics)
+
+            // Löschen
+            ctx.fillStyle = '#0d1117'
+            ctx.fillRect(0, 0, W, H)
+
+            // Achsen zeichnen
+            ctx.strokeStyle = '#444c56'
+            ctx.lineWidth = 1
+
+            // X-Achse (Unten)
+            ctx.beginPath()
+            ctx.moveTo(PADDING, H - PADDING)
+            ctx.lineTo(W - PADDING, H - PADDING)
+            ctx.stroke()
+            // Y-Achse
+            ctx.beginPath()
+            ctx.moveTo(PADDING, PADDING)
+            ctx.lineTo(PADDING, H - PADDING)
+            ctx.stroke()
+
+            // Beschriftungen
+            ctx.fillStyle = '#94a3b8'
+            ctx.font = '10px Inter'
+            ctx.fillText('Amplitude', 5, 15)
+            ctx.fillText('Harmonics (k * f₀)', W - 110, H - 5)
+
+            // Spektrum zeichnen
+            const plotHeight = H - 2 * PADDING
+            const plotWidth = W - 2 * PADDING
+
+            // Max-Amplitude (normalerweise die Grundfrequenz) zur Skalierung
+            const maxAmp = Math.max(...spectrum.slice(1, MAX_HARMONICS + 1)) * 1.1 // 10% Puffer
+
+            const currentBinWidth = plotWidth / (MAX_HARMONICS + 1)
+            const barWidth = currentBinWidth * 0.7
+
+            ctx.fillStyle = '#4f46e5' // Primärfarbe (Violett/Blau)
+
+            // Iteriere über die ersten MAX_HARMONICS Bins (ab Bin 1, da Bin 0 DC ist)
+            for (let k = 1; k <= MAX_HARMONICS; k++) {
+                const magnitude = spectrum[k]
+                if (magnitude === undefined) continue
+
+                // X-Position des Bars: PADDING + (k * currentBinWidth) - (barWidth / 2);
+                // Verwende den Mittelpunkt des Bins
+                const x = PADDING + (k * currentBinWidth) - (barWidth / 2)
+
+                // Höhe des Bars, skaliert auf die maximale Amplitude
+                const barH = (magnitude / maxAmp) * plotHeight
+
+                // Y-Position: Startet am Boden der Achse (H - PADDING) und geht nach oben
+                const y = H - PADDING - barH
+
+                ctx.fillRect(x, y, barWidth, barH)
+
+                // Beschrifte die Oberwellen
+                ctx.fillStyle = '#94a3b8'
+                ctx.fillText(k, x + barWidth / 2 - 4, H - PADDING + 12)
+            }
+
+            // Text zur Grundfrequenz
+            ctx.fillStyle = '#e5e5e5'
+            ctx.font = '12px Inter'
+            ctx.fillText(`Grundfrequenz f₀ = ${f_base} Hz`, PADDING + 5, H - PADDING - 5)
+        }
+
+        // --- Hauptfunktion zur Aktualisierung ---
+
+        function updateVisualization() {
+            // Check for initial setup completion
+            if (!timeCanvas || !buttonMap) {
+                // If the function is called before DOMContentLoaded finishes, exit silently.
+                return
+            }
+
+            const frequency = parseInt(document.getElementById('frequency').value)
+            const amplitude = 1.0
+            const N = N_SAMPLES
+            const fs = SAMPLE_RATE
+
+            let signal
+
+            // 1. Signal generieren
+            if (waveformType === 'sine') {
+                signal = generateSine(frequency, amplitude, N, fs)
+            } else if (waveformType === 'square') {
+                // Rechteck und Sägezahn benötigen mehr Oberwellen für eine gute Darstellung
+                signal = generateSquare(frequency, amplitude, N, fs, 50)
+            } else if (waveformType === 'sawtooth') {
+                signal = generateSawtooth(frequency, amplitude, N, fs, 50)
+            } else {
+                console.error("Unbekannte Signalart:", waveformType)
+                return
+            }
+
+            // 2. DFT berechnen
+            const spectrum = calculateDFT(signal)
+
+            // 3. Visualisierung
+            drawTimeDomain(timeCtx, timeCanvas, signal)
+            drawFrequencyDomain(freqCtx, freqCanvas, spectrum, frequency)
+        }
+
+        // Stellt sicher, dass die Plots beim Ändern der Fenstergröße neu gezeichnet werden
+        window.addEventListener('resize', () => {
+            if (!timeCanvas || !freqCanvas) return // Exit if not initialized
+            const canvasWidth = timeCanvas.parentElement.clientWidth
+            timeCanvas.width = canvasWidth
+            freqCanvas.width = canvasWidth
+            updateVisualization()
+        });
+
+    </script>
+</body>
+
+</html>

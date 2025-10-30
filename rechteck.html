@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fourier-Synthese-Demonstrator</title>
+    <!-- Lade Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Spezifische Stile für die Canvas-Elemente */
+        .plot-canvas {
+            width: 100%;
+            height: 400px;
+            background-color: #0d1117;
+            /* Dunkler Hintergrund für den Plot */
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Definiere die Inter-Schriftart */
+        body {
+            font-family: "Inter", sans-serif;
+        }
+    </style>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'primary': '#4f46e5',
+                        'secondary': '#10b981',
+                        'dark-bg': '#0a0d11',
+                        'card-bg': '#161b22',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+
+<body class="bg-dark-bg text-gray-100 p-4 md:p-8">
+
+    <div class="max-w-7xl mx-auto">
+        <header class="text-center mb-10">
+            <h1 class="text-3xl md:text-4xl font-extrabold text-secondary mb-2">Fourier-Synthese: Vom Sinus zum Rechteck
+            </h1>
+            <p class="text-gray-400">Wählen Sie ungerade Oberwellen hinzu, um zu sehen, wie sich das resultierende
+                Signal dem Rechteck annähert.</p>
+        </header>
+
+        <!-- Steuerelemente und Oberschwingungen -->
+        <div class="bg-card-bg p-6 rounded-xl shadow-xl mb-8">
+            <h2 class="text-xl font-bold text-gray-200 mb-4">Einstellungen</h2>
+
+            <!-- NEUE KONTROLLE FÜR PERIODEN -->
+            <div class="mb-6">
+                <label for="periods" class="block text-sm font-medium text-gray-300 mb-2">Anzahl Perioden (Zyklen):
+                    <span id="period_value" class="font-semibold text-secondary">3</span></label>
+                <input type="range" id="periods" min="1" max="10" value="3" step="1"
+                    class="w-full h-2 bg-gray-700 rounded-lg appearance-none cursor-pointer"
+                    oninput="setPeriods(parseInt(this.value))">
+            </div>
+
+            <h2 class="text-xl font-bold text-gray-200 mb-4">Oberwellen-Auswahl (Harmonics)</h2>
+            <p class="text-sm text-gray-400 mb-4">
+                Ein ideales Rechtecksignal wird durch die Summe von ungeraden Sinus-Oberwellen gebildet. Die Amplitude
+                jeder $k$-ten Oberwelle ist proportional zu $1/k$.
+            </p>
+
+            <div id="harmonic_controls" class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8 gap-4">
+                <!-- Die Kontrollen werden hier durch JS eingefügt -->
+            </div>
+        </div>
+
+        <!-- Plot der synthetisierten Welle -->
+        <div class="space-y-4">
+            <h2 class="text-xl font-bold text-gray-200">Synthetisiertes Signal (Summe der gewählten Wellen)</h2>
+            <canvas id="synthesisCanvas" class="plot-canvas"></canvas>
+            <p id="harmonic_count" class="text-sm text-gray-400 font-semibold">Aktuelle Oberwellen: 1. Harmonic
+                (Grundfrequenz)</p>
+        </div>
+
+    </div>
+
+    <script>
+        // --- Konfiguration und Initialisierung ---
+        const N_PLOT_POINTS = 1024 // Feste Anzahl von Punkten für die Zeichenauflösung
+        const FUNDAMENTAL_FREQ = 1 // f0 = 1 Hz
+
+        let synthesisCanvas, synthesisCtx
+
+        // Liste der ungeraden Harmonischen, die zur Rechteckwellen-Synthese benötigt werden
+        const ODD_HARMONICS = [1, 3, 5, 7, 9, 11, 13, 15]
+
+        // Speichert, welche Harmonischen ausgewählt sind. 1 (Grundfrequenz) ist immer aktiv.
+        let selectedHarmonics = new Set([1])
+        let numPeriods = 3 // Standard: 3 Perioden
+
+        document.addEventListener('DOMContentLoaded', () => {
+            synthesisCanvas = document.getElementById('synthesisCanvas')
+
+            // Stelle Canvas-Größe ein
+            const canvasHeight = 400
+            const canvasWidth = synthesisCanvas.parentElement.clientWidth
+            synthesisCanvas.width = canvasWidth
+            synthesisCanvas.height = canvasHeight
+            synthesisCtx = synthesisCanvas.getContext('2d')
+
+            // Setze initialen Periodenwert im UI
+            document.getElementById('period_value').textContent = numPeriods
+
+            createHarmonicControls()
+            synthesizeAndDraw()
+        })
+
+        // --- Steuerung der Perioden ---
+        function setPeriods(P) {
+            numPeriods = P
+            document.getElementById('period_value').textContent = P
+            synthesizeAndDraw()
+        }
+
+        // --- UI-Erzeugung ---
+
+        function createHarmonicControls() {
+            const container = document.getElementById('harmonic_controls')
+
+            ODD_HARMONICS.forEach(k => {
+                const isFundamental = (k === 1)
+
+                const label = document.createElement('label')
+                label.className = `flex items-center space-x-2 p-3 rounded-lg cursor-pointer transition duration-150 
+                                   ${isFundamental ? 'bg-secondary/20 border border-secondary text-secondary' : 'bg-gray-700/50 hover:bg-gray-600/50 border border-gray-600'}`
+
+                const checkbox = document.createElement('input')
+                checkbox.type = 'checkbox'
+                checkbox.value = k
+                checkbox.checked = isFundamental
+                checkbox.disabled = isFundamental // Grundfrequenz ist immer aktiv
+                checkbox.className = 'w-4 h-4 text-primary bg-gray-900 border-gray-600 rounded focus:ring-primary/80 disabled:opacity-50 disabled:cursor-not-allowed'
+                checkbox.onclick = (e) => toggleHarmonic(k, e.target.checked)
+
+                const text = document.createElement('span')
+                text.className = 'text-sm font-medium'
+                // LaTeX-Angabe entfernt (Anforderung des Benutzers)
+                text.innerHTML = `
+                    Harmonic ${k}
+                    ${isFundamental ? '<span class="text-xs block opacity-75">(Grundfrequenz)</span>' : `<span class="text-xs block opacity-75">Amplitude 1/${k}</span>`}
+                `
+
+                label.appendChild(checkbox)
+                label.appendChild(text)
+                container.appendChild(label)
+            })
+        }
+
+        function toggleHarmonic(k, isChecked) {
+            if (k === 1) return // Grundfrequenz kann nicht deaktiviert werden
+
+            if (isChecked) {
+                selectedHarmonics.add(k)
+            } else {
+                selectedHarmonics.delete(k)
+            }
+            synthesizeAndDraw()
+        }
+
+        // --- Signalgenerierung ---
+
+        /** * Generiert eine einzelne Sinus-Oberwelle.
+         * P ist die Anzahl der Perioden, die dargestellt werden sollen.
+         */
+        function generateHarmonicComponent(k, f0, P) {
+            const N = N_PLOT_POINTS
+            const signal = new Array(N)
+            // Amplitude ist proportional zu 1/k (basierend auf der Fourier-Reihe des Rechtecks)
+            const A = 1.0 / k
+            const f_k = k * f0
+
+            // Gesamtzeit T_max = P Perioden der Grundfrequenz (da f0=1, T_max=P)
+            const T_max = P / f0
+
+            for (let n = 0; n < N; n++) {
+                // Zeit t = (n / N) * T_max
+                const t = (n / N) * T_max
+                // Hier nutzen wir die Amplitude A, um die Fourier-Reihe zu bilden: A * sin(...)
+                signal[n] = A * Math.sin(2 * Math.PI * f_k * t)
+            }
+            return signal
+        }
+
+        /** Summiert alle ausgewählten Oberwellen zur Synthese. */
+        function synthesizeSignal() {
+            const N = N_PLOT_POINTS
+            const f0 = FUNDAMENTAL_FREQ
+            const P = numPeriods // Nutze die aktuell gewählte Periodenanzahl
+            const synthesizedSignal = new Array(N).fill(0)
+            let harmonicList = Array.from(selectedHarmonics).sort((a, b) => a - b)
+
+            // Führe die Summation durch
+            harmonicList.forEach(k => {
+                // Übergib P an die Komponentengenerierung
+                const component = generateHarmonicComponent(k, f0, P)
+                for (let i = 0; i < N; i++) {
+                    synthesizedSignal[i] += component[i]
+                }
+            })
+
+            // Normalisiere das Signal, sodass der Peak-Wert immer 1 ist.
+            const maxVal = synthesizedSignal.reduce((max, val) => Math.max(max, Math.abs(val)), 0)
+
+            // Füge eine kleine Pufferzone hinzu, falls maxVal Null ist (was bei korrekter Grundfrequenz nicht passieren sollte)
+            const normalizationFactor = maxVal > 0 ? 1 / maxVal : 1
+
+            const normalizedSignal = synthesizedSignal.map(val => val * normalizationFactor)
+
+            // Aktualisiere die Anzeige der aktiven Harmonischen
+            document.getElementById('harmonic_count').textContent =
+                `Aktive Oberwellen: ${harmonicList.join(', ')} Harmonische(n) (${harmonicList.length} Komponenten).`
+
+            return normalizedSignal
+        }
+
+        // --- Visualisierung ---
+
+        function drawSignal(ctx, canvas, signal) {
+            const W = canvas.width
+            const H = canvas.height
+            const N = signal.length
+            const PADDING = 30 // Etwas mehr Platz für Beschriftungen
+
+            // Löschen
+            ctx.fillStyle = '#0d1117'
+            ctx.fillRect(0, 0, W, H)
+
+            // Achsen und Gitterlinien
+            ctx.strokeStyle = '#444c56'
+            ctx.lineWidth = 1
+
+            // X-Achse (Mitte)
+            ctx.beginPath()
+            ctx.moveTo(PADDING, H / 2)
+            ctx.lineTo(W - PADDING, H / 2)
+            ctx.stroke()
+
+            // Y-Achse (Amplitude 1 und -1)
+            ctx.strokeStyle = '#444c56'
+            const plotAreaHeight = H - 2 * PADDING
+            const y1 = PADDING + (plotAreaHeight * 0.05) // 5% Puffer oben
+            const y_1 = H - PADDING - (plotAreaHeight * 0.05) // 5% Puffer unten
+
+            ctx.setLineDash([5, 5]) // Gestrichelte Linie
+            ctx.beginPath()
+            ctx.moveTo(PADDING, y1)
+            ctx.lineTo(W - PADDING, y1)
+            ctx.moveTo(PADDING, y_1)
+            ctx.lineTo(W - PADDING, y_1)
+            ctx.stroke()
+            ctx.setLineDash([]) // Zurücksetzen
+
+            // Zusätzliche vertikale Linien für Perioden
+            const plotWidth = W - 2 * PADDING
+            ctx.strokeStyle = '#2d333b'
+            for (let p = 1; p < numPeriods; p++) {
+                const x = PADDING + (p / numPeriods) * plotWidth
+                ctx.beginPath()
+                ctx.moveTo(x, PADDING)
+                ctx.lineTo(x, H - PADDING)
+                ctx.stroke()
+            }
+
+
+            // Signal zeichnen
+            ctx.strokeStyle = '#f97316' // Orange für die Synthese
+            ctx.lineWidth = 3
+            ctx.beginPath()
+
+            // Plot-Bereich für die Signal-Skalierung (zwischen y1 und y_1)
+            const signalPlotHeight = y_1 - y1
+
+            for (let i = 0; i < N; i++) {
+                // Skaliere X: Sample-Index zu Pixel-Position
+                const x = PADDING + (i / N) * plotWidth
+
+                // Skaliere Y: Amplitude [-1, 1] zu Pixel-Position [y1, y_1]
+                // (Signal[i] + 1) / 2 -> Wert von [0, 1]
+                // 1 - (Wert von [0, 1]) -> Invertiert, da Canvas Y von oben nach unten wächst
+                const scaledYPosition = 1 - (signal[i] + 1) / 2
+                const y = y1 + scaledYPosition * signalPlotHeight
+
+                if (i === 0) {
+                    ctx.moveTo(x, y)
+                } else {
+                    ctx.lineTo(x, y)
+                }
+            }
+            ctx.stroke()
+
+            // Beschriftungen
+            ctx.fillStyle = '#94a3b8'
+            ctx.font = '12px Inter'
+            ctx.fillText('+1.0', 5, y1 + 4)
+            ctx.fillText('-1.0', 5, y_1 + 4)
+            ctx.fillText('Amplitude', 5, 15)
+            ctx.fillText('Zeit (Zyklen)', W - 90, H - 5)
+        }
+
+        // --- Hauptsteuerungsfunktion ---
+
+        function synthesizeAndDraw() {
+            // 1. Signal synthetisieren
+            const synthesizedSignal = synthesizeSignal()
+
+            // 2. Zeichnen
+            drawSignal(synthesisCtx, synthesisCanvas, synthesizedSignal)
+        }
+
+        // Stellt sicher, dass der Plot beim Ändern der Fenstergröße neu gezeichnet wird
+        window.addEventListener('resize', () => {
+            if (!synthesisCanvas) return
+            const canvasWidth = synthesisCanvas.parentElement.clientWidth
+            synthesisCanvas.width = canvasWidth
+            synthesizeAndDraw()
+        });
+
+    </script>
+</body>
+
+</html>

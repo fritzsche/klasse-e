@@ -8,6 +8,21 @@ Jupyter  Notebook:
 
 https://github.com/fritzsche/klasse-e/blob/main/mischer.ipynb
 
+#Sender
+
+Welche Oberwellen haben Signale:
+https://fritzsche.github.io/klasse-e/oberwelle.html
+
+
+Bei ein Rechtecksignal aus Oberwellen:
+https://fritzsche.github.io/klasse-e/rechteck.html
+
+
+How a LPF works:
+https://fritzsche.github.io/klasse-e/rechteck.html
+
+
+
 ## Lernkrücken
 Work in progress:
 https://github.com/fritzsche/klasse-e/blob/main/kruecken.pdf

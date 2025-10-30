@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8" />
+<title>LPF-Demo – Zero-Phase, Auto-Zoom & Filterwahl</title>
+<style>
+:root{
+  --bg:#0a0d11;--card:#161b22;--text:#f3f4f6;--muted:#9ca3af;
+  --input:#f97316;--filter:#3b82f6;--output:#10b981;
+  --grid:#2d333b;--red:#dc2626;
+}
+body{font-family:Inter,system-ui;background:var(--bg);color:var(--text);margin:0;padding:16px;}
+.container{max-width:1200px;margin:auto;}
+header{text-align:center;margin-bottom:12px;}
+h1{color:var(--output);margin:0;font-size:1.6rem;}
+.small{color:var(--muted);font-size:0.9rem;margin-top:4px;}
+
+.controls{background:var(--card);padding:14px;border-radius:10px;margin-bottom:18px;}
+.controls .row{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:8px;white-space:nowrap;}
+.controls label{flex:1;color:var(--muted);}
+.controls .value{min-width:70px;text-align:right;color:var(--filter);}
+input[type=range]{flex:2;}
+select{flex:1;padding:4px;border-radius:6px;background:#222;color:var(--text);}
+.plot-grid{display:grid;gap:18px;}
+@media(min-width:900px){.plot-grid{grid-template-columns:repeat(3,1fr)}}
+.plot-canvas{width:100%;height:300px;border-radius:8px;}
+.plot-title{font-weight:700;margin-bottom:6px;}
+</style>
+</head>
+<body>
+<div class="container">
+<header>
+  <h1>Tiefpassfilter (LPF) – Zero-Phase & Filterwahl</h1>
+  <div class="small">Rechtecksignal → LPF mit variabler Ordnung · Automatische Achsenskalierung</div>
+</header>
+
+<div class="controls">
+  <div class="row">
+    <label>Rechteck-Frequenz (f₀):</label>
+    <span id="f0_label" class="value">5 Hz</span>
+    <input id="f0" type="range" min="0.5" max="50" step="0.5" value="5" oninput="updateF0(this.value)">
+  </div>
+
+  <div class="row">
+    <label>Grenzfrequenz (f<sub>c</sub>):</label>
+    <span id="fc_label" class="value">8 Hz</span>
+    <input id="fc" type="range" min="0.5" max="200" step="0.5" value="8" oninput="updateFc(this.value)">
+  </div>
+
+  <div class="row">
+    <label>Filtertyp:</label>
+    <select id="filterType" onchange="updatePlots()">
+      <option value="1">1. Ordnung (RC)</option>
+      <option value="2" selected>2. Ordnung Butterworth</option>
+      <option value="3">3. Ordnung (kaskadiert)</option>
+    </select>
+  </div>
+
+  <div class="row">
+    <label>Zero-Phase (filtfilt):</label>
+    <input id="zeroPhase" type="checkbox" checked onchange="updatePlots()">
+  </div>
+</div>
+
+<div class="plot-grid">
+  <div><div class="plot-title" style="color:var(--input)">1. Eingang (Rechteck)</div><canvas id="in" class="plot-canvas"></canvas></div>
+  <div><div class="plot-title" style="color:var(--filter)">2. Frequenzgang</div><canvas id="freq" class="plot-canvas"></canvas></div>
+  <div><div class="plot-title" style="color:var(--output)">3. Ausgang (gefiltert)</div><canvas id="out" class="plot-canvas"></canvas></div>
+</div>
+</div>
+
+<script>
+let fs=4000,N=4096,f0=5,fc=8;
+const canv={};
+
+document.addEventListener("DOMContentLoaded",()=>{
+  ["in","freq","out"].forEach(k=>{
+    canv[k]=document.getElementById(k);
+    canv[k].width=canv[k].parentElement.clientWidth;
+    canv[k].height=300;
+  });
+  updatePlots();
+});
+
+window.addEventListener("resize",()=>updatePlots());
+
+function updateF0(v){f0=parseFloat(v);document.getElementById("f0_label").textContent=`${f0.toFixed(1)} Hz`;updatePlots();}
+function updateFc(v){fc=parseFloat(v);document.getElementById("fc_label").textContent=`${fc.toFixed(1)} Hz`;updatePlots();}
+
+/* Rechtecksignal */
+function genSquare(f0,fs,N){
+  const y=new Float32Array(N);
+  const K=31; // 15 Harmonische
+  for(let n=0;n<N;n++){
+    let s=0;
+    for(let k=1;k<=K;k+=2)s+=Math.sin(2*Math.PI*f0*k*n/fs)/k;
+    y[n]=s*(4/Math.PI);
+  }
+  return y;
+}
+
+/* Filterimplementierungen */
+function filt1(x,fs,fc){
+  const y=new Float32Array(x.length);
+  const dt=1/fs,wc=2*Math.PI*fc,a=wc*dt,b0=a/(2+a),b1=b0,a1=(2-a)/(2+a);
+  y[0]=b0*x[0];
+  for(let n=1;n<x.length;n++)y[n]=b0*x[n]+b1*x[n-1]+a1*y[n-1];
+  return y;
+}
+
+function butter2(x,fs,fc){
+  const y=new Float32Array(x.length);
+  const c=1/Math.tan(Math.PI*fc/fs);
+  const a0=1/(1+Math.SQRT2*c+c*c);
+  const a1=2*a0;
+  const a2=a0;
+  const b1=2*a0*(1-c*c);
+  const b2=a0*(1-Math.SQRT2*c+c*c);
+  y[0]=a0*x[0];
+  y[1]=a0*x[1]+a1*x[0];
+  for(let n=2;n<x.length;n++){
+    y[n]=a0*x[n]+a1*x[n-1]+a2*x[n-2]-b1*y[n-1]-b2*y[n-2];
+  }
+  return y;
+}
+
+/* Filteraufruf */
+function applyFilter(x,fs,fc,type,zero){
+  let y=x.slice();
+  const pass=(sig)=>{
+    if(type==1) return filt1(sig,fs,fc);
+    if(type==2) return butter2(sig,fs,fc);
+    if(type==3){let out=sig.slice();for(let i=0;i<3;i++)out=filt1(out,fs,fc);return out;}
+  };
+  y=pass(y);
+  if(zero){
+    y=y.slice().reverse();
+    y=pass(y);
+    y=y.slice().reverse();
+  }
+  return y;
+}
+
+/* Frequenzgang berechnen */
+function freqResp(fs,fc,type,zero,maxHz){
+  const pts=512,fArr=new Float32Array(pts),mag=new Float32Array(pts);
+  for(let i=0;i<pts;i++){
+    const f=i/pts*maxHz;fArr[i]=f;
+    const omega=2*Math.PI*f/fs;
+    let H=0;
+    if(type==1){
+      const wc=2*Math.PI*fc;
+      const mag1=1/Math.sqrt(1+Math.pow(f/fc,2));
+      H=mag1;
+    }else if(type==2){
+      const mag1=1/Math.sqrt(1+Math.pow(f/fc,4));
+      H=mag1;
+    }else{
+      const mag1=1/Math.sqrt(1+Math.pow(f/fc,6));
+      H=mag1;
+    }
+    if(zero)H=Math.pow(H,2);
+    mag[i]=H;
+  }
+  return {fArr,mag};
+}
+
+/* Plot-Zeichnung */
+function drawSig(c,arr,col){
+  const ctx=c.getContext("2d"),W=c.width,H=c.height;
+  ctx.fillStyle="#081018";ctx.fillRect(0,0,W,H);
+  ctx.strokeStyle="#2d333b";ctx.beginPath();ctx.moveTo(0,H/2);ctx.lineTo(W,H/2);ctx.stroke();
+  ctx.strokeStyle=col;ctx.lineWidth=2;ctx.beginPath();
+  const N=arr.length;
+  for(let i=0;i<N;i++){
+    const x=i/N*W;
+    const y=H/2-arr[i]*H*0.4;
+    if(i===0)ctx.moveTo(x,y);else ctx.lineTo(x,y);
+  }
+  ctx.stroke();
+}
+
+function drawFreq(c,resp,fc,f0){
+  const ctx=c.getContext("2d"),W=c.width,H=c.height;
+  ctx.fillStyle="#081018";ctx.fillRect(0,0,W,H);
+  ctx.strokeStyle="#2d333b";ctx.beginPath();ctx.moveTo(0,H-20);ctx.lineTo(W,H-20);ctx.stroke();
+  ctx.strokeStyle="#3b82f6";ctx.lineWidth=2;ctx.beginPath();
+  const N=resp.fArr.length;
+  for(let i=0;i<N;i++){
+    const x=i/N*W;const y=H-20-resp.mag[i]*H*0.7;
+    if(i===0)ctx.moveTo(x,y);else ctx.lineTo(x,y);
+  }
+  ctx.stroke();
+
+  const fx=f=>Math.min(W*(f/resp.fArr[N-1]),W-5);
+  ctx.strokeStyle="#dc2626";ctx.beginPath();ctx.moveTo(fx(fc),0);ctx.lineTo(fx(fc),H);ctx.stroke();
+  ctx.fillStyle="#dc2626";ctx.fillText(`f_c=${fc.toFixed(1)} Hz`,fx(fc)+4,14);
+
+  ctx.strokeStyle="#10b981";ctx.beginPath();ctx.moveTo(fx(f0),0);ctx.lineTo(fx(f0),H);ctx.stroke();
+  ctx.fillStyle="#10b981";ctx.fillText(`f₀=${f0.toFixed(1)} Hz`,fx(f0)+4,28);
+}
+
+/* Hauptupdate */
+function updatePlots(){
+  const zero=document.getElementById("zeroPhase").checked;
+  const type=parseInt(document.getElementById("filterType").value);
+  const x=genSquare(f0,fs,N);
+  const y=applyFilter(x,fs,fc,type,zero);
+  const maxHz=Math.min(fs/2,3*Math.max(f0,fc)); // auto-zoom max = 3×max(f0,fc)
+  const r=freqResp(fs,fc,type,zero,maxHz);
+  drawSig(canv.in,x,"#f97316");
+  drawSig(canv.out,y,"#10b981");
+  drawFreq(canv.freq,r,fc,f0);
+}
+</script>
+</body>
+</html>
