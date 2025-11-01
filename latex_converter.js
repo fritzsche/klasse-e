@@ -13,10 +13,10 @@ function escape(text) {
         return ''
     }
     let escapedText = text
-    escapedText = escapedText.replace(/\\/g, '\\textbackslash{}')
+ //   escapedText = escapedText.replace(/\\/g, '\\textbackslash{}')
     escapedText = escapedText.replace(/&/g, '\\&')
     escapedText = escapedText.replace(/%/g, '\\%')
-    escapedText = escapedText.replace(/\$/g, '\\$')
+//    escapedText = escapedText.replace(/\$/g, '\\$')
     escapedText = escapedText.replace(/#/g, '\\#')
     escapedText = escapedText.replace(/_/g, '\\_')
     escapedText = escapedText.replace(/{/g, '\\{')
