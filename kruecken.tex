@@ -63,6 +63,9 @@
 
 \usepackage[HTML]{xcolor}
 
+
+\newcommand{\qref}[1]{\hyperref[#1]{#1}}
+
 \definecolor{c00a0dc}{HTML}{00A0DC}
 \definecolor{cbdbdbd}{HTML}{0BBDBD}
 \definecolor{ce05022}{HTML}{E05022}
@@ -143,7 +146,7 @@
 
 \ExplSyntaxOn
 \NewDocumentCommand{\frage}{ m m m m m m m m }{
-  \item[#1] #2
+  \item[#1] \label{#1} #2
     \tl_if_eq:nnTF {#7} {true} {
         \qgrafic{#1}
     }{}
@@ -169,6 +172,7 @@
     \begin{tabular}{cc}
       (A) \adjustbox{valign=c}{\agrafic{#1}{a}} &
       (B) \adjustbox{valign=c}{\agrafic{#1}{b}} \\
+      \multicolumn{2}{c}{\vspace{10pt}} \\
       (C) \adjustbox{valign=c}{\agrafic{#1}{c}} &
       (D) \adjustbox{valign=c}{\agrafic{#1}{d}} \\
     \end{tabular}
@@ -239,9 +243,9 @@ Das Ziel des Dokuments ist auch nicht ein möglichst genaue Fachliche Darstellun
 
 Da sich Funker immer per \qq{Du} ansprechen, will ich in diesem Dokument auch nicht anders machen.
 
-Dieses Dokument verwendet die Kapitalstruktur der DARC Lernplattform \url{http://50ohm.de}. Du kannst also alle Inhalte dort nachlesen. In diesem Dokument fassen wir die Inhalte absichtlich nur sehr knapp zusammen. Wir beschränken uns auf die nach Inhalte die im Fragekatalog vorkommen. 
+Dieses Dokument verwendet die Kapitalstruktur der DARC Lernplattform \url{http://50ohm.de}. Du kannst also alle Inhalte dort nachlesen. In diesem Dokument fassen wir die Inhalte absichtlich nur sehr knapp zusammen. Wir beschränken uns auf die nach Inhalte die im Fragenkatalog vorkommen. 
 
-Wenn es sich nicht im ein triviale definition handelt wird die Lösung jeder Frage im Detail im Block "Lösungsansatz erklärt.
+Wenn es sich nicht im ein triviale definition handelt wird die Lösung jeder Frage im Detail im Block \qq{Lösungsansatz} erklärt.
 
 \setcounter{section}{7}
 \section{Grundlegende Schaltungen}
@@ -269,11 +273,10 @@ Wenn es sich nicht im ein triviale definition handelt wird die Lösung jeder Fra
 
 
 \begin{ohmchapter}
-In einem Mischer werden zwei Eingangssignale zu einem Ausgangssignal gemischt. Das Blockschaltdiagramm eines Mischers sieht aus wie eine Waschmaschine.
+In einem Mischer werden zwei Eingangssignale zu einem Ausgangssignal gemischt. Das Blockschaltdiagramm eines Mischers sieht aus wie eine Waschmaschine. Tatsächlich soll uns das Kreuz in der Mitte des Symbols an ein Multiplikationszeichen erinnern, da es sich um meine multiplikative Mischung von Frequenzen handelt.
 Beim Mischen entsteht aus den beiden Eingangsfrequenzen die Summe und Differenz Frequenz:
 
-%$$f_{\text{out 1}} = f_{\text{in 1}} + f_{\text{in 2}} \textrm{\ und\ }f_{\text{out 2}} = | f_{\text{in 1}} - f_{\text{in 2}} |$$
-%Als Blockschaltdiagramm sieht es folgendermaßen aus:
+
 \begin{center}
 \begin{adjustbox}{margin=10pt}
 \begin{circuitikz}
@@ -289,8 +292,55 @@ $\begin{aligned}
 \end{circuitikz}
 \end{adjustbox}
 \end{center}
-\end{ohmchapter}
 
+
+
+Wie solch ein Mischer funktioniert kannst Du mit dieser \href{https://fritzsche.github.io/klasse-e/mischer.html}{App} interaktiv ausprobieren.
+
+
+%$$f_{\text{out 1}} = f_{\text{in 1}} + f_{\text{in 2}} \textrm{\ und\ }f_{\text{out 2}} = | f_{\text{in 1}} - f_{\text{in 2}} |$$
+%Als Blockschaltdiagramm sieht es folgendermaßen aus:
+
+
+Hier nur eine kurze Erklärung wie sich dies Mathematisch herleiten lässt. Für die Prüfung brauchst Du diese Details nicht wissen!
+In unserem Beispiel haben wir ein empfangenes Signal $S_{\text{empf}}$ 
+und das Signal eines lokalen Oszillator  $S_{\text{LO}}$.
+
+% --- Definition der Eingangssignale ---
+\begin{align*}
+    S_{\text{empf}}(t) &= A_{\text{empf}} \cdot \sin(\omega_{\text{empf}} t) \\
+    S_{\text{LO}}(t) &= A_{\text{LO}} \cdot \sin(\omega_{\text{LO}} t)
+\end{align*}
+
+Ein Multiplikativer Mixer wird unser Signal zu einem  wie eine einfache Ausgangssignal $S_{\text{out}}$ multiplizieren:
+
+% --- Mischer-Multiplikation ---
+\begin{equation*}
+    S_{\text{out}}(t) = S_{\text{empf}}(t) \cdot S_{\text{LO}}(t)
+\end{equation*}
+
+% --- Produkt-zu-Summe-Formel (Trigonometrie) ---
+Wir verwenden die folgende Trigonometrie Formel:
+\begin{equation*}
+    \label{eq:sin_prod}
+    \sin(A) \cdot \sin(B) = \frac{1}{2} \left[ \cos(A-B) - \cos(A+B) \right]
+\end{equation*}
+
+% --- Das resultierende Ausgangssignal ---
+
+Also gilt:
+\begin{align*}
+    S_{\text{out}}(t) &= A_{\text{empf}} A_{\text{LO}} \cdot \sin(\omega_{\text{empf}} t) \cdot \sin(\omega_{\text{LO}} t) \\
+    S_{\text{out}}(t) &= \frac{1}{2} A_{\text{empf}} A_{\text{LO}} \left[ \cos((\omega_{\text{empf}} - \omega_{\text{LO}}) t) - \cos((\omega_{\text{empf}} + \omega_{\text{LO}}) t) \right]
+\end{align*}
+
+Summe und Differenz entstehen also einfach aus unserer Formel.
+
+% --- Komponenten-Bezeichnung (Optional, als Text) ---
+% Die Differenzfrequenz ($\omega_{\text{empf}} - \omega_{\text{LO}}$) ist die Zwischenfrequenz (ZF).
+
+
+\end{ohmchapter}
 
 \begin{sol}{EF501}
     Der Transverter setzt natürlich vom 70cm Signal ins 10m Band um und umgekehrt.
@@ -514,16 +564,17 @@ Je kleiner die Empfangsbandbreite ist, desto enger ist auch mein Filter und das 
 \end{ohmchapter}  
 
 \subsection{BFO I}
+
 \begin{sol}{EF217}
   Seht starke Signale können einen Empfänger überlasten und müssen gedämpft werden. Dazu verwenden wir ein \textbf{Dämpfungsglied}.
 \end{sol} 
 
-
+\begin{ohmchapter}
+Mit dem \qq{Beat Frequenz Oscillator} (BFO) wird in Überlagerungsempfänger die ZF auf Audio gemischt und damit hörbar gemacht.
+\end{ohmchapter}  
 \subsection{Vorverstärker und Dämpfungsglied}
 
-\begin{ohmchapter}
-Mit dem BFO wird in Überlagerungsempfänger die ZF auf Audio gemischt und damit hörbar gemacht.
-\end{ohmchapter}  
+
 
 \begin{sol}{EF218}
 Im UHF (Ultra Hoch Frequenz) sind die Verluste auf den Zuleitungen besonders hoch. Im schlimmsten Fall ist das Nutzsignal durch diese Dämpfung bereits komplett im Rauschen verschwunden. Deshalb werden HF (Vor-)Verstärker im UHF Bereit möglichst direkt an der Antenne montiert.
@@ -813,9 +864,101 @@ Wir unterscheiden zwei unterschiedliche Arten von Störungen.
   \item[Einstrahlung] Die HF gelangt direkt in der gestörte Gerät, z.B. da die Abschirmung nicht ausreicht.
 \end{description}
 
-
-
-
-
 \end{ohmchapter}
+
+\section{Digitale Übertragungsverfahren}
+\subsection{Binäres Zahlensystem}
+
+
+
+\begin{sol}{EA202}
+  Wir haben also 3 Bits. Wir können die Zahl $111_2$ berechnen:
+    \begin{center}
+  \begin{tabular}{|c|c|c|c|c|c|c|c|} 
+    128& 64&32&16 &8 & 4 & 2 & 1 \\ \hline
+    0&0&0&0&0&1&1&1
+  \end{tabular} 
+  \end{center}
+Also $111_2 = 4+2+1 = 7$. Dies ist aber keine der möglichen Antworten! Wir haben die 0 vergessen, es wurde ja nach \qq{unterschiedliche(n) Zuständen} gefragt! Also ist 8 die richtige Antwort.
+
+Es geht auch einfacher $1000_2$ die nächst höhere Zahl ist können wird direkt mit $8 = 2^3$ antworten.
+\end{sol}
+
+
+\begin{sol}{EA203}
+Analog zu Frage \qref{EA202} rechnen wir $2^4 = 16$.
+\end{sol}
+
+\begin{sol}{EA204}
+Analog zu Frage \qref{EA202} rechnen wir $2^5 = 32$.
+\end{sol}
+
+
+\begin{sol}{EA205}
+  Wir rechnen:
+  \begin{center}
+\begin{tabular}{|c|c|c|c|c|c|c|c|} 
+128& 64&32&16 &8 & 4 & 2 & 1 \\ \hline
+0&1&0&0&1&1&1&0
+\end{tabular}
+
+\end{center}
+Also: $64+8+4+2 = 78$ 
+\end{sol} 
+
+\begin{sol}{EA206}
+  Wir rechnen:
+  \begin{center}
+\begin{tabular}{|c|c|c|c|c|c|c|c|} 
+128& 64&32&16 &8 & 4 & 2 & 1 \\ \hline
+1&0&0&0&1&1&1&0
+\end{tabular}
+
+\end{center}
+Also: $128+8+4+2 = 142$ 
+\end{sol}  
+
+
+\begin{sol}{EA207}
+  Wir rechnen:
+  \begin{center}
+\begin{tabular}{|c|c|c|c|c|c|c|c|} 
+128& 64&32&16 &8 & 4 & 2 & 1 \\ \hline
+1&0&0&1&1&1&0&0
+\end{tabular}
+\end{center}
+Also: $128+16+8+4 = 156$ 
+\end{sol}  
+
+
+\begin{sol}{EA208}
+  Wir rechnen:
+  \begin{center}
+\begin{tabular}{|c|c|c|c|c|c|c|c|} 
+128& 64&32&16 &8 & 4 & 2 & 1 \\ \hline
+1&1&1&1&1&0&0&0
+\end{tabular}
+\end{center}
+Also: $128+64+32+16 = 248$ 
+\end{sol}  
+
+\begin{ohmchapter}
+  Wir verwenden im Alltag üblicherweise Zahlen im Dezimalsystem. D.h wir verwenden die Ziffern 0 bis 9 alle Zahlen darzustellen. 
+  In der Digitaltechnik hat sich allerdings hauptsächlich das Binärsystem durchgesetzt in dem nur die Ziffern 0 und 1 verwendet werden, die durch zwei Zustände (Strom ist ein oder aus) abgebildet werden können.  Das Binärsystem wird manchmal auch Dualsystem genannt.
+   Eine Ziffer die im Binärsystem (0 oder 1) wird auch Bit genannt.
+  Üblicherweise fassen wir 8 Bit zu einer Zahl zusammen und nennen es Byte.
+  Für die Stellen einer 8 Bit Zahl gilt: 
+  \begin{align*}
+    2^7 &= 128 \\         
+    2^6 &= 64 \\
+    2^5 &= 32 \\  
+    2^4 &= 16 \\         
+    2^3 &= 8  \\
+    2^2 &= 4 \\         
+    2^1 &= 2  \\   
+    2^0 &= 1  
+  \end{align*}  
+Tipp für die Prüfung: viele Schul-Taschenrechner (nicht programmierbar und deshalb vielleicht von der Bundesnetzagentur für die Prüfung akzeptiert) können zwischen Zahlsystemen umrechnen.
+\end{ohmchapter}
+
 \end{document}
