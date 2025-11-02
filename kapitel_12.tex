@@ -1,0 +1,301 @@
+\setcounter{section}{11}
+\section{Digitale Übertragungsverfahren}
+\subsection{Binäres Zahlensystem} \label{sec:binär}
+
+
+
+\begin{sol}{EA202}
+  Wir haben also 3 Bits. Wir können die Zahl $111_2$ berechnen:
+    \begin{center}
+  \begin{tabular}{|c|c|c|c|c|c|c|c|} 
+    128& 64&32&16 &8 & 4 & 2 & 1 \\ \hline
+    0&0&0&0&0&1&1&1
+  \end{tabular} 
+  \end{center}
+Also $111_2 = 4+2+1 = 7$. Dies ist aber keine der möglichen Antworten! Wir haben die 0 vergessen, es wurde ja nach \qq{unterschiedliche(n) Zuständen} gefragt! Also ist 8 die richtige Antwort.
+
+Es geht auch einfacher $1000_2$ die nächst höhere Zahl ist können wird direkt mit $8 = 2^3$ antworten.
+\end{sol}
+
+
+\begin{sol}{EA203}
+Analog zu Frage \qref{EA202} rechnen wir $2^4 = 16$.
+\end{sol}
+
+\begin{sol}{EA204}
+Analog zu Frage \qref{EA202} rechnen wir $2^5 = 32$.
+\end{sol}
+
+
+\begin{sol}{EA205}
+  Wir rechnen:
+  \begin{center}
+\begin{tabular}{|c|c|c|c|c|c|c|c|} 
+128& 64&32&16 &8 & 4 & 2 & 1 \\ \hline
+0&1&0&0&1&1&1&0
+\end{tabular}
+
+\end{center}
+Also: $64+8+4+2 = 78$ 
+\end{sol} 
+
+\begin{sol}{EA206}
+  Wir rechnen:
+  \begin{center}
+\begin{tabular}{|c|c|c|c|c|c|c|c|} 
+128& 64&32&16 &8 & 4 & 2 & 1 \\ \hline
+1&0&0&0&1&1&1&0
+\end{tabular}
+
+\end{center}
+Also: $128+8+4+2 = 142$ 
+\end{sol}  
+
+
+\begin{sol}{EA207}
+  Wir rechnen:
+  \begin{center}
+\begin{tabular}{|c|c|c|c|c|c|c|c|} 
+128& 64&32&16 &8 & 4 & 2 & 1 \\ \hline
+1&0&0&1&1&1&0&0
+\end{tabular}
+\end{center}
+Also: $128+16+8+4 = 156$ 
+\end{sol}  
+
+
+\begin{sol}{EA208}
+  Wir rechnen:
+  \begin{center}
+\begin{tabular}{|c|c|c|c|c|c|c|c|} 
+128& 64&32&16 &8 & 4 & 2 & 1 \\ \hline
+1&1&1&1&1&0&0&0
+\end{tabular}
+\end{center}
+Also: $128+64+32+16 = 248$ 
+\end{sol}  
+
+\begin{ohmchapter}
+  Wir verwenden im Alltag üblicherweise Zahlen im Dezimalsystem. D.h wir verwenden die Ziffern 0 bis 9 alle Zahlen darzustellen. 
+  In der Digitaltechnik hat sich allerdings hauptsächlich das Binärsystem durchgesetzt in dem nur die Ziffern 0 und 1 verwendet werden, die durch zwei Zustände (Strom ist ein oder aus) abgebildet werden können.  Das Binärsystem wird manchmal auch Dualsystem genannt.
+   Eine Ziffer die im Binärsystem (0 oder 1) wird auch Bit genannt.
+  Üblicherweise fassen wir 8 Bit zu einer Zahl zusammen und nennen es Byte.
+  Für die Stellen einer 8 Bit Zahl gilt: 
+  \begin{align*}
+    2^7 &= 128 \\         
+    2^6 &= 64 \\
+    2^5 &= 32 \\  
+    2^4 &= 16 \\         
+    2^3 &= 8  \\
+    2^2 &= 4 \\         
+    2^1 &= 2  \\   
+    2^0 &= 1  
+  \end{align*}  
+Tipp für die Prüfung: viele Schul-Taschenrechner (nicht programmierbar und deshalb vielleicht von der Bundesnetzagentur für die Prüfung akzeptiert) können zwischen Zahlsystemen umrechnen.
+\end{ohmchapter}
+
+
+\subsection{Digimode per SSB}
+
+\begin{sol}{EE402}
+  Wie im Eingang zu diesem Kapitel beschrieben wird in der Regel SSB verwendet.
+\end{sol}
+
+
+\begin{sol}{EE403}
+Wie bereits im Kapitel zur Modulation erklärt sind bei SSB NF unf HF Bandbreite identisch.
+\end{sol}
+
+
+\begin{sol}{EE404}
+Über die Audio Schnittstelle wird am PC die komplette Bandbreite von \SI{2.4}{\kilo\hertz} empfangen. 
+Digitale Signale haben oft eine Bandbreite von nur wenigen Hertz und können somit gleichzeitig empfangen werden.
+Hier ein Bild eines Wasserfalls mit Spektrum. Im Audio Empfangsbereich liegen viele Signale:
+  \begin{center}
+    \includegraphics[scale=.5]{bilder/ft8.png}    
+  \end{center}
+\end{sol}
+
+\begin{sol}{EE415}
+  Du musst die einfach merken, dass SSTV (Slow Scan TV) Bilder sind. Diese werden z.B. auch von der ISS im \SI{2}{\meter}  Band gesendet. Hier als Anschauung ein SSTV Bild:
+  \begin{center}
+    \includegraphics[scale=.15]{bilder/sstv.jpg}    
+  \end{center}
+  
+\end{sol}
+
+
+\begin{ohmchapter}
+  Digitale Signale werden oft nicht direkt (nativ) vom Funkgerät verarbeitet.
+  Vielmehr wird das Funkgerät im Modus SSB betrieben, die Audio Signale kommen aber natürlich nicht via Mikroton sondern werden per USB Audio interface von einem Computer erzeugt.
+\end{ohmchapter}
+
+
+\subsection{9600-Port }
+
+\begin{sol}{EF219}
+Wie wir im Eingang zu diesem Kapitel gelernt haben umgeht der 9600-Port den Audio Bereich des Funkgeräts und steuert direkt den Demodulator an. Der Demodulator ist zwischen 3 und 4. Wir wählen 4, da dies nach der NF Verarbeitung aber vor dem Demodulator ist.
+\end{sol}
+
+\begin{sol}{EF309}
+Wir gehen analog zu Frage \qref{EF219} vor. Es kommt nur 2 in Frage, da dies nach dem NF Bandpassfilter aber vor dem Modular ist. Achtung: die Position 1 ist im NF Teil des Senders. Bitte nicht verwirren lassen.
+\end{sol}
+
+\begin{ohmchapter}
+Der 9600-Port dient der schnellen digitalen Datenkommunikation (z.,B. Packet Radio, APRS) mit 9600 Baud. Er umgeht die sprachoptimierte Audioverarbeitung des Transceivers durch direkte Einspeisung analoger Audiosignale vom externen Modem/TNC in den Frequenzmodulator. Dies ermöglicht höhere Übertragungsraten im Vergleich zu herkömmlichen 1200-Baud-Verbindungen über den Mikrofonanschluss. Die übertragenen Signale sind analog (AFSK/FSK Töne), nicht digital im Sinne von TTL-Pegeln.
+Damit hat der 9600-Port eine größere Bandbreite als die Anbindung via SSB die wir im vorherigen Kapitel kennengelernt haben und steuert den Modulator/Demodulator direkt an.
+\end{ohmchapter}
+
+
+
+
+
+
+\subsection{Übersteuerung }
+
+\begin{sol}{EJ217}
+  Wenn die ALC eingreif ist das Audio Signal zu hoch eingestellt. Dadurch kann es zu Störungen auf den Nachbarfrequenzen kommen.
+\end{sol}
+
+\begin{sol}{EJ218}
+Wie schon seit Frage \qref{EJ217} bekannt wollen wir nicht, dass die ALC aktiv wird. Allerdings sollte der Pegel natürlich möglichst hoch sein. Deshalb stellen wir den Pegel genau so hoch, dass die ALC gerade so keinen Ausschlag hat. Dies können wir z.B. für den FT-8 Betrieb machen in dem wir der Audio Regler (am Computer) des Audio Interface hochdrehen und dabei die ALC beobachten. Wenn die ALC ausschlägt gehen wir mit der Lautstärke noch etwas herunter. 
+\end{sol}
+
+
+\begin{sol}{EJ219}
+Wie in Frage \qref{EJ218} erklärt reduzieren wir den NF-Pegel (Lautstärke) noch etwas.
+\end{sol}
+
+\begin{ohmchapter}
+Wir haben gelernt, dass viele Digitale Signale über ein Audio Interface und dem Transceiver im SSB Modus erzeugt werden. Wir wissen auch, dass es in SSB auf den Audio Pegel ankommt um einen störungsfreien Betrieb durchzuführen.
+\end{ohmchapter}
+
+
+\subsection{Automatische Empfangsberichte}
+Viele Stationen Empfangen Radio Signale und verbreiten diese via Internet (WebSDR),
+Besonders im digitalen Bereich könne diese Signale automatisch dekodiert werden und der Empfang kann an zentrale Server berichtet werden. Dort können sie zentral eingesehen werden.
+Z.B. werden automatisiert dekodierte CW Signale vom \href{https://www.reversebeacon.net/}{Reverse Beaken Network} gesammelt.
+FT8 und PSK vom \href{https://pskreporter.info}{PSK reporter}.
+
+\begin{ohmchapter}
+\end{ohmchapter}
+
+
+
+\subsection{Paketvermittelte Netzwerke}
+
+
+\begin{sol}{EE412}
+Wie allgemein bekannt werden Informationen im Internet via Paketen verteilt.
+Das Internet besteht dabei aus vielen kleinen Netzwerken die diese Pakete austauschen. Du hast vermutlich bei Dir zuhause einen Internet Router (in vielen Fällen ist dies eine FritzBox). Er stellt für Dich die Verbindung von Deinem lokalen Netzwerk (WLAN) zu allen anderen Netzwerken her. D.h. wenn Du an Deinem Computer eine Internetseite öffnest, werden eine oder mehrere Pakete erzeugt die zunächst alle an Deinen Router gehen. Der Leitet sie dann an das Netzwerk Deines Internet Providers weiter und solange \textbf{weitergeleitet} bis das Paket den Zielserver erreicht.
+\end{sol}
+
+\begin{sol}{EE413}
+Die IP-Adresse und die Subnetzmaske definieren zusammen das lokale Netzwerk, indem sie bestimmen, welcher Teil der IP-Adresse die Netzwerk-ID (das lokale Netz) und welcher Teil die Host-ID (ein spezifisches Gerät innerhalb dieses Netzes) identifiziert.
+\end{sol}
+
+\begin{sol}{EE414}
+  Für diese Frage ist die Musterantwort schlecht formuliert. Das Internet ist zunächst ein Netzwerk, dass das Internet Protokoll (IP) befolgt. Diese IP Pakete können auch mit Amateurfunk weitergeleitet werden, wobei z.B. das Rufzeichen in höheren Netzwerkebene (z.B. TCP) ausgetauscht werden. Wir merken uns die Formulierung der Musterantwort.
+\end{sol}
+
+
+\begin{ohmchapter}
+In diesem Kapitel haben wir einige Fragen zu den Grundlagen eines \textbf{Paketvermittelten Netzwerk}. Es geht konkret um das IP-Protokoll, dass dem Internet wie Du es kennst zu Grunde liegt. Die Details verrate ich jeweils bei den Fragen.
+
+\end{ohmchapter}
+
+
+\subsection{Amplituden- und Frequenzumtastung (ASK, FSK)}
+
+\begin{sol}{EE406}
+Nur in der Musterlösung A ändert sich die Amplitude.
+\end{sol}
+
+
+\begin{sol}{EE407}
+Nur in der Musterlösung A ändert sich die Frequenz.
+\end{sol}
+
+\begin{ohmchapter}
+  Im Kapitel \ref{sec:modulation} zur Modulation hast Du bereits FM und AM kennengelernt. 
+  Diese Arten der Modulation lassen sich auch auf digitale Übertragungsverfahren anwenden.
+  Da die Grundlage der Modulation hier digital ist sprechen wir von einer \textbf{Umtastung}.
+
+  \begin{description}
+    \item[ASK] (Amplitude Shift Keying) oder auf Deutsch Amplitudenumtastung.
+    Hier werden für 0 bzw. 1 jeweils unterschiedliche Amplituden gesendet.
+    \item[FSK] (Frequency Shift Keying) oder auf Deutsch Frequenzumtastung. Es werden unterschiedliche Frequenzen gesendet. 
+  \end{description}
+
+\end{ohmchapter}
+
+\subsection{AFSK}
+\begin{ohmchapter}
+Wir haben bereits ASK und FSK im letzten Kapitel kennengelernt.
+Bei AFSK (Audio Shift Keying) wird das NF Signal digital umgetastet, in dem verschiedene Tonhöhen für 0 und 1 erzeugt werden. Dies wird dann z.B. via FM moduliert und gesendet (also FSK).
+Ein bekanntest AFSK Signal ist z.B. APRS (Automatic Packet Reporting System), dass in Europa auf \SI{144,800}{\mega\hertz} gesendet wird.
+
+\end{ohmchapter}
+
+\subsection{Datenübertragungsrate}
+
+\begin{sol}{EE401}
+Wie wissen die Bandbreite wird in Hertz angegeben es geht um den genutzten Frequenzbereich. Die Datenübertragungsrate aber in Bits pro Sekunde also der Datenmenge die pro Sekunde übertragen wird.
+
+\end{sol}
+
+\begin{ohmchapter}
+  In diesem Kapitel geht es um die Datenübertragungsrate. Wir haben im Kapitel \ref{sec:binär} zum binären Zahlensystem bereits gelernt, was ein \textbf{Bit} ist. 
+  Die Datenübertragungsrate gibt einfach an wie viele \textbf{Bits pro Sekunde} übertragen werden.
+\end{ohmchapter}  
+
+
+\subsection{Vielfachzugriff}
+
+\begin{sol}{EE409}
+Das T in TDMA steht für \qq{time} also \textbf{Zeit}.
+\end{sol}
+
+\begin{sol}{EE410}
+Das F in FDMA steht für \qq{frequency} also \textbf{Frequenz}.
+\end{sol}
+
+\begin{sol}{EE411}
+Das C in CDMA steht für \qq{code}, hier geht es um  \textbf{Spreizcodes}.
+\end{sol}
+
+\begin{ohmchapter}
+In der drahtlosen Kommunikation sind \textbf{Frequenzmultiplex (FDMA)}, \textbf{Zeitmultiplex (TDMA)} und \textbf{Codemultiplex (CDMA)} die zentralen Verfahren, um das gemeinsame Frequenzspektrum effizient unter mehreren Nutzern aufzuteilen und Interferenzen zu minimieren. Die Wahl des Verfahrens hängt von den spezifischen Anforderungen an Bandbreite, Nutzerzahl und Robustheit ab.
+
+\begin{description} 
+    \item[\textbf{FDMA (Frequency Division Multiple Access)}]
+     \ \\
+    \begin{itemize}
+        \item  \textit{Funktionsweise}: Das Frequenzband wird in mehrere getrennte Frequenzkanäle unterteilt, wobei jeder Kanal einem einzelnen Nutzer fest zugewiesen wird (\textbf{Trennung über Frequenz}).
+        \item \textit{Kurzcharakteristik}: Einfaches, etabliertes Verfahren; jedoch bandbreitenineffizient bei vielen Nutzern.
+        \item \textit{Anwendungsbeispiele}: Analoge Mobilfunknetze (z.B. AMPS), Satellitenkommunikation.
+    \end{itemize}
+
+    \item[\textbf{TDMA (Time Division Multiple Access)}]
+    \ \\
+    \begin{itemize}
+        \item \textit{Funktionsweise}: Alle Nutzer teilen sich denselben Frequenzkanal, erhalten aber nacheinander in festgelegten Zeitintervallen Zugriff auf den Kanal (\textbf{Trennung über Zeit}).
+        \item \textit{Kurzcharakteristik}: Hohe Frequenzeffizienz; erfordert jedoch präzise Synchronisation der Zeitschlitze.
+        \item \textit{Anwendungsbeispiele}: GSM (2G Mobilfunknetze), DECT.
+    \end{itemize}
+
+    \item[\textbf{CDMA (Code Division Multiple Access)}]
+    \ \\
+    \begin{itemize}
+        \item \textit{Funktionsweise}: Alle Nutzer nutzen denselben Frequenzkanal zur gleichen Zeit. Die Trennung erfolgt über individuelle, orthogonale \textbf{Spreizcodes}.
+        \item \textit{Kurzcharakteristik}: Höchste Flexibilität und Kapazität; sehr robust gegen Störungen; erfordert aber komplexe Signalverarbeitung.
+        \item \textit{Anwendungsbeispiele}: UMTS (3G Mobilfunknetze), GPS.
+    \end{itemize}
+\end{description}
+
+
+\noindent \textbf{Zusammenfassung:} FDMA ist die einfachste Methode, während TDMA und insbesondere CDMA zunehmend effizienter und komplexer werden. CDMA bietet die größte Flexibilität bei begrenzter Bandbreite und vielen Nutzern, erfordert jedoch auch die technologisch aufwendigste Umsetzung.
+
+
+
+\end{ohmchapter}  

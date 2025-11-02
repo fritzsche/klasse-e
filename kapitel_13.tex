@@ -1,0 +1,41 @@
+\setcounter{section}{12}
+\section{Digitale Signalverarbeitung}
+%\subsection{Digitale Signalverarbeitung}
+% Es gibt kein Unterkapitel
+\setcounter{subsection}{1}
+
+\begin{sol}{EF601}
+Wie eingangs des Kapitels beschrieben können brauchen wie zunächst einen A/D-Umsetzer und nach der Digitalen Verarbeitung einen D/A-Umsetzer.
+\end{sol}
+
+\begin{sol}{EF602}
+digitalisiert werden.
+\end{sol}
+
+\begin{sol}{EF603}
+Die Abkürzung SDR steht für Software Defined Radio. Hier wird mindestens ein Teil der Signalverarbeitung in Software realisiert. Manchmal wird dazu bereits sehr früh im HF-Teil des Empfängers digitalisiert, manchmal wird auch ein Teil z.B. die IF in klassischen Schaltungen realisiert und nur der NF Bereich ist Digital.
+
+Einige SDR's sind über das Internet kostenlos erreichbar, z.B. über sogenannte \href{http://websdr.org}{WebSDR}.
+
+\end{sol}
+
+\begin{ohmchapter}
+Um ein Signal digital verarbeiten zu können müssen wir es zunächst digitalisieren.  
+Um ein analoges Signal zu Digitalisieren brauchen wir einen sogenannten \textbf{A/D-Umsetzer}. Das Blockschaltdiagramm sieht folgendermaßen aus:
+\begin{center}
+\begin{circuitikz}
+\draw (0, 0) node[adcshape,box]{} (0, 0);
+\end{circuitikz}
+\end{center}
+Natürlich können wir auch umgekehrt ein Digitales Signal in ein analoges umsetzen. Dies ist ein \textbf{D/A-Umsetzer} und das Blockschaltdiagramm sieht folgendermaßen aus.
+\begin{center}
+\begin{circuitikz}
+\draw (0, 0) node[dacshape,box]{} (0, 0);
+\end{circuitikz}
+\end{center}
+
+
+
+\end{ohmchapter}  
+
+

@@ -1,0 +1,218 @@
+
+\setcounter{section}{10}
+\section{Sender}
+\subsection{ALC}
+\begin{ohmchapter}
+Wir haben bereits im Kapitel \ref{agc} über die AGC gesprochen. Dies ist eine automatische Verstärker Steuerung für den Empfänger.
+Aber auch der Sender hat hat solch eine Steuerung: Automatic Level Control (ALC). Wie Du im Kapitel über SSB gelernt hast hängt hier die Signalstärke von der Amplitude des NF Signals ab, welches ganz natürlich schwankt wenn wir in das Mikrofon sprechen. 
+Um diese Schwankungen entgegenzuwirken und damit die Endstufe zu schützen, reduziert die ALC Signalstärke (Amplitude) wenn sie über ein definiertes Limit geht.
+\end{ohmchapter}  
+\subsection{Senderausgangsleistung}
+
+\begin{sol}{EF401}
+Die \qq{Ausgangsleistung} ist natürlich die Leistung direkt am Senderausgang (vor Zusatzgeräten). Vor- bzw. rücklaufende Leistung spielen keine Rolle.
+\end{sol}  
+\begin{sol}{EF402}
+Die Peak Envelop Power (PEP) oder auf Deutsch maximale Hüllkurvenleistung wird direkt am Senderausgang gemessen.
+Mit der Klasse E sind oft 100 W zulässig. Eine Antenne mit Gewinn kann die Abstrahlung noch verstärken.
+\end{sol}  
+
+\begin{sol}{EJ209}
+Hier geht es mit die Leistung die zu unerwünschten Aussendungen führt. Deshalb wird hier auch Stehwellenmessgerät und ggf. ein verwendeter Tiefpassfilter berücksichtigt werden.
+\end{sol}  
+
+
+\begin{ohmchapter}
+  Die Definitionen der Senderausgangsleistung musst Du Dir einfach merken. Wie Du bereits bei der Klasse N gelernt hast, bist Du als  Funkamateur verpflichtet dich an entsprechende Grenzwerte zu halten.
+\end{ohmchapter}
+
+\subsection{Unerwünschte Aussendungen II}
+
+\begin{sol}{EJ201}
+Nur sinusförmige Schwingungen haben keine Oberwellen. In dieser 
+\href{https://fritzsche.github.io/klasse-e/oberwelle.html}{App} kannst Du ausprobieren welche Oberwellen unterschiedliche Signale haben.
+
+\end{sol}  
+
+\begin{sol}{EF404}
+Wenn die Senderendstufe neu eingestellt wurde wollte zur Sicherheit überprüft werden, dass keine Oberwellen entstehen.
+Wenn nach der Einstellung z.B. kein reiner Sinus mehr erzeugt wird sind Oberwellen dabei.
+\end{sol}  
+
+
+\begin{sol}{EJ202}
+Hochfrequente Störungen durch Harmonische werden durch Tiefpassfilter gefiltert. Hier wird explizit nach einen Oberwellenfilter gefragt. Nicht irritieren lassen!
+Die Frage EJ203 wird der Begriff Tiefpassfilter verwendet.
+\end{sol} 
+
+\begin{sol}{EJ203}
+In dieser Fragen finden wir schnell, dass uns ein Tiefpassfilter hilft.
+Du kannst einen Tiefpassfilter in dieser \href{https://fritzsche.github.io/klasse-e/lpf.html}{App}
+praktisch ausprobieren, in dem ein Rechtecksignal durch bei geeigneten Parametern durch einen Tiefpassfilter zu einem Sinus Signal wird.
+\end{sol}  
+
+\begin{sol}{EJ204}
+Der Tiefpassfilter ist mal wieder die richtige Antwort.
+\end{sol}  
+
+
+\begin{sol}{EJ205}
+Auch für UHF Sender wird man einen Tiefpassfilter verwenden, wenn man Oberwellen unterdrücken will.
+\end{sol}  
+
+
+\begin{sol}{EJ206}
+Es gibt mehrere Fragen nach denen dem Schaltbild eines Filters gefragt wird. Bei all Fragen kann man sich die Position des Kondensators im Vergleich zur Spule ansehen. Ist der Kondensator \qq{unten} so handelt es sich um einen Tiefpass, sonst om einen Hochpass.
+Da Oberwellen mit einem Tiefpassfilter gedämpft werden bleibt nur diese Antwort.
+\end{sol}  
+
+\begin{sol}{EJ206}
+Es gibt mehrere Fragen nach denen dem Schaltbild eines Filters gefragt wird. Bei all Fragen kann man sich die Position des Kondensators im Vergleich zur Spule ansehen. Ist der Kondensator \qq{unten} so handelt es sich um einen Tiefpass, sonst om einen Hochpass.
+Da Oberwellen mit einem Tiefpassfilter gedämpft werden bleibt nur diese Antwort. Beachte bitte, dass dies natürlich im allgemeinen nicht gild, da es davon abhängt wie der Schaltplan gezeichnet wurde, aber die Schaltpläne des aktuelle Fragekatalogs wurden alle so gezeichnet, dass die Regel gilt. 
+\end{sol}  
+
+
+\begin{sol}{EJ207}
+Ein Filter zur Verringerung von Oberwellen ist ein Tiefpassfilter. D.h. die Tiefen Frequenzen werden ungehindert durchgelassen, die hohen Frequenzen werden abgeschwächt.
+In der Frage geht es um einen Kurzwellen-Sender, d.h. wir wollen alle Frequenzen unterhalb von \SI{30}{\mega\hertz} durchlassen und nur oberhalb filtern. Dies finden wird in Bild A.
+\end{sol}  
+
+
+\begin{sol}{EJ208}
+Wie bei Frage EJ207: Ein Filter zur Verringerung von Oberwellen ist ein Tiefpassfilter. D.h. die Tiefen Frequenzen werden ungehindert durchgelassen, die hohen Frequenzen werden abgeschwächt.
+In der Frage geht es um einen Kurzwellen-Sender, d.h. wir wollen alle Frequenzen unterhalb von \SI{30}{\mega\hertz} durchlassen und nur oberhalb filtern. Dies finden wird in Bild A.
+\end{sol}  
+
+\begin{ohmchapter}
+  Unerwünscht Aussendungen entstehen oft durch \textbf{Oberwellen}. Diese können in der Regel durch einen \textbf{Tiefpassfilter} vermieden werden.
+\end{ohmchapter}
+
+
+\subsection{Störende Beeinflussung elektronischer Geräte I}
+
+
+\begin{sol}{EJ101}
+Siehe Definition am Anfang des Kapitel.
+\end{sol}  
+
+\begin{sol}{EJ102}
+Siehe Definition am Anfang des Kapitel.
+\end{sol}  
+
+
+\begin{sol}{EJ103}
+Das Schlüsselwort ist \textbf{Übersteuerung}. D.h. das Signal ist einfach zu stark und überlasten den Empfänger in der Nähe.
+\end{sol}
+
+
+\begin{sol}{EJ104}
+Dies ist leider ein Grundsatz der oft zu wenig berücksichtigt wird. 
+\end{sol}
+
+\begin{sol}{EJ105}
+Nicht mit unnötig hoher Sendeleistung zu senden lohnt sich immer.
+\end{sol}
+
+\begin{sol}{EJ106}
+Mit hohem Gewinn senden wir ein Signal in der Nachbarschaft von TV Kanälen aus. Dies kann den Empfänger im TV Gerät übersteuern.
+\end{sol}
+
+\begin{sol}{EJ107}
+Bei sehr starken Signalen wird ein Empfänger (z.B. AGC) die Verstärker zurückfahren um eine Übersteuerung zu vermeiden.
+Deshalb geht die Empfindlichkeit zurück.
+\end{sol}
+
+\begin{sol}{EJ108}
+Das Abschirmgehäuse ist in der Regel aus Metall um unerwünschte Aussendungen abzufangen.
+\end{sol}
+
+\begin{sol}{EJ109}
+Ohne Abschirmung können HF Signale in die 230 V Wechselstromleitung gelangen und dann über die Leitung in andere Geräte einströmen.
+\end{sol}
+
+
+\begin{sol}{EJ111}
+Diese Frage lässt sich gut durch das Ausschlussprinzip beantworten. Aber auch direkt mach es Sinn eine getrennte HF Erdung zu verwenden.
+\end{sol}
+
+\begin{sol}{EJ112}
+Einströmung via Netzanschluss.
+\end{sol}
+
+\begin{sol}{EJ113}
+Die abgeschaltete Stereoanlage verhält sich hier wir ein Detektorenempfänger. 
+\end{sol}
+
+\begin{sol}{EJ114}
+Geschirmte Laubsprecherbkabel können Einstrahlungen reduzieren.
+\end{sol}
+
+\begin{sol}{EJ115}
+Abschirmen.
+\end{sol}
+
+
+\begin{sol}{EJ116}
+Die Frequenz von \SI{28} {\mega\hertz } liegt im 10 m Band am oberen Ende der Kurzwelle. Dies sollte aus der Klasse N noch bekannt sein. Die TV Signale liegen vie höher. Wir wollen also hohe Frequenzen durchlassen (TV) aber die niedrigen HF Signale unterdrücken. Wir brauchen also einen Hochpassfilter.
+\end{sol}
+
+
+\begin{sol}{EJ117}
+Wie in Frage EJ116 brauchen wir einen Hochpassfilter. Nach der Merkregel sind bei einem Hochpass Filter die Kondensatoren auch oben. Also Schaltbild A.
+\end{sol}
+
+\begin{sol}{EJ118}
+Eine so genannte Mantelwellensperre oder auch Mantelwellendrossel reduziert Gleichtaktströme. Dies ist HF die sich z.B. auf dem Außenmantel von Koaxialleitungen bilden könnte.
+\end{sol}
+
+\begin{sol}{EJ119}
+Wie in EJ118 kann eine Mantelwellendrossel diese unerwünschten Gleichtaktströme verringern und muss in das Koax vor dem Empfänger eingebaut werden.
+\end{sol}
+
+
+\begin{sol}{EJ120}
+Es werden Mischfrequenzen erzeugt, Phantomsignale. Wir haben bereits über den Mischer gesprochen und eine der Frequenzen abgeschaltet wird verschwindet natürlich auch das Signal.
+\end{sol}
+
+\begin{sol}{EJ121}
+Wir merken uns die Antwort.
+\end{sol}
+
+\begin{sol}{EJ122}
+Das einfachste zuerst! Passen die Störungen überhaupt zeitlich zum Funkbetrieb?
+Es ist bereits oft vorgekommen, dass die Störungen auftreten obwohl wohl die Amateurfunkanlage nicht in Betrieb war.
+\end{sol}
+
+\begin{sol}{EJ124}
+Eine Zimmerantenne ist für den Empfang nicht optimal und führen zu einem schlechten Signal Rauschabstand. Durch sind im Verhältnis auch die Störungen viel Stärker (siehe auch AGC). Eine AUßenantenne kann die Situation verbessern.
+\end{sol}
+
+\begin{sol}{EJ212}
+AFSK (Audio Frequency Shift Keying) wirkt hier wie FM. Durch absenken des audio Pegel reduzieren wir also die Bandbreite.
+\end{sol}
+
+\begin{sol}{EJ213}
+Ist der Leistungsverstärker übersteuert, so sieht das Signal nicht mehr wie ein Sinus sondern eher wie ein Rechtecksignal. Dies führt zu viel Oberwellen. Aber auch Benachbarte Frequenzen werden durch sogenannte Splatter beeinflusst.
+\end{sol}
+
+\begin{sol}{EJ214}
+Insbesondere im SSB Bereich sind Splatter (Störungen auf Nachbarfrequenzen) zu beobachten, wenn die Leistungsendstufe übersteuert wird. In einem modernen SDR Transceiver kann man sofort erkennen, dass dabei die 
+übliche Bandbreite von ca. \SI{2.4} {\kilo\hertz }  deutlich überschritten wird.
+\end{sol}
+
+\begin{sol}{EJ216}
+  Die Antwort sollte unmittelbar klar sein.
+\end{sol}
+
+
+\begin{ohmchapter}
+Auch in diesem Kapitel geht es um unterschiedliche Störungen die mir einem Sender verursacht werden können.
+Wir unterscheiden zwei unterschiedliche Arten von Störungen.
+
+\begin{description}
+  \item[Einströhmungen] Die Störung, bzw. die HF wird durch eine Zuleitung, z.B. Netzzuleitung, Antennenzuleitung, Lautsprecherkabel etc. verursacht. 
+  \item[Einstrahlung] Die HF gelangt direkt in der gestörte Gerät, z.B. da die Abschirmung nicht ausreicht.
+\end{description}
+
+\end{ohmchapter}
+

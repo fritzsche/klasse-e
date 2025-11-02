@@ -1,0 +1,169 @@
+
+\setcounter{section}{7}
+\section{Grundlegende Schaltungen}
+
+%\input{kapitel_8pre.tex}
+
+\setcounter{subsection}{3}
+\subsection{Mischer}
+
+\begin{sol}{EF201}
+    \mischer{31.7}{21}  
+\end{sol}
+\begin{sol}{EF202}
+    \mischer{38.7}{28}
+\end{sol}
+\begin{sol}{EF203}
+    \mischer{39}{30} 
+\end{sol}
+\begin{sol}{EF204}
+    \mischer{145}{136} 
+\end{sol}
+\begin{sol}{EF205}
+    \mischer{145}{136} 
+\end{sol}
+\begin{sol}{EF206}
+    In der Frage geht es um \glqq unerwünschte Abstrahlungen\grqq{}, wir müssen also abschirmen.    
+\end{sol}
+
+
+\begin{ohmchapter}
+In einem Mischer werden zwei Eingangssignale zu einem Ausgangssignal gemischt. Das Blockschaltdiagramm eines Mischers sieht aus wie eine Waschmaschine. Tatsächlich soll uns das Kreuz in der Mitte des Symbols an ein Multiplikationszeichen erinnern, da es sich um meine multiplikative Mischung von Frequenzen handelt.
+Beim Mischen entsteht aus den beiden Eingangsfrequenzen die Summe und Differenz Frequenz:
+
+
+\begin{center}
+\begin{adjustbox}{margin=10pt}
+\begin{circuitikz}
+\draw (0,0) node[mixer,boxed] (M) {}; 
+\draw[->] (-2, 0)node[left] {$f_{\text{in 1}}$} -- (M.w); 
+\draw[->] (0, -2)node[below] {$f_{\text{in 2}}$} -- (M.s); 
+\draw[->] (M.out) -- (2, 0) node[right,text width=5cm] {
+$\begin{aligned}
+      &f_{\text{out 1}} = f_{\text{in 1}} + f_{\text{in 2}}\\
+      &f_{\text{out 2}} = | f_{\text{in 1}} - f_{\text{in 2}} | 
+    \end{aligned}$
+    }; 
+\end{circuitikz}
+\end{adjustbox}
+\end{center}
+
+
+
+Wie solch ein Mischer funktioniert kannst Du mit dieser \href{https://fritzsche.github.io/klasse-e/mischer.html}{App} interaktiv ausprobieren.
+
+
+%$$f_{\text{out 1}} = f_{\text{in 1}} + f_{\text{in 2}} \textrm{\ und\ }f_{\text{out 2}} = | f_{\text{in 1}} - f_{\text{in 2}} |$$
+%Als Blockschaltdiagramm sieht es folgendermaßen aus:
+
+
+Hier nur eine kurze Erklärung wie sich dies Mathematisch herleiten lässt. Für die Prüfung brauchst Du diese Details nicht wissen!
+In unserem Beispiel haben wir ein empfangenes Signal $S_{\text{empf}}$ 
+und das Signal eines lokalen Oszillator  $S_{\text{LO}}$.
+
+% --- Definition der Eingangssignale ---
+\begin{align*}
+    S_{\text{empf}}(t) &= A_{\text{empf}} \cdot \sin(\omega_{\text{empf}} t) \\
+    S_{\text{LO}}(t) &= A_{\text{LO}} \cdot \sin(\omega_{\text{LO}} t)
+\end{align*}
+
+Ein Multiplikativer Mixer wird unser Signal zu einem  wie eine einfache Ausgangssignal $S_{\text{out}}$ multiplizieren:
+
+% --- Mischer-Multiplikation ---
+\begin{equation*}
+    S_{\text{out}}(t) = S_{\text{empf}}(t) \cdot S_{\text{LO}}(t)
+\end{equation*}
+
+% --- Produkt-zu-Summe-Formel (Trigonometrie) ---
+Wir verwenden die folgende Trigonometrie Formel:
+\begin{equation*}
+    \label{eq:sin_prod}
+    \sin(A) \cdot \sin(B) = \frac{1}{2} \left[ \cos(A-B) - \cos(A+B) \right]
+\end{equation*}
+
+% --- Das resultierende Ausgangssignal ---
+
+Also gilt:
+\begin{align*}
+    S_{\text{out}}(t) &= A_{\text{empf}} A_{\text{LO}} \cdot \sin(\omega_{\text{empf}} t) \cdot \sin(\omega_{\text{LO}} t) \\
+    S_{\text{out}}(t) &= \frac{1}{2} A_{\text{empf}} A_{\text{LO}} \left[ \cos((\omega_{\text{empf}} - \omega_{\text{LO}}) t) - \cos((\omega_{\text{empf}} + \omega_{\text{LO}}) t) \right]
+\end{align*}
+
+Summe und Differenz entstehen also einfach aus unserer Formel.
+
+% --- Komponenten-Bezeichnung (Optional, als Text) ---
+% Die Differenzfrequenz ($\omega_{\text{empf}} - \omega_{\text{LO}}$) ist die Zwischenfrequenz (ZF).
+
+
+\end{ohmchapter}
+
+\begin{sol}{EF501}
+    Der Transverter setzt natürlich vom 70cm Signal ins 10m Band um und umgekehrt.
+    Aufpassen bei Antwort (B): Hier wird beim Senden und Empfangen jeweils von 70cm in's 10m Band umgesetzt. Das macht keinen Sinn. 
+
+\end{sol}
+\begin{sol}{EF502}
+    Im letzten Kapitel haben wir über den Mixer gesprochen. Hier wird Summe und Differenz Frequenz gebildet.
+\end{sol}
+\begin{sol}{EF503}
+    Im Blockschaltbild können wir die Sende-/Empfangsumschaltung erkennen wie zwischen RX und TX umschaltet. Es ist also der \textbf{Transverter}.
+\end{sol}
+
+\begin{sol}{EF504}
+    Es gibt keine Sende-/Empfangsumschaltung und überhaupt nur den Empfang. Es ist also ein \textbf{Konverter}.
+\end{sol}
+
+\begin{sol}{EF505}
+    Diese Fragen hat viele ähnlich Antworten. Liess dies alle genau durch!
+    Es geht um den Satellitenbetrieb über die hohe Frequenz von 2,4 GHz. Wir müssen also die Sendefrequenz vervielfachen und damit vervielfachen wir auch Frequenzabweichungen.
+\end{sol}
+
+\begin{sol}{ED403}
+    Die Antwort sollte klar sein, die alternativen Antworten (B),(C),(D) machen überhaupt keinen Sinn.
+\end{sol}
+
+\begin{sol}{EF307}
+    Hier geht es um Audio Signale vom Mikrofon. Das Menschliche Ohr kann bis maximal ca. 20k Hz hören, allerdings verwenden wird im Amateurfunk nur die untersten 2700Hz davon um nicht unnötig Bandbreite zu verschwenden. Die untersten 300Hz können wir nicht hören, deshalb kann ein Mikrofonverstärker mit der Kennlinie (A) auch als extra Filter dienen. 
+\end{sol}
+
+\subsection{Konverter und Transverter}
+\begin{ohmchapter}
+  Wir müssen Konverter und Transverter unterscheiden können.
+  \begin{description}
+  \item[Konverter] setzen das Signal nur in eine Richtung um (entweder im Sendepfad oder im Empfangspfad).
+  \item[Transverter] verfügen über eine interne Sende-/Empfangsumschaltung und setzen das Signal in Sende- und Empfangsrichtung um (ähnlich wie ein Transceiver).
+  \end{description} 
+  Wenn also eine \qq{Sende-/Empfangsumschaltung} vorhanden ist, dann ist es ein Transverter.
+\end{ohmchapter}
+
+\begin{sol}{ED401}
+ Die Frage ist einfach zu beantworten, hat aber mal wider viele ähnlich Antworten.
+ Zunächst schließen wir Antwort (C) und (D) aus, da wir ja mit dem Verstärker die Ausgangsleistung erhöhen wollen. Der unterschied von (A) und (B) ist nur ab eine Spannungsquelle notwendig ist und auch dies ist einleuchtend, dass für ein Verstärkung Energie zugeführt werden muss. Deshalb brauchen wir ein Spannungsquelle.  
+\end{sol}
+
+\begin{sol}{ED401}
+ Die Frage ist einfach zu beantworten, hat aber mal wider viele ähnlich Antworten.
+ Zunächst schließen wir Antwort (C) und (D) aus, da wir ja mit dem Verstärker die Ausgangsleistung erhöhen wollen. Der unterschied von (A) und (B) ist nur ab eine Spannungsquelle notwendig ist und auch dies ist einleuchtend, dass für ein Verstärkung Energie zugeführt werden muss. Deshalb brauchen wir ein Spannungsquelle.  
+\end{sol}
+
+\begin{sol}{ED402}
+ In der Schaltung finden wir ganz Zentral den Transistor, der ja typisch ist für den Verstärker, also schließen wir schon mal (D) aus. Weiterhin finden wir das Schaltzeichen eines Lautsprechers im Schema, es geht also um Audio (NF).   
+\end{sol}
+
+\begin{sol}{EF308}
+  Bereits aus der Frage erfahren wir, dass es um einen NF-Verstärker geht, auch wenn zur Verwirrung noch Mixer und Bandpass eingezeichnet sind. Die Bezeichnungen SSB und LSB/USB lässt uns erkennen, dass es um das gewünschte Audiospektrum von ca. 2,5 kHz geht.
+\end{sol}
+
+\begin{sol}{EF403}
+ Wichtig ist, dass wir uns merken, dass ein SSB Verstärker die Signale \textbf{linear} verstärken soll. Er muss dabei z.B. die gesamte Bandbreite des Signals gleichmäßig abdecken und sollte nicht bei gewünschten Frequenzen (SSB) oder Amplituden einbrechen (die Amplitude eines SSB Signals hängt von der Lautstärke des NF Signals ab).
+\end{sol}
+
+\begin{sol}{EF405}
+  Die Stromversorgung in einem Sender, sollte niederohmig sein, um eine stabile und effiziente Energieversorgung der Senderendstufe zu gewährleisten. Die Antwort (C) und (D) macht ebenso keinen Sinn. Also merken wir uns, dass wir keine HF in der Stromzufuhr haben wollen. Bei Netzversorgung würden wir ja sonst auch die HF über das Stromnetz in der ganzen Nachbarschaft verteilen.
+\end{sol}
+
+\subsection{Verstärker}
+\begin{ohmchapter}
+Der Transistor ist für moderne Verstärker das Entscheidende Bauelement, dass uns hilft die Schaltungen aufeinander halten zu können. Für viele Jahre wurden auch Röhren verwendet, die auch heute noch viele Amateurfunker verwenden. Allerdings kommen sie nicht mehr im Fragenkatalog vor.
+\end{ohmchapter}  
+

@@ -1,0 +1,220 @@
+\subsection{Schwingkreis I}
+
+
+\begin{sol}{ED201}
+In diesem Diagram sehen wir wie viel Leistung bei welcher Frequenz $f$ durchgelassen wird.
+Wie sehen, dass unterhalb der mit gestrichelten Linien markiertem Grenzfrequenz haben wir eine konstant hohe Leistung.
+Über der \qq{Grenzfrequenz} fällt die Leistung schnell ab.
+Da niedrige Frequenzen durchgelassen werden aber hohe Frequenzen sind, handelt es sich um einen Tiefpassfilter.
+\end{sol}
+
+\begin{sol}{ED201}
+    Hier ist alles nur umgekehrt wie in Frage \qref{ED201}. Es handelt sich also um einen Hochpassfilter.
+\end{sol}
+
+\begin{sol}{ED202}
+    Hier ist alles nur umgekehrt wie in Frage \qref{ED201}. Es handelt sich also um einen Hochpassfilter.
+\end{sol}
+
+
+\begin{sol}{ED203}
+ Es wird nur ein kleines Frequenzspektrum durchgelassen. Es ist ein Bandpass.
+\end{sol}
+
+
+\begin{sol}{ED204}
+ Umgekehrt wie in Frage \qref{ED203} wird hier jede Frequenz außerhalb eines Bereichs durchgelassen. 
+ Es ist eine Bandsperre.
+\end{sol}
+
+
+\begin{sol}{ED205}
+ Niedriger Widerstand bei einer Frequenz. Wie in diesem Kapitel gelernt haben ist die ein Serienschwingkreises.
+\end{sol}
+
+\begin{sol}{ED206}
+Gegenteil von Frage \qref{ED205}. Ein Parallelschwingkreis.
+\end{sol}
+
+
+\begin{sol}{ED207}
+ Wie in Frage \qref{ED206}: ein hochohmiger Widerstand.
+\end{sol}
+
+\begin{sol}{ED208}
+ Der Kondensator ist \qq{tief}: Tiefpass.
+\end{sol}
+
+\begin{sol}{ED209}
+ Der Kondensator ist \qq{tief}: Tiefpass.
+\end{sol}
+
+\begin{sol}{ED209}
+ Nur in Bild A ist der Kondensator \qq{tief}.
+\end{sol}
+
+
+\begin{sol}{ED211}
+ Der Kondensator ist \qq{hoch}: Hochpass.
+\end{sol}
+
+\begin{sol}{ED212}
+ Der Kondensator ist \qq{hoch}: Hochpass.
+\end{sol}
+
+\begin{sol}{ED213}
+ Nur in Bild A ist der Kondensator \qq{hoch}.
+\end{sol}
+
+\begin{sol}{ED214}
+ Wie haben einen Parallelschwingkreis im Signalweg. Der wird bei Resonanzfrequenz sperren: Sperrkreis.
+\end{sol}
+
+
+\begin{sol}{ED215}
+ Wie haben einen Serienschwingkreises parallel zum Signalweg: Saugkreis. Diesen ulkigen Namen einfach merken!
+\end{sol}
+
+\begin{ohmchapter}
+    In diesem Kapitel geht es um verschiedene Schwingkreise und Filter.
+    Zunächst erinnern wir uns an dem Spannungsteiler.
+    Zudem erinnern wir uns an den frequenzabhängigen Wechselstrohmwiderstand eines Kondensator $X_C$.
+    $X_C$ ist bei niedrigen Frequenzen sehr hoch und niedrig für hohe Frequenzen. Merkhilfe: (Bei Frequent \SI{0}{\hertz} leitet ein Kondensator nicht).
+
+    Schauen wir uns einen sehr einfachen Filter an:
+    \qgrafic[0.9]{ED208}
+
+    Hätten wir in der Schaltung statt des Kondensator einen Widerstand so hätten wir einen einfachen Spannungsteiler. Da wir hier aber einen Kondensator verwenden der einen von der Frequenz abhängigen Widerstand hat.
+    D.h. der Spannungsteiler ist frequenzabhängig.
+    Bei niedrigen Frequenzen wird der Kondensator einen sehr hohen Widerstand haben und die Leistung wird nicht reduziert. Bei hohen Frequenzen wird der Kondensator zunehmend leitend und damit ist die Leistung die den Filter passiert reduziert.
+    Dies ist ein \textbf{Tiefpassfilter}.
+    In einem Diagramm können wir dies wie folgt darstellen:
+        \qgrafic[0.9]{ED201}
+
+
+    Was passiert, wenn wir in einem Spannungsteiler den anderen Widerstand durch einen Kondensator ersetzen?
+    Also etwa so:
+    \qgrafic[0.9]{ED211}
+
+   Bei niedrigen Frequenzen wird hier fast keine Leistung durchgelassen und bei hohen Frequenzen sehr viel. Es ist ein \textbf{Hochpassfilter}.
+   Die Filtercharakteristik eines solchen Hochpassfilter sieht also folgendermaßen aus:
+  \qgrafic[0.9]{ED202}   
+
+
+   Jetzt, da wir RC-Filter kennengelernt haben, erinnern wir uns an den Wechselstrohmwiderstand $X_L$ einer Spule. Der war genau umgekehrt zum Kondensator. Bei niedrigen Frequenzen leitet die Spule sehr gut und bei hohen Frequenzen haben wir mehr und mehr Widerstand.
+   D.h. in unserem Spannungsteiler hätten wir auch einen Widerstand durch eine Spule ersetzten können und Hochpass und Tiefpass bauen können. 
+   Ersetzten wir einen der Widerstände durch einen Kondensator und den anderen durch eine Spule so sind beide Widerstände unseres Spannungsteilers frequenzabhängig. Der Effekt wird verstärkt. Wie sprechen von einem LC-Filter.
+
+   Eine wichtige \textbf{Merkregel für die Prüfung}:
+   Um zu beantworten ob ein Filter ein Hochpass oder Tiefpass ist schauen wir uns die Position des Kondensators im Schaltbild an.
+   Ist der \qq{tief} eingezeichnet, so ist es ein Tiefpass. Ist er \qq{hoch} eingezeichnet haben wir einen Hochpassfilter.
+
+Nachdem wir uns mit Hochpass und Tiefpass beschäftigt haben, die im Grunde frequenzabhängige Spannungsteiler sind, wollen wir uns mit einer neuen Anordnung von Kondensator und Spule beschäftigen.
+Wenn wir sie parallel anordnen wie in diesem Schaltkreis:
+\begin{center}
+\ctikzset{bipoles/length=1cm}   
+\begin{circuitikz}[scale=0.8,european,american inductors]
+%\draw[style=help lines] (-3,-3) grid (10,5);    
+\draw (0,0) to [R, o-*] ++(4,0) 
+  to [short,*-*] ++(0,-0.5)
+  to [short] ++(-1,0)
+  to [L,mirror ] ++(0,-2)
+  to [short,-*] ++(+1,0)
+  to [short,*-*] ++(0,-0.5)
+  to [short,-o] ++(-4,0); 
+
+\draw (4,0) to [short, -o] ++(2,0);   
+\draw (4,-3) to [short, -o] ++(2,0);
+
+\draw (4,-0.5) to [short, *-] ++(1,0)
+ to [C] ++(0,-2)
+ to [short] ++(-1,0);
+\end{circuitikz}
+\end{center}
+
+entsteht ein \textbf{Parallelschwingkreis}.
+Das bedeutet, dass wenn der Widerstand von Kondensator und Induktivität gleich sind, wird die Elektrische Energie ständig zwischen diesen beiden Komponenten ausgetauscht, also zwischen dem elektrischen Feld des Kondensators und dem magnetischen Feld der Spule. Man sagt auch der Schwingkreis ist in \textbf{Resonanz}. In einen idealen Parallelschwingkreis kann bei Resonant kein Strom mehr hineinfließen, er hat einen hohen Widerstand. Es entsteht ein \textbf{Bandpass}.
+
+Wir können den Parallelschwingkreis aber auch in dieser Konfiguration verwenden:
+ \qgrafic[0.9]{ED214} 
+ Dies ist eine Sperrkreis, da der Parallelschwingkreis bei Resonanz einen hohen Widerstand hat.
+
+Neben dem Parallelschwingkreis gibt es natürlich auch den \textbf{Serienschwingkreises}. 
+ \qgrafic[0.9]{ED215} 
+ In dieser Konfiguration hört er auf den ulkigen Namen \textbf{Saugkreis}. Auf der Resonanzfrequenz sind Kondensator und Spule beide leitend und diese Frequenzen werden quasi aus dem Signalweg gesaugt.
+\end{ohmchapter}    
+
+
+\subsection{Oszillatoren}
+
+\begin{sol}{ED501}
+L steht für die Spule und C für den Kondensator und ein Schwingkreis ist eine Art Oszillator.
+\end{sol}
+
+\begin{sol}{ED502}
+Nach Tipp: \qq{zunehmend}, also Antwort mit \qq{niedriger}.
+\end{sol}
+
+
+\begin{sol}{ED503}
+Nach Tipp: \qq{kleiner}, also Antwort mit \qq{höher}.
+\end{sol}
+
+\begin{sol}{ED504}
+Nach Tipp: \qq{zunehmend}, also Antwort mit \qq{niedriger}.
+\end{sol}
+
+
+\begin{sol}{ED505}
+Nach Tipp: \qq{kleiner}, also Antwort mit \qq{höher}.
+\end{sol}
+
+
+\begin{sol}{ED506}
+    Sollte klar sein.
+\end{sol}
+
+
+\begin{sol}{ED507}
+    Anfang des Kapitel erklärt: ein Quarz hat eine stabilere Frequenz. (z.B. bei ändernden Temperaturen)
+\end{sol}
+
+\begin{sol}{EF207}
+    Hier wird Hochfrequenz erzeugt. Eine Abschirmung macht Sinn.
+\end{sol}
+
+\begin{sol}{EF305}
+    Wir hatten bereits sehr viele Fragen zu dem Thema.
+\end{sol}
+
+
+\begin{ohmchapter}
+Im letzten Kapitel haben wir bereits den Parallelschwingkreis kennen gelernt, in dem ein Kondensator und ein Spule in Resonanz gebracht werden. Solch ein Parallelschwingkreis ist das einfachste Beispiel von Schaltungen die Schwingungen erzeugen. Wie sagen zu so einem Schwingkreis auch \textbf{Oszillator}. In Fall des Parallelschwingkreis handelt es sich um einen \textbf{LC-Oszillator}.
+
+LC-Oszillatoren sind leider Temperaturabhängig. Deshalb wird in modernen Schaltungen auf einen Schwingquarz zurückgegriffen. Wir haben dann einen \textbf{Quarz-Oszillator}.
+
+Tipps für die Prüfung: bei allen Fragen bei denen es um die Temperatur eines LC-Oszillator und dessen Frequenz geht, kannst Du immer das Gegenteil der Frage nehmen. Soll heißen wenn die Temperatur steigt (Frage) ist die Antwort mit Frequenz fällt richtig.
+
+\end{ohmchapter} 
+
+\subsection{Frequenzvervielfacher I}
+
+
+\begin{sol}{EF302}
+    Wir haben die Frequenzvervielfacher mit Faktoren $2\cdot 3 \cdot 2 = 12$. Wir rechen rückwärts und teilen.
+    Rechnung: $\frac{\SI{145.200}{\mega\hertz}}{2\cdot 3\cdot 2} = \SI{12.1}{\mega\hertz}$
+\end{sol}
+
+\begin{sol}{EF302}
+    Auf dem Bild erkennen wir, dass wir auf dem Weg vom VFO zu Punkt $a$ an zwei Frequenzvervielfachern vorbeikommen, die den Faktor 2 und 3 haben. Wir gehen aber rückwärts und deshalb teilen wir durch 6.
+    
+    Rechnung: $\frac{\SI{21.360}{\mega\hertz}}{2\cdot 3} = \SI{3.56}{\mega\hertz}$
+\end{sol}
+\begin{sol}{EF303}
+    Auf dem Bild erkennen wir, dass wir auf dem Weg vom VFO zu Punkt $a$ an zwei Frequenzvervielfachern vorbeikommen, die jeweils einen Faktor 2 haben.
+    
+    Rechnung: $\SI{3.51}{\mega\hertz} \cdot 2 \cdot 2 = \SI{14.04}{\mega\hertz}$
+\end{sol}
+\begin{ohmchapter}
+    Um nicht für jede Frequenz die ein Funkgerät bracht einen anderen Quarz zu brachen, kommen Frequenzvervielfacher zum Einsatz. Wie der Name schon angibt vervielfacht sich die Frequenz entsprechend eines Faktors. Im Blockschaltdiagramm ist dieser Faktor angegeben.
+\end{ohmchapter}
