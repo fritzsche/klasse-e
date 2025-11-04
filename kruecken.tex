@@ -70,7 +70,11 @@
 \definecolor{cbdbdbd}{HTML}{0BBDBD}
 \definecolor{ce05022}{HTML}{E05022}
 \definecolor{ce5e5e5}{HTML}{E5E5E5}
-\definecolor{c7fcfed}{HTML}{C7FCFE}
+\definecolor{c7fcfed}{HTML}{7FCFED}
+
+\definecolor{cbfbfbf}{HTML}{BFBFBF}
+\definecolor{c7f7f7f}{HTML}{7F7F7F}
+
 \usepackage{svg}
 
 \usepackage{siunitx}
@@ -123,17 +127,24 @@
 }
 
 \newcommand{\qgrafic}[2][1.3]{%
-\begin{center}
+\begin{center}  
     \begin{tikzpicture}[scale=#1]
         \input{pic/#2_q.tex}        
     \end{tikzpicture}
 \end{center}    
 }
 
+
+\newcommand{\qgraficmeasure}[2][1.3]{%
+  \begin{tikzpicture}[scale=#1]
+    \input{pic/#2_q.tex}
+  \end{tikzpicture}%
+}
+
 % Automatic layout switcher
 \newsavebox{\tempbox}
 \newlength{\imgwidth}
-
+\newlength{\imgheight}
 
 \newcommand{\agrafic}[2]{%
 \resizebox{!}{3cm}{
@@ -148,7 +159,13 @@
 \NewDocumentCommand{\frage}{ m m m m m m m m }{
   \item[#1] \label{#1} #2
     \tl_if_eq:nnTF {#7} {true} {
-        \qgrafic{#1}
+      \sbox{\tempbox}{\qgraficmeasure{#1}}%
+      \settoheight{\imgheight}{\usebox{\tempbox}}%
+        \ifdim \imgheight>10cm          
+          \qgrafic[0.7]{#1}
+        \else          
+          \qgrafic{#1}
+        \fi  
     }{}
 \getsavedata{#1}
 
@@ -243,12 +260,13 @@
 %%%%%%%%%%%%%%%%%
 
 
-%\input{kapitel_0.tex}
+\input{kapitel_0.tex}
 \input{kapitel_8.tex}
 \input{kapitel_9.tex}
 %\input{kapitel_10.tex}
 %\input{kapitel_11.tex}
 %\input{kapitel_12.tex}
 %\input{kapitel_13.tex}
+%\input{kapitel_14.tex}
 
 \end{document}
