@@ -15,6 +15,9 @@ function escape(text) {
     let escapedText = text
  //   escapedText = escapedText.replace(/\\/g, '\\textbackslash{}')
     escapedText = escapedText.replace(/&/g, '\\&')
+
+    escapedText = escapedText.replace(/<u>nicht<\/u>/g, '\\underline{nicht}&')
+
     escapedText = escapedText.replace(/%/g, '\\%')
 //    escapedText = escapedText.replace(/\$/g, '\\$')
     escapedText = escapedText.replace(/#/g, '\\#')
