@@ -20,7 +20,7 @@ function escape(text) {
     escapedText = escapedText.replace(/%/g, '\\%')
 //    escapedText = escapedText.replace(/\$/g, '\\$')
     escapedText = escapedText.replace(/#/g, '\\#')
-    escapedText = escapedText.replace(/_/g, '\\_')
+  //  escapedText = escapedText.replace(/_/g, '\\_')
     escapedText = escapedText.replace(/{/g, '\\{')
     escapedText = escapedText.replace(/}/g, '\\}')
 
@@ -28,7 +28,7 @@ function escape(text) {
 
     escapedText = escapedText.replace(/~/g, '\\textasciitilde{}')
     escapedText = escapedText.replace(/\^/g, '\\textasciicircum{}')
-    escapedText = escapedText.replace(/"/g, '""')
+   // escapedText = escapedText.replace(/"/g, '""')
     return escapedText
 }
 

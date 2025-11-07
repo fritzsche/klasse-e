@@ -452,3 +452,88 @@ Für die Prüfung bekommst das folgende Diagram als Anhang zur Formelsammlung, i
 \begin{ohmchapter}
 Wir merken uns die Angabe, dass ein SWR von 3 bedeutet, dass in etwa 25\% der Leistung reflektiert wird.bedeutet.
 \end{ohmchapter}
+
+\subsection{Stehwellenmessgerät (SWR-Meter) I}
+
+\begin{sol}{EI401}
+Wir messen das SWR und damit wie gut unsere Antenne angepasst ist.
+\end{sol}
+\begin{sol}{EI402}
+Klar, SWR-Meter.
+\end{sol}
+
+\begin{sol}{EI403}
+Eine SWR-Messbrücke ist nur eine andere Bezeichnung für SWR-Meter.
+\end{sol}
+
+\begin{sol}{EI404}
+Wir messen idealer Weise am Speisepunkt der Antenne (also zwischen Antennenkabel und Antenne).
+\end{sol}
+
+\begin{sol}{EI405}
+Hier soll die gesamte Antennenanlage gemessen werden, also müssen wir den LPF berücksichtigen der hier verwendet wird und an Punkt 1 messen.
+\end{sol}
+
+\begin{ohmchapter}
+\end{ohmchapter}
+
+\subsection{Vektorieller Netzwerkanalysator (VNA) I }
+
+\begin{sol}{EI201}
+    Wir können mit einem VNA z.B. Schwingkreise vermessen.
+\end{sol}
+
+\begin{sol}{EI202}
+    Auch ohne VNA können wir über Induktivität und Kapazität die Resonanzfrequenz rechnerisch bestimmen. Mit einem VNA geht dies in der Regel direkt.
+\end{sol}
+
+\begin{sol}{EI203}
+ Dies sollte klar sein. Die falschen Antworten machen auch keinen Sinn. Selbst ein analoges Multimeter wird nicht ausreichen.
+\end{sol}
+
+\begin{sol}{EI204}
+Die Impedanz ist der frequenzabhängige Wechselstromwiderstand. Ein VNA ist gut für die Messung geeignet.
+\end{sol}
+
+\begin{sol}{EI205}
+Viel Messgeräte müssen vor Gebrach kalibriert werden, insbesondere der VNA. 
+Hierzu werden z.B. am Eingang Kurzschluss, Leerlauf und Anpassung (\SI{50}{\ohm}) gemessen.
+\end{sol}
+
+\begin{sol}{EI206}
+    Die Zustände Kurzschluss, Leerlauf und Anpassung haben wir bereits bei Frage \qref{EI205} kennengelernt. Damit können wir den VNA überprüfen.
+\end{sol}
+
+\begin{ohmchapter}
+    Ein Vektorieller Netzwerkanalysator misst die sogenannten S-Parameter (Streuparameter), welche die Übertragungs- und Reflexionseigenschaften (Amplitude und Phase) eines Prüflings (z.B. Filter, Kabel, Antenne) als Funktion der Frequenz beschreiben.
+\end{ohmchapter}
+
+
+\subsection{Mantelwellen I  }
+
+\begin{sol}{EI404}
+ Der Strom $I_3$ läuft auf dem Koaxialkabel zurück. Wir hatten dies im Kapitel als Mantelstrom bezeichnet.
+\end{sol}
+
+\begin{sol}{EI405}
+Mantelwellen sind nicht weiter abgeschirmt und können die HF auch in andere Geräte einstrahlen und damit Störungen verursachen.
+\end{sol}
+
+\begin{sol}{EI406}
+Schließen wir den Halbwellendipol (symmetrisch) direkt an das Koaxialkabel (nicht symmetrisch) an, kommt es zu Mantelwellen.
+\end{sol}
+
+\begin{sol}{EI407}
+Ein Balun (Balanced / Unbalanced) ist wie die Frage bereits verrät ein Symmetrierglied. Es kann die nicht symmetrischen Signale unseres Koaxialkabels in symmetrische Signale umformen. Damit einem Balun zwischen Koaxialkabel und Antenne sollten weniger (Ideal: keine) Mantelwellen entstehen.
+\end{sol}
+
+\begin{sol}{EG408}
+    Dies ist der einfache Aufbau eines Balun's den wir in Frage \qref{EI407} kennen gelernt haben und damit können wir Mantelwellen dämpfen.
+\end{sol}
+
+\begin{ohmchapter}
+
+    Ist eine Antenne über ein Koaxialkabel angeschlossen, so ist die HF in Prinzip durch die Abschirmung im inneren des Kabels eingeschlossen.
+    Dennoch kann es vorkommen, dass ein Teil der HF Leistung über den Mantel des Koaxialkabel zurück läuft. Dies geschieht bereits dann wenn an das nicht symmetrische Koaxialkabel eine symmetrische Antenne angeschlossen wird. Dies nennt man \textbf{Mantelwellen} oder auch Mantelstrom.
+
+\end{ohmchapter}
