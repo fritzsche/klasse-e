@@ -112,3 +112,145 @@ Dies ist für (B),(C) und (D) der Fall. Hier wird aber gefragt, welche Antenne \
 Antennen sind für den Funkamateur eines der wichtigsten Themen. Die perfekte Antenne für alles gibt es nicht, jede Antenne bringt unterschiedliche Vor- und Nachteile mit sich.
 Wie fangen direkt mit den Fragen an umd klären Vor- und Nachteile.
 \end{ohmchapter}
+
+
+\subsection{Antennenlänge und -resonanz}
+
+\begin{sol}{EG102} 
+    Diese Frage ist etwas verwirrend für jeden der zunächst an $\lambda / 2$, $\lambda / 4$ die in den falschen Antworten genannt werden.
+    Tatsächlich kann man sehr viele verschiedene Längen von Drahtantennen anpassen damit sie auf einem Amateurfunk Kurzwellenband resonant ist.
+    Dies ist die \qq{richtige} Antwort.
+
+    Realitätscheck: Das ist dies natürlich nicht general korrekt: die Länge ist \underline{nicht} beliebig. Ist die Antenne viel zu kurz, so wird selbst im perfekt angepassten Aufbau diese Antenne einen so schlechten Wirkungsgrad haben, dass sie quasi unbrauchbar ist.
+\end{sol}
+
+
+\begin{sol}{EG109}
+    Rechnung: 
+    $$\lambda = \frac{300}{\SI{28,5}{\mega\hertz}} \approx 10,53$$
+    $$\frac{5}{8}\cdot \lambda = \frac{5}{8} \cdot 10,53 \approx  6,58$$
+\end{sol}
+
+\begin{sol}{EG110}
+  Ein \textbf{Faltdipol} ist quasi eine plattgedrückte Ganzwellenschleifen. Die Drahtlänge ist eine Wellenlänge.
+\end{sol}
+
+
+\begin{ohmchapter}
+In diesem Kapitel geht es um die Resonanz von Antenne. Hier geht es aber nur um 3 relativ einfache Fragen.
+\end{ohmchapter}
+
+
+\subsection{Verkürzungsfaktor I}
+
+Die Lichtgeschwindigkeit beträgt im Vakuum $c= \SI{299792458} {\meter/\second}$. Wir haben die bereits für die Klasse N verwendet um die Wellenlänge zu berechnen:
+$$ \lambda = \frac{c}{f}$$.
+
+Die Lichtgeschwindigkeit ist allerdings in Leitungen (z.B. Antennendrähten) etwas langsamer. Nach einer Faustregel ist die Geschwindigkeit etwa 95\%. Der Verkürzungsfaktor $k_v$ gibt dies an. Also nach Faustregel: $k_v  \approx 0.95$.
+
+Für die Wellenlänge gilt:
+$$ \lambda_{\text{Leitung}} = k_v \cdot \frac{c}{f}$$.
+
+In der Realität gibt es unterschiedliche Verkürzungsfaktoren abhängig von der Art der Leitung. Oft gibt es ein Datenblatt in dem man genauere Angaben finden kann.
+
+Wenn Du die Länge eines Antennendrahtes berechnest solltest Du trotz Berücksichtigung des Verkürzungsfaktor in der Regel immer ein 10-15\% längeres Stück abschneiden, dass kannst Du dann immer noch trimmen:
+
+\qq{Abschneiden ist einfacher als dranschneiden.}
+
+\begin{sol}{EG201}
+Die falschen Antworten enthalten immer Begriffe / Dinge die mit der Verkürzungsfaktor zu tun haben. Selbst wenn Du die Formel nicht im Kopf hast. Du solltest Dir merken, dass der \textbf{Verkürzungsfaktor} etwas mit der Ausbreitungsgeschwindigkeit im Vakuum zu tun hat und landest sofort bei (A).
+\end{sol}
+
+\begin{sol}{EG202}
+ Die Faustregel nach der der Verkürzungsfaktor etwa 95\% ist musst Du dir merken.
+\end{sol}
+
+\subsection{Fußpunktimpedanz I}
+
+\begin{sol}{EG207}
+Der Halbwellendipol ist die bekannteste Antenne. Du musst Dir merken, dass die Impedanz (wenn noch montiert) nicht \SI{50}{\ohm} beträgt sondern etwas höher ist.
+Die Beträgt etwa \SI{75}{\ohm}. Die falschen Antworten kannst Du ggf. auch ausschließen.
+\end{sol}
+
+\begin{sol}{EG208}
+    In Frage \qref{EG207} haben wir den Dipol mit \SI{75}{\ohm} angegeben. In der Praxis lieft es oft niedriger und stellt für unseren Transceiver kein Problem dar.    
+\end{sol}
+
+\begin{sol}{EG209}
+    Analog zu Frage \qref{EG208}.
+\end{sol}
+
+\begin{sol}{EG210}
+    Das kannst Du Dir die richtigen Werte merken: nimm den größten Wert. Generell gilt für den Faltdipol, dass die Spannung verdoppelt wird und der benötigte Strom sich halbiert. Dies entspricht einer Vervierfachung. 
+\end{sol}
+
+\begin{sol}{EG211}
+    Die Groundplane Antenne ist ja eine Art von Dipol (also nur eine Dipolhälfte + Radials). Da oft auch sehr bodennah, kannst Du Dir merken, dass wir einen niedrigen Fußpunktwiederstand haben. Die wählen also Antwort (A) die auch unsere markanten \SI{50}{\ohm} enthält.
+\end{sol}
+
+
+\begin{ohmchapter}
+Wir haben den Begriff \textbf{Impedanz} bereits als Wechselstromwiderstand kennengelernt.
+Bei der  \textbf{Fußpunktimpedanz} geht es um die Impedanz am Einspeisepunkt der Antenne.
+
+Unsere Transceiver erwarten in der Regel eine Impedanz von \SI{50}{\ohm}.
+Unterschiedliche Antennen und Aufbauvarianten (z.B. Höhe) haben unterschiedliche Fußpunktimpedanz. Diese musst Du einfach lernen.
+
+\end{ohmchapter}
+
+
+\subsection{Yagi-Uda Antenne II}
+
+\begin{sol}{EG211}
+    Wie im Eingang des Kapitels beschrieben.
+\end{sol}
+
+
+\begin{sol}{EG212}
+    Wie im Eingang des Kapitels beschrieben.
+\end{sol}
+
+
+\begin{sol}{EG218}
+    Das Strahlungsdiagramm zeigt eine klare Richtcharakteristik. D.h. viel mehr Leistung geht nach rechts als nach links. Dies ist typisch für einen Beam.
+    Nur Antwort (A) enthält mit der Yagi-Uda Antenne einen Beam der in Frage kommt.
+\end{sol}
+
+\begin{ohmchapter}
+Die Yagi-Uda Antenne wurde ab 1924 von den Japanern Hidetsugu Yagi und Shintaro Uda entwickelt. 
+
+Der generelle Aufbau ist vielen zugmindestems durch TV- und Rundfunk Antennen bekannt, grob gesprochen besteht sie aus unterschiedlichen Elementen die in Hauptstahlrichtung immer kleiner werden. 
+Eines der Elemente ist der \textbf{Strahler}. Oft ist er als Dipol oder als Faltdipol ausgeführt. Er hat den Einspeisepunkt der ganzen Antenne.
+
+Die Elemente länger als der Strahler werden \textbf{Reflektor} genannt. Die Elemente kürzer als der Strahler werden \textbf{Direktor} genannt. 
+
+\end{ohmchapter}
+
+
+
+\subsection{Parabolspiegel I}
+
+\begin{sol}{EG113}
+   Wie suchen eine Antenne für den Mikrowellenbereich die \qq{scharf bündelt}. Hier solltest Du die Parabolantenne kennen. Die Frage Antwort (B) ist auch etwas gemein formuliert: den isotropen Strahler gibt es in der Praxis ja nicht. Also geht es um die Erregerantenne (Feed).
+\end{sol}
+
+\begin{sol}{EG114}
+Merke dir einfach, dass die Parabolantenne sehr groß ist.
+\end{sol}
+
+\begin{ohmchapter}
+    Wenn Du bei einem Parabolspiegel an eine Satellitenschüssel denkst, dann ist das genau richtig. Diese Art der Antenne kann einen sehr großen Antennengewinn haben, da alle Radiowellen am sogenannten \textbf{Spiegelkörper} zu einem zentralen Punkt gebündelt werden. Da der Spiegelkörper mindestens fünf Wellenlängen entsprechen sollte, ist dies nur etwas für kleine Wellenlängen. In diesem Frequenzbereich von \SI{1}{\giga\hertz} bis \SI{300}{\giga\hertz} sind wir im so genannten Mikrowellenbereich.
+\end{ohmchapter}
+
+
+\subsection{Strom- und Spannungsspeisung I}
+\begin{ohmchapter}
+\end{ohmchapter}
+
+\subsection{Antennengewinn in dBi und dBd}
+\begin{sol}{EG220}
+    Der Buchstabe i in dBi verrät es: 
+\end{sol}
+
+\begin{ohmchapter}
+\end{ohmchapter}
