@@ -239,18 +239,193 @@ Merke dir einfach, dass die Parabolantenne sehr groß ist.
 \end{sol}
 
 \begin{ohmchapter}
-    Wenn Du bei einem Parabolspiegel an eine Satellitenschüssel denkst, dann ist das genau richtig. Diese Art der Antenne kann einen sehr großen Antennengewinn haben, da alle Radiowellen am sogenannten \textbf{Spiegelkörper} zu einem zentralen Punkt gebündelt werden. Da der Spiegelkörper mindestens fünf Wellenlängen entsprechen sollte, ist dies nur etwas für kleine Wellenlängen. In diesem Frequenzbereich von \SI{1}{\giga\hertz} bis \SI{300}{\giga\hertz} sind wir im so genannten Mikrowellenbereich.
+    Wenn Du bei einem Parabolspiegel an eine Satellitenschüssel denkst, dann ist das genau richtig. Diese Art der Antenne kann einen sehr großen Antennengewinn haben, da alle Radiowellen am sogenannten \textbf{Spiegelkörper} zu einem zentralen Punkt gebündelt werden. 
+    
+    \pic[1.5]{parabol}
+    
+    Da der Spiegelkörper mindestens fünf Wellenlängen entsprechen sollte, ist dies nur etwas für kleine Wellenlängen. In diesem Frequenzbereich von \SI{1}{\giga\hertz} bis \SI{300}{\giga\hertz} sind wir im so genannten Mikrowellenbereich.
 \end{ohmchapter}
 
 
 \subsection{Strom- und Spannungsspeisung I}
-\begin{ohmchapter}
-\end{ohmchapter}
 
-\subsection{Antennengewinn in dBi und dBd}
-\begin{sol}{EG220}
-    Der Buchstabe i in dBi verrät es: 
+\begin{sol}{EG204}
+    Wir haben in der Einleitung zu diesem Kapitel gelernt, dass der Dipol an seinem Einspeisepunkt (in der Mitte) einen Strombauch und Spannungsknoten hat.
+\end{sol}
+
+
+\begin{sol}{EG205}
+    Die Situation ist genau umgekehrt zu Frage \qref{EG204}. Also etwa wir bei einer endgespeisten Antenne.
+\end{sol}
+
+\begin{sol}{EG205}
+    Siehe Frage \qref{EG204}.
 \end{sol}
 
 \begin{ohmchapter}
+    Wir wollen uns in diesem Kapitel damit beschäftigen, wie sich Strom und Spannung auf einer Antenne verteilen. Wenn wir dies für den Dipol aufmalen sieht es in etwa so aus:
+    \pic[1]{strom_spannung}
+
+    Du kannst Dir diese Verteilung ganz einfach merken, in dem Du betrachtest, was für eine Situation wir an den Enden des Dipols haben. Da der Leiter hier physikalisch zu Ende ist, kann hier kein Strom mehr fließen, der Widerstand ist also unendlich groß. Nach dem Ohmschen Gesetz haben wir dann auch unendlichen Spannung. Dies gilt zunächst mathematisch, in der Realität liegt die Impedanz natürlich nicht bei Unendlich, ist aber schon ca. \SI{6000}{\ohm}. Wir sprechen von einem \textbf{Stromknoten} und einem \textbf{Spannungsbauch}.
+
+    Die Situation am Einspeisepunkt des Dipols ist genau umgekehrt. Hier fließt bei niedriger Impedanz der meiste Strom und deshalb ist die Spannung niedrig. Wie sprechen von einem \textbf{Strombauch} und einem \textbf{Spannungsknoten}.
+
+    Eine Antenne die an einem Strombauch gespeist wird heisst auch \textbf{stromgespeist}. Umgekehrt eine Antenne mit Speisung an einem Spannungsbauch wird auch \textbf{spannungsgespeist} genannt.
+
+\end{ohmchapter}
+
+
+\subsection{Bauch und Knoten von Strom und Spannung}
+
+\begin{sol}{EG203}
+    Siehe Frage \qref{EG204}.
+\end{sol}
+
+
+\begin{ohmchapter}
+\end{ohmchapter}
+
+
+\subsection{Antennengewinn in dBi und dBd}
+
+
+\begin{sol}{EG220}
+    Der Buchstabe i in dBi verrät es: Isotropenstrahler.
+\end{sol}
+
+
+\begin{sol}{EG221}
+    Wir müssen den Gewinn von 2,15 dB des Dipols addieren. 
+    Tipp: den Gewinn des Dipols finest Du in der Formelsammlung.
+    Rechnung: $$ \SI{5}{dBd} + \SI{2,15}{\dB} = \SI{7,15}{dBi}$$ 
+\end{sol}
+
+\begin{ohmchapter}
+    Wir erinnern uns, dass die Angabe dBi ein Antennengewinn in Bezug auf den Isotropenstrahler ist und dBd den Gewinn in Bezug auf den Dipol. Der Unterschied sind die 2,15 dBi des Dipols. 
+\end{ohmchapter}
+
+
+\subsection{Standortwahl}
+
+\begin{sol}{EG112}
+Eine Richtantenne kann mit ihrem hohen Gewinn schnell zu Störungen verursachen. Um dies zu vermeiden sollte die Antenne so hoch und weit weg wie möglich montiert werden.
+\end{sol}
+
+\begin{sol}{EG223}
+Im Haus verlaufen viel teils ungeschirmte Leistungen. Um zu vermeiden, dass die Sendeantenne HF in diese Leitungen koppelt ist es ratsam Sendeantennen außerhalb des Haus zu montieren.
+\end{sol}
+
+\begin{sol}{EJ110}
+Erinnere Dich an die Richtcharakteristik des Dipols. Wenn der Draht rechtwinklig gespannt ist geht die meiste Strahlung nicht in Richtung der Häuserzeile.
+\end{sol}
+
+\begin{ohmchapter}
+\end{ohmchapter}
+
+\subsection{Übertragungsleitungen}
+
+\begin{sol}{EG301}
+  Wie in im Kapitel beschrieben ist die Impedanz unseres Übertragungsleitung konstant.
+\end{sol}
+
+\begin{sol}{EG302}
+ Mit gutem Koaxkabel können wir die Kabeldämpfung gering halten und vermeiden, dass Störungen einstrahlen. 
+\end{sol}
+
+
+\begin{sol}{EG303}
+Merken! Der N-Stecker gerne auch im UKW Bereich verwendet.
+\end{sol}
+
+\begin{sol}{EG304}
+In diesem Kapitel haben wir bereits Koaxkabel und die parallele Zweidrahtleitung erwähnt. Bei einem Koaxkabel denen die beiden Leiter völlig anders aus, dies ist eine unsymmetrische Speiseleitung. Dahingehend sind bei einer symmetrischen Zweidrahtleitung (wie der Name schon sagt) beide Leitungen gleich geformt.
+\end{sol}
+
+\begin{sol}{EG305}
+Eine Paralleldrahtleitung hat eine sehr geringe Dämpfung und ist deshalb relativ populär.
+\end{sol}
+
+
+\begin{sol}{EG306}
+    Wenn HF- und Netzkabel parallel liegen, kann HF in die Netzkabel einströmen.
+\end{sol}
+
+
+\begin{ohmchapter}
+    In diesem Kapitel soll es um die Übertragungsleitungen gehen, also um die Leistungen die wir verwenden um den Transceiver mit der Antenne zu verwenden.  In der Regel verwenden wir Koaxkabel, aber es gibt auch alternativen wie eine parallele Zweidrahtleitung. 
+
+    \begin{center}
+    \includegraphics[scale=.30]{bilder/Zweidrahtleitung.jpeg}    
+    \end{center}
+
+    Unsere Übertragungsleitungen, z.B. Koaxkabel haben auf der Kurzwelle einen annähern Konstanten Wert, der von der Leitungscharakteristik und z.B. dem Aufbau der Abschirmung abhängt.
+\end{ohmchapter}
+
+\subsection{Kabeldämpfung I}
+
+\begin{sol}{EG307}
+Einfache Rechnung für die beiden Kabelstücke gilt:
+$$ \SI{2}{\dB} + \SI{3}{\dB} = \SI{5}{\dB}$$
+\end{sol}
+
+\begin{sol}{EG308}
+Einfache dB Überlegung: die Leistung halbiert sich auf der Übertragungsleitung (bei optimalen SWR von 1).
+Ein Faktor 2 entspricht aber genau \SI{3}{\dB} (Leistungsverhältnis).
+Dies hast Du Dir gemerkt, oder du findest sie in der Formelsammlung im Abschnitt Pegel. Da es um Dämpfung geht ist der positive Wert \SI{3}{\dB} richtig und \SI{-3}{\dB} falsch.
+\end{sol}
+
+\begin{sol}{EG309}
+Aus Frage \qref{EG308} wissen wir, dass \SI{3}{\dB} der Hälfte Entspricht.
+Ein viertel ist die Hälfte der Hälfte. In dB müssen wir die Werte addieren:
+$$ \SI{3}{\dB} + \SI{3}{\dB} = \SI{6}{\dB}$$
+
+Alternativ kannst Du auch den Faktor 4 in der DB Tabelle der Formelsammlung finden und direkt auf \SI{6}{\dB} kommen.
+\end{sol}
+
+\begin{sol}{EG310}
+    Analog zu Frage \qref{EG309}. Ein Faktor 10 entspricht \SI{10}{\dB}.
+\end{sol}
+
+\begin{sol}{EG311}
+    Dreisatz: $$ \frac{\SI{20}{\meter}}{\SI{100}{\meter}}  \cdot \SI{20}{\dB} =  \SI{4}{\dB}$$
+\end{sol}
+
+
+\begin{sol}{EG312}
+ Du musst im Diagramm ablesen. Pass auf, dass Du die Kurve für das richtige Kabel verwendest. Einige Angaben klingen zu ähnlich. Prüfe, dass Du die  Kurve  mit Koax mit \SI{4,95}{\milli\meter} Durchmesser verwendest.
+ Du kannst \SI{20}{\dB} direkt ablesen.
+\end{sol}
+
+\begin{sol}{EG313}
+ Zunächst wie in Frage \qref{EG312} ablesen. Die \SI{20}{\dB} gelten aber für \SI{100}{\meter}. Du brauchst also den Dreisatz wie in Frage  \qref{EG311}.
+ $$ \frac{\SI{15}{\meter}}{\SI{100}{\meter}}  \cdot \SI{20}{\dB} =  \SI{3}{\dB} $$
+\end{sol}
+
+\begin{sol}{EG314}
+Wie in den vorherigen Fragen lesen wir zunächst im Kabeldämpfungsdiagramm ab und finden \SI{40}{\dB} für \SI{100}{\meter}. Ein Kabel, dass nur halb so lang ist hat also  \SI{20}{\dB} Dämpfung.
+\end{sol}
+
+
+\begin{sol}{EG315}
+Wie in den vorherigen Fragen lesen wir zunächst im Kabeldämpfungsdiagramm ab und finden \SI{7}{\dB} für \SI{100}{\meter}. 
+
+ $$ \frac{\SI{40}{\meter}}{\SI{100}{\meter}}  \cdot \SI{7}{\dB} =  \SI{2,8}{\dB} $$
+
+\end{sol}
+
+\begin{sol}{EG316}
+Wie in den vorherigen Fragen lesen wir zunächst im Kabeldämpfungsdiagramm ab und finden \SI{20,5}{\dB} für \SI{100}{\meter}. 
+
+ $$ \frac{\SI{40}{\meter}}{\SI{100}{\meter}}  \cdot \SI{20,5}{\dB} =  \SI{8,2}{\dB} $$
+
+ Selbst wenn Du z.B. nicht exakt \SI{20,5}{\dB} abgelesen hast, bist Du noch nahe genug am Ergebnis um Antwort (A) zu wählen.
+
+\end{sol}
+
+
+\begin{ohmchapter}
+Die Kabeldämpfung unterschiedlicher Arten von Koaxkabel unterscheidet sich. In der Regel wird die Dämpfung pro \SI{100}{\meter} Kabel in Datenblättern angegeben.
+Für die Prüfung bekommst das folgende Diagram als Anhang zur Formelsammlung, in der Du alle Werte ablesen kannst. Du musst also für die Kabeldämpfung nichts auswendig lernen.
+
+    \pic{daempfung}
 \end{ohmchapter}
