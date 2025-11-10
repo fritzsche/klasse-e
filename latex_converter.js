@@ -21,8 +21,8 @@ function escape(text) {
 //    escapedText = escapedText.replace(/\$/g, '\\$')
     escapedText = escapedText.replace(/#/g, '\\#')
   //  escapedText = escapedText.replace(/_/g, '\\_')
-    escapedText = escapedText.replace(/{/g, '\\{')
-    escapedText = escapedText.replace(/}/g, '\\}')
+//    escapedText = escapedText.replace(/{/g, '\\{')
+//    escapedText = escapedText.replace(/}/g, '\\}')
 
     escapedText = escapedText.replace(/<u>nicht<\/u>/g, '\\underline{nicht}')
 
