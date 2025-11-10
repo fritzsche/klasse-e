@@ -13,6 +13,84 @@ Wie in Frage \qref{EG501} geht es um EIRP also können nur die Antworten mit \qq
 \end{sol}
 
 
+\begin{sol}{EG503}
+Diese Frage ist viel einfacher zu lösen wie es zunächst aussieht.
+Es geht um einen Parabolspiegel mit $\SI{26}{dBi} = \SI{20}{dBi} + \SI{6}{dBi}$.
+Warum den Gewinn gerade so aufteilen? In der Formelsammlung finden wir im Abschnitt Pegel Angaben: Der Gewinnfaktor (Leistung) von \SI{20}{dB} entspricht Faktor 100. Der Gewinnfaktor von \SI{6}{dBi} ist 4. Zusammen ergibt sich also der Gewinnfaktor von $100 \cdot 4 = 400$. Erinnere Dich daran: Die Addition in der dB-Rechnung entspricht der Multiplikation wenn wir mit entsprechenden Gewinnfaktoren arbeiten. 
+Also werden die \SI{250}{\milli\watt} um einen Antennengewinn von Faktor 400 verstärkt.
+$$ \SI{250}{\milli\watt} \cdot 400 = \SI{100}{\watt} $$
+\end{sol}
+
+
+\begin{sol}{EG504}
+    Analog zu \qref{EG503} zerlegen wir die $\SI{36}{dBi} =  \SI{20}{dB} + \SI{10}{dB} + \SI{6}{dB}$.
+    Mit den Gewinnfaktoren aus der Umrechnungstabelle in der Formelsammlung ergibt sich: $100 \cdot 10 \cdot 4 = 4000$.
+    Also:
+    $$ \SI{5}{\watt} \cdot 4000 = \SI{20000}{\watt} $$
+\end{sol}
+
+\begin{sol}{EG505}
+    Wir haben \SI{11}{dBi} Antennengewinn. Davon können wir aber \SI{1}{\dB} Dämpfung abziehen. In der Formelsammlung (Kapitel Pegel) entspricht dies einem Faktor 10.
+    Also $$ \SI{100}{\watt} \cdot 10 = \SI{1000}{\watt} $$
+
+\end{sol}
+
+\begin{sol}{EG506}
+Wir haben \SI{75}{\watt} Ausgangsleistung. 
+%und rechnen mit Faktoren. Unter Dipol hat \SI{2,15}{dBi} Gewinn. Dies entspricht einem Faktor $1,64$. 
+Die Kabelverluste entsprechen ganz genau dem Antennengewinn eines Dipol.
+Diese Angaben über den Dipol sind in der Formelsammlung (Strahlungsleistung und Gewinn von Antennen).
+
+Da sich Gewinn und Verlust ausgleichen kommen auch \SI{70}{\watt} EIRP heraus.
+\end{sol}
+
+\begin{sol}{EG507}
+ Die \SI{10}{\dB} Dämpfung entsprechen einem Faktor von 10. D.h. \SI{100}{\watt} Ausgangsleistung werden zu \SI{10}{\watt} an der Antenne. Es handelt sich um einen Dipol also müssen wir noch den Antennengewinn mit dem Faktor 1,64 berücksichtigen und bekommen also $\SI{10}{\watt} \cdot 1,64 = \SI{16,4}{\watt}$ heraus.
+\end{sol}
+
+\begin{sol}{EG508}
+    Ähnlich zu Frage \qref{EG507}!
+    Aus Kebelverlust und Antennengewinn haben wir \SI{3}{\dB} also ein Faktor 2 laut der Umrechnungstabelle. Aus \SI{5}{\watt} werden mit dem Faktor 2 also \SI{10}{\watt}.
+    Jetzt aber aufpassen: der Antennengewinn was in dB (also in Bezug auf Dipol) angegeben. Um auf EIRP (Bezug Isotropenstrahler) zu kommen müssen wir den Gewinn des Dipols mit dem Faktor 1,64 berücksichtigen. Das Ergebnis ist also auch $\SI{10}{\watt} \cdot 1,64 = \SI{16,4}{\watt}$.
+\end{sol}
+
+\begin{sol}{EG509}
+    Aus Antennengewinn und Kebelverlust ergeben sind \SI{10}{\dB}, also Faktor 10 Gewinn. Aus \SI{0,6}{\watt} werden also \SI{6}{\watt}. Wir berücksichtigen aber noch den Dipol Gewinnfaktor von 1,64 und erhalten: $\SI{6}{\watt} \cdot 1,64 = \SI{9,84}{\watt}$
+\end{sol}
+
+\begin{sol}{EG510}
+    Ich gebe zwei mögliche Lösungen an. Der Lösungsweg auf der 50 Ohm Webseite halte ich für unnötig kompliziert!
+
+    Zunächst haben wir \SI{1,5}{\dB} Kabelverlust aber einen Dipol mit Gewinn \SI{2,15}{\dB}. In Summe bleiben nur \SI{0,64}{\dB} Gewinn über.
+
+    Zunächst die Lösung mit \textbf{Überschlagsrechnung}:
+    Schauen wir in der Tabelle die Gewinnfaktoren von 0 dB und 1 dB nach so entspricht dies Faktor 1 bis 1,26. Es gibt aber nur die Antwort (A) die sich aus \SI{8,5}{\watt} Ausgangsleistung und solch einem Faktor nahe 1 ergeben könnte.
+
+    Eine \textbf{exakte Lösung}:    
+    In der Formelsammlung im Kapitel \qq{Strahlungsleistung und Gewinn von Antennen} finden wir die Formel $$ G = 10^\frac{g}{\SI{10}{\dB}}$$. Wir setzten ein um den exakten Gewinnfaktor zu errechnen:
+    $$G = 10^\frac{0,64}{\SI{10}{\dB}} \approx 1,16 $$.
+    $$\SI{8,5}{\watt} \cdot 1,16 = \SI{9,86}{\watt}$$
+
+\end{sol}
+
+\begin{sol}{EG511}
+    Dies ist vermutlich eine der Kompliziertesten Fragen im ganzen Katalog der Klasse E. Wenn Du Dir die Antwort (A) mit \SI{3}{\watt} merkst, ist dies sicherlich geschickt.
+
+    Dennoch geben wir wie bei Frage \qref{EG510} wieder zwei Lösungen an:
+
+    Zunächst die Lösung mit \textbf{Überschlagsrechnung}:
+    Die \SI{5,15}{dBi} sind annähernd \SI{5}{dBi} und die können wir zerlegen in $\SI{5}{dBi} = \SI{3}{dBi} + \SI{1}{dBi} + \SI{1}{dBi}$. Als Gewinnfaktor haben wir also etwa: $2*1,26*1,26=3,1752$. 
+    Rechnen wir von den maximal \SI{10}{\watt} EIRP zurück, ergibt sich: $$10/3,1752 \approx \SI{3,1494}{\watt}$$ die wir maximal aussengen können.
+    D.h., auch wenn das Ergebnis denkbar knapp ist, \SI{3}{\watt} können wir senden.
+    
+    Eine \textbf{exakte Lösung}:   
+    Wir verwenden die Formel aus Frage \qref{EG510} um den Gewinnfaktor exakt zu berechnen.
+    $$G = 10^\frac{5,15}{\SI{10}{\dB}} \approx 3,273 $$
+    Mit dem Gewinnfaktor können wir die maximale Ausgangsleistung mit $10 / 3,273 \approx 3,0553$ ermitteln.
+    Knapp aber 3 Watt sollten gerade noch unter dem Grenzwert liegen.
+\end{sol}
+
+
 \begin{ohmchapter}
  
 \end{ohmchapter}
