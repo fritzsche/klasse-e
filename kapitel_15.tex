@@ -118,13 +118,72 @@ Eine Frage der Vorschriften die Du lernen musst, die aber auch Sinn macht.
 \subsection{Grenzwerte }
 
 \begin{sol}{EK101}
-Die Antwort sollte klar sein. 
+Die Antwort sollte klar sein. Ist eine Formulierung die Du Dir merken solltest.
 \end{sol}
+
+\begin{sol}{EK102}
+Auch diese Angaben musst Du Dir merken. Quadratisch und 6 Minuten.
+\end{sol}
+
+\begin{sol}{EK103}
+Es geht um aktive Körperhilfen. Dein maximales Signal sollte also immer den Grenzwert einhalten.
+\end{sol}
+
+
+
 \begin{ohmchapter}
- In diesem Kapitel befassen wir und mit Fragen wie wird den Personenschutz-Sicherheitsabstand bestimmen können, bzw. wann eine Näherungsformel für die Fernfeldberechnung zum Einsatz kommen kann.
 \end{ohmchapter}
 
 \subsection{Näherungsformel I}
+
+\begin{sol}{EK105}
+Hier müssen wir nicht den Personensicherheitsabstand bestimmen. Es wurde aber mit der Formal für die Fernfeldberechnung ermittelt wie müssen lediglich überprüfen ob der Abstand $d$ ausreicht.
+Im Abschnitt Strahlungsleistung und Gewinn von Antennen finden wir unter Feldstärke im Fernfeld einer Antenne die Formel und auch die Angabe über den Abstand $$d > \frac{\lambda}{2\cdot \pi}$$
+Für die Frequenz \SI{3,5}{\mega\hertz} ist 
+$$ \lambda = \frac{300}{3,5} = \SI{85,71}{\meter}.$$
+
+Wir setzen ein
+$$d > \frac{\lambda}{2\cdot \pi} = \frac{\SI{85,71}{\meter}}{2\cdot \pi} = \SI{13,64}{\meter}$$
+
+Da die Rechnung erst ab \SI{13,64}{\meter} gültig ist, wir aber laut Frage \SI{3,65}{\meter} ermittelt haben, kann die Rechnung nicht verwendet werden. wir müssen z.B. Messen.
+
+\end{sol}
+
+
+
+\begin{sol}{EK105}
+Hier müssen wir nicht den Personensicherheitsabstand bestimmen. Es wurde aber mit der Formal für die Fernfeldberechnung ermittelt wie müssen lediglich überprüfen ob der Abstand $d$ ausreicht.
+Im Abschnitt Strahlungsleistung und Gewinn von Antennen finden wir unter Feldstärke im Fernfeld einer Antenne die Formel und auch die Angabe über den Abstand $$d > \frac{\lambda}{2\cdot \pi}$$
+Für die Frequenz \SI{3,5}{\mega\hertz} ist 
+$$ \lambda = \frac{300}{3,5} = \SI{85,71}{\meter}.$$
+
+Wir setzen ein
+$$d > \frac{\lambda}{2\cdot \pi} = \frac{\SI{85,71}{\meter}}{2\cdot \pi} = \SI{13,64}{\meter}$$
+
+Da die Rechnung erst ab \SI{13,64}{\meter} gültig ist, wir aber laut Frage \SI{3,65}{\meter} ermittelt haben, kann die Rechnung nicht verwendet werden. wir müssen z.B. Messen.
+
+\end{sol}
+
+\begin{sol}{EK106}
+    Wie in Frage \qref{EK105} überprüfen wir nur den Gültigkeitsbereich der Feldfeldberechnung. Wir wissen noch aus der vorherigen Frage, dass der Abstand im 80 m-Band näherungsweise \SI{13,64}{\meter} betrug. Wir finden eine seht ähnliche Angabe in der richtigen Antwort (A). 
+    Da $\lambda$ im Zähler, muss für 160 m etwas der doppelte Abstand gelten, auch dass passt zu Antwort (A).
+    Genau genommen sind die Angaben in Antwort (C) sogar noch kleiner. Diese Berechnungen währen also auch ungültig und Antwort (C) ist auch richtig. Aber die BnetzA lässt nur Antwort (A) zu.
+\end{sol}
+
+
+\begin{sol}{EK108}
+    In der Formelsammlung finden wir 
+    $$ E = \frac{\sqrt{\SI{30}{\ohm}\cdot P_{\text{EIRP}}}}{d}$$
+    $$ d = \frac{\sqrt{\SI{30}{\ohm}\cdot P_{\text{EIRP}}}}{E}$$
+
+    Wir haben \SI{7,5}{\dB} - \SI{1,5}{\dB} = \SI{6}{\dB}. Laut Tabelle in der Formelsammlung entspricht dies einem Faktor 4. Da die Antenne mit einem Gewinn in dBd angegeben ist müssen wir noch den Dipol Gewinnfaktor von 1,64 berücksichtigen: $4\cdot 1.64 = 6,56$.
+    Mit der Senderausgangsleistung von \SI{100}{\watt}. Also $$P_{\text{EIRP}} = \SI{100}{\watt} \cdot 6,56 = \SI{653}{\watt}$$
+
+    Wir setzen ein 
+     $$ d = \frac{\sqrt{\SI{30}{\ohm}\cdot \SI{653}{\watt}}}{28 V/m} = \SI{5,01}{\meter}$$     
+
+\end{sol}
+
 
 \begin{ohmchapter}
  In diesem Kapitel befassen wir und mit Fragen wie wird den Personenschutz-Sicherheitsabstand bestimmen können, bzw. wann eine Näherungsformel für die Fernfeldberechnung zum Einsatz kommen kann.
