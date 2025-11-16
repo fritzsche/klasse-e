@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zahlenkonvertierer: Dezimal ↔ Binär</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #333;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+        }
+
+        header {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+
+        .converter-section {
+            padding: 40px;
+        }
+
+        .input-group {
+            margin-bottom: 30px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: 600;
+            font-size: 1.1em;
+            color: #555;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 15px;
+            font-size: 1.3em;
+            border: 3px solid #ddd;
+            border-radius: 8px;
+            transition: all 0.3s;
+        }
+
+        input[type="text"]:focus {
+            outline: none;
+            border-color: #4facfe;
+            box-shadow: 0 0 10px rgba(79, 172, 254, 0.3);
+        }
+
+        .radio-group {
+            display: flex;
+            gap: 30px;
+            margin-bottom: 20px;
+            justify-content: center;
+        }
+
+        .radio-option {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 15px 25px;
+            background: #f0f0f0;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .radio-option:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .radio-option input[type="radio"] {
+            width: 20px;
+            height: 20px;
+        }
+
+        .radio-option.selected {
+            background: #4facfe;
+            color: white;
+        }
+
+        .convert-btn {
+            width: 100%;
+            padding: 18px;
+            font-size: 1.3em;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 600;
+        }
+
+        .convert-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
+        }
+
+        .convert-btn:active {
+            transform: translateY(0);
+        }
+
+        .result-section {
+            padding: 0 40px 40px;
+        }
+
+        .result-card {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 25px;
+            margin-bottom: 20px;
+            border-left: 5px solid #4facfe;
+        }
+
+        .result-card h3 {
+            color: #333;
+            margin-bottom: 15px;
+            font-size: 1.4em;
+        }
+
+        .result-value {
+            font-size: 2em;
+            font-weight: bold;
+            color: #667eea;
+            margin: 20px 0;
+            text-align: center;
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            border: 2px dashed #ddd;
+        }
+
+        .steps-container {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 20px;
+            border: 1px solid #e0e0e0;
+        }
+
+        .step {
+            padding: 15px;
+            margin: 10px 0;
+            background: #f1f8ff;
+            border-left: 4px solid #4facfe;
+            border-radius: 5px;
+            animation: slideIn 0.5s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .step-number {
+            display: inline-block;
+            width: 30px;
+            height: 30px;
+            background: #4facfe;
+            color: white;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 30px;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+
+        .highlight {
+            background: #fff3cd;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-weight: bold;
+            color: #856404;
+        }
+
+        .error {
+            background: #f8d7da;
+            border-color: #dc3545;
+            color: #721c24;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                margin: 10px;
+            }
+            header h1 {
+                font-size: 2em;
+            }
+            .converter-section, .result-section {
+                padding: 20px;
+            }
+            .radio-group {
+                flex-direction: column;
+                gap: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🔢 Zahlenkonvertierer</h1>
+            <p>Lerne, wie man Dezimal- und Binärzahlen umrechnet!</p>
+        </header>
+
+        <section class="converter-section">
+            <div class="input-group">
+                <label for="inputNumber">Gib eine Zahl ein:</label>
+                <input type="text" id="inputNumber" placeholder="z.B. 42 oder 101010" autocomplete="off">
+            </div>
+
+            <label>Konvertierungsrichtung:</label>
+            <div class="radio-group">
+                <div class="radio-option" onclick="selectConversion('decimal-to-binary')">
+                    <input type="radio" name="conversionType" value="decimal-to-binary" checked>
+                    <span>Dezimal → Binär</span>
+                </div>
+                <div class="radio-option" onclick="selectConversion('binary-to-decimal')">
+                    <input type="radio" name="conversionType" value="binary-to-decimal">
+                    <span>Binär → Dezimal</span>
+                </div>
+            </div>
+
+            <button class="convert-btn" onclick="convert()">🔍 Konvertieren</button>
+        </section>
+
+        <section class="result-section" id="resultSection" style="display: none;">
+            <div class="result-card">
+                <h3>Ergebnis:</h3>
+                <div class="result-value" id="resultValue"></div>
+            </div>
+
+            <div class="result-card">
+                <h3>Schritt-für-Schritt Erklärung:</h3>
+                <div class="steps-container" id="stepsContainer"></div>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        function selectConversion(type) {
+            document.querySelectorAll('.radio-option').forEach(option => option.classList.remove('selected'));
+            if (type === 'decimal-to-binary') {
+                document.querySelectorAll('.radio-option')[0].classList.add('selected');
+                document.querySelector('input[value="decimal-to-binary"]').checked = true;
+            } else {
+                document.querySelectorAll('.radio-option')[1].classList.add('selected');
+                document.querySelector('input[value="binary-to-decimal"]').checked = true;
+            }
+        }
+
+        function convert() {
+            const input = document.getElementById('inputNumber').value.trim();
+            const conversionType = document.querySelector('input[name="conversionType"]:checked').value;
+            
+            if (!input) {
+                showError('Bitte gib eine Zahl ein!');
+                return;
+            }
+
+            if (conversionType === 'decimal-to-binary') {
+                convertDecimalToBinary(input);
+            } else {
+                convertBinaryToDecimal(input);
+            }
+        }
+
+        function convertDecimalToBinary(decimalStr) {
+            const decimal = parseInt(decimalStr);
+            
+            if (isNaN(decimal) || decimal < 0) {
+                showError('Bitte gib eine gültige positive Dezimalzahl ein!');
+                return;
+            }
+
+            const steps = [];
+            let num = decimal;
+            let stepCounter = 1;
+
+            if (decimal === 0) {
+                steps.push({
+                    step: stepCounter++,
+                    description: `Die Zahl ist 0. Das Ergebnis ist direkt <span class="highlight">0</span>.`
+                });
+                showResult('0', steps, 'Dezimal', 'Binär');
+                return;
+            }
+
+            steps.push({
+                step: stepCounter++,
+                description: `Wir teilen die Zahl <span class="highlight">${decimal}</span> wiederholt durch 2 und notieren die Reste.`
+            });
+
+            const divisions = [];
+            let remainder;
+            
+            while (num > 0) {
+                remainder = num % 2;
+                divisions.push({
+                    num: num,
+                    remainder: remainder,
+                    quotient: Math.floor(num / 2)
+                });
+                num = Math.floor(num / 2);
+            }
+
+            steps.push({
+                step: stepCounter++,
+                description: `Tabelle der Divisionen:`
+            });
+
+            divisions.forEach((div, idx) => {
+                steps.push({
+                    step: stepCounter++,
+                    description: `<span class="highlight">${div.num}</span> ÷ 2 = <span class="highlight">${div.quotient}</span> Rest <span class="highlight">${div.remainder}</span>`
+                });
+            });
+
+            const binary = divisions.map(d => d.remainder).reverse().join('');
+            
+            steps.push({
+                step: stepCounter++,
+                description: `Die Binärzahl erhält man, indem man die <strong>Reste von unten nach oben</strong> liest:`
+            });
+
+            steps.push({
+                step: stepCounter++,
+                description: `<div style="font-family: monospace; font-size: 1.2em; text-align: center; margin: 20px 0;">
+                    ${divisions.map(d => d.remainder).reverse().join(' ')}
+                </div>`
+            });
+
+            showResult(binary, steps, 'Dezimal', 'Binär');
+        }
+
+        function convertBinaryToDecimal(binaryStr) {
+            if (!/^[01]+$/.test(binaryStr)) {
+                showError('Bitte gib eine gültige Binärzahl ein (nur 0 und 1)!');
+                return;
+            }
+
+            const steps = [];
+            let stepCounter = 1;
+
+            steps.push({
+                step: stepCounter++,
+                description: `Die Binärzahl <span class="highlight">${binaryStr}</span> wird von rechts nach links gelesen.`
+            });
+
+            const bits = binaryStr.split('').reverse();
+            let decimal = 0;
+            
+            steps.push({
+                step: stepCounter++,
+                description: `Jede Stelle wird mit <span class="highlight">2<sup>Position</sup></span> multipliziert (Position beginnt bei 0 von rechts):`
+            });
+
+            const calculations = [];
+            bits.forEach((bit, position) => {
+                const value = parseInt(bit) * Math.pow(2, position);
+                decimal += value;
+                
+                calculations.push({
+                    position: position,
+                    bit: bit,
+                    power: `2<sup>${position}</sup>`,
+                    value: value
+                });
+
+                steps.push({
+                    step: stepCounter++,
+                    description: `Position ${position}: <span class="highlight">${bit}</span> × 2<sup>${position}</sup> = <span class="highlight">${bit}</span> × ${Math.pow(2, position)} = <span class="highlight">${value}</span>`
+                });
+            });
+
+            steps.push({
+                step: stepCounter++,
+                description: `Nun addieren wir alle Werte:`
+            });
+
+            const sumString = calculations.map(c => c.value).join(' + ');
+            steps.push({
+                step: stepCounter++,
+                description: `<span class="highlight">${sumString}</span> = <span class="highlight">${decimal}</span>`
+            });
+
+            showResult(decimal.toString(), steps, 'Binär', 'Dezimal');
+        }
+
+        function showResult(result, steps, fromType, toType) {
+            document.getElementById('resultSection').style.display = 'block';
+            document.getElementById('resultValue').innerHTML = `
+                <div style="font-size: 0.6em; color: #666; margin-bottom: 10px;">
+                    Von: ${fromType} → ${toType}
+                </div>
+                ${result}
+            `;
+            
+            const stepsContainer = document.getElementById('stepsContainer');
+            stepsContainer.innerHTML = '';
+            
+            steps.forEach(s => {
+                const stepDiv = document.createElement('div');
+                stepDiv.className = 'step';
+                stepDiv.innerHTML = `
+                    <span class="step-number">${s.step}</span>
+                    ${s.description}
+                `;
+                stepsContainer.appendChild(stepDiv);
+            });
+
+            // Scroll to result
+            document.getElementById('resultSection').scrollIntoView({ 
+                behavior: 'smooth', 
+                block: 'start' 
+            });
+        }
+
+        function showError(message) {
+            document.getElementById('resultSection').style.display = 'block';
+            document.getElementById('resultValue').innerHTML = `
+                <span style="color: #dc3545; font-size: 0.8em;">
+                    ⚠️ ${message}
+                </span>
+            `;
+            document.getElementById('stepsContainer').innerHTML = `
+                <div class="step error">
+                    <span class="step-number">!</span>
+                    Bitte überprüfe deine Eingabe und versuche es erneut.
+                </div>
+            `;
+        }
+
+        // Enter key support
+        document.getElementById('inputNumber').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                convert();
+            }
+        });
+
+        // Initialize with default selection
+        selectConversion('decimal-to-binary');
+    </script>
+</body>
+</html>

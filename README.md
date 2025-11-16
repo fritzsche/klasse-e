@@ -22,6 +22,10 @@ Ein LPF im Einsatz:
 https://fritzsche.github.io/klasse-e/lpf.html
 
 
+Digi:
+https://fritzsche.github.io/klasse-e/binary.html
+
+
 
 ## Lernkrücken
 Work in progress:
