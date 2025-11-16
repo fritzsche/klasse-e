@@ -92,6 +92,8 @@ Also: $128+64+32+16 = 248$
     2^0 &= 1  
   \end{align*}  
 Tipp für die Prüfung: viele Schul-Taschenrechner (nicht programmierbar und deshalb vielleicht von der Bundesnetzagentur für die Prüfung akzeptiert) können zwischen Zahlsystemen umrechnen.
+Praktisch ausprobieren kannst Du die Umrechnung auch mit dieser kleinen App auf \href{https://fritzsche.github.io/klasse-e/binary.html}{Github}.
+
 \end{ohmchapter}
 
 
@@ -144,6 +146,14 @@ Wir gehen analog zu Frage \qref{EF219} vor. Es kommt nur 2 in Frage, da dies nac
 \begin{ohmchapter}
 Der 9600-Port dient der schnellen digitalen Datenkommunikation (z.,B. Packet Radio, APRS) mit 9600 Baud. Er umgeht die sprachoptimierte Audioverarbeitung des Transceivers durch direkte Einspeisung analoger Audiosignale vom externen Modem/TNC in den Frequenzmodulator. Dies ermöglicht höhere Übertragungsraten im Vergleich zu herkömmlichen 1200-Baud-Verbindungen über den Mikrofonanschluss. Die übertragenen Signale sind analog (AFSK/FSK Töne), nicht digital im Sinne von TTL-Pegeln.
 Damit hat der 9600-Port eine größere Bandbreite als die Anbindung via SSB die wir im vorherigen Kapitel kennengelernt haben und steuert den Modulator/Demodulator direkt an.
+
+In der Praxis ist der 9600-Port oft mit Data bezeichnet wie bei diesem Yaesu FT-710.
+
+  \begin{center}
+    \includegraphics[scale=.3]{bilder/data_port.jpg}    
+  \end{center}
+
+
 \end{ohmchapter}
 
 
@@ -172,12 +182,19 @@ Wir haben gelernt, dass viele Digitale Signale über ein Audio Interface und dem
 
 
 \subsection{Automatische Empfangsberichte}
+
+
+\begin{ohmchapter}
 Viele Stationen Empfangen Radio Signale und verbreiten diese via Internet (WebSDR),
 Besonders im digitalen Bereich könne diese Signale automatisch dekodiert werden und der Empfang kann an zentrale Server berichtet werden. Dort können sie zentral eingesehen werden.
 Z.B. werden automatisiert dekodierte CW Signale vom \href{https://www.reversebeacon.net/}{Reverse Beaken Network} gesammelt.
 FT8 und PSK vom \href{https://pskreporter.info}{PSK reporter}.
 
-\begin{ohmchapter}
+Hier ist die Web-Seite von pskreporter zu sehen in der DN9KAI überprüft hat ob sein Digitalen Signale auch empfangen werden. In diesem Fall hat auch DP0GYN (Van Neumayer Station Antarktis) einen Empfangsbericht geschickt:
+  \begin{center}
+    \includegraphics[scale=.2]{bilder/DP0GVN.png}    
+  \end{center}
+
 \end{ohmchapter}
 
 
