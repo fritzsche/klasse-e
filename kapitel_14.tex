@@ -110,15 +110,63 @@ Dies ist für (B),(C) und (D) der Fall. Hier wird aber gefragt, welche Antenne \
 
 \begin{ohmchapter}
 Antennen sind für den Funkamateur eines der wichtigsten Themen. Die perfekte Antenne für alles gibt es nicht, jede Antenne bringt unterschiedliche Vor- und Nachteile mit sich.
-Wie fangen direkt mit den Fragen an umd klären Vor- und Nachteile.
+
 
 %Wir haben in diesem Kurs und der Klasse N bereits einige Antennenformen kennengelernt.
 
-%\begin{description}
-%    \item[W3DZZ] 
-%    \pic[0.5]{w3dzz}
-%    \item[Windowm]  
-%\end{description}
+\begin{description}
+    \item[Delta Loop] 
+    Eine Delta-Loop-Antenne ist eine geschlossene Schleifenantenne (Loop-Antenne) in Form eines Dreiecks. Sie ist eine sogenannte Ganzwellenschleife, das heißt, ihre Gesamtlänge entspricht in etwa einer Wellenlänge ($\lambda$) der Betriebsfrequenz. 
+    \item[W3DZZ] 
+ 
+     Die W3DZZ-Antenne ist eine Dipolantenne, die im Amateurfunk im 40- und 80-Meter-Band eingesetzt wird. Es sind dies die Amateurfunkbänder von 7–7,2 MHz respektive 3,5–3,8 MHz. Die Schwingkreise in den beiden Dipolhälften sind auf 7 MHz abgestimmt. Sie wirken für Frequenzen um 7 MHz (Wellenlänge 40 m) als Sperrkreise und verkürzen die Antenne. W3DZZ-Antennen haben typisch eine Spannweite von rund 34 m.
+     \begin{center}
+        
+     
+     \begin{circuitikz}[scale=0.6]
+        %\draw[style=help lines] (-3,-3) grid (10,5);  
+        \ctikzset{inductors/scale=0.8, inductor=american}
+        \ctikzset{capacitors/scale=0.8}
+        \draw (0.2,0.2) to[short,-*] ++(2,0) coordinate(S1) -- ++(0,0.5) 
+        to[L] ++(2,0) to[short,-*] ++(0,-0.5) -- ++(4,0) to[short,-o] ++(0,-0.5) ++(0.25,0) coordinate(SP) ++(0.25,0)
+        to[short,o-] ++(0,0.5) to[short,-*] ++(4,0) coordinate(S2) -- ++(0,0.5) to[L] ++(2,0) to[short,-*] ++(0,-0.5)  
+        -- ++(2,0)
+
+        (S1) -- ++(0,-0.5)   to[C,name=C1] ++(2,0)  -- ++(0,0.5) 
+        (S2) -- ++(0,-0.5)   to[C,name=C2] ++(2,0)  -- ++(0,0.5) 
+
+        (SP) 
+        ++(0,-0.5) node[below]{Speisung}
+        (C1) ++(0,-0.5) node[below]{Sperrkreis}
+        (C2) ++(0,-0.5) node[below]{Sperrkreis}
+        ; 
+
+        \end{circuitikz}
+
+    \end{center}
+
+    \item[Windom]  Diese Kurzwellenantenne ist nach ihrem Erfinder  L.G. Windom, W8GZ benannt.
+    Die Antenne wird im gegensatz zu einem klassischen Dipol nicht in der Mitte gespeist. Deshalb wird ein 1:6 Balun verwendet um die Impedanz in einem für den Transceiver akzeptablen Bereich zu bekommen.
+    Durch 
+        \begin{center}
+        \begin{circuitikz}
+        %\draw[style=help lines] (-3,-3) grid (10,5);  
+        \ctikzset{inductors/scale=1, inductor=american}
+        \draw (0,0) -- ++(3,0) to[short,-o] ++(0,-0.5) ++(0.25,0) coordinate(SP) ++(0.25,0)
+        to[short,o-] ++(0,0.5) -- ++(7,0) 
+        (SP) 
+        ++(1,-0.2) node[right]{1:6 Balun}
+        (SP) -- ++(0.5,0) -- ++(0,-0.5) -- ++(-0.5,0) coordinate(coax) -- ++(-0.5,0) -- ++(0,0.5) -- ++(0.5,0)
+        (coax) ++(1,-1) node[right]{Koaxialkabel}
+        ; 
+        \draw[ultra thick] (coax) -- ++(0,-1.5);
+        \end{circuitikz}    
+        \end{center}
+
+        \item[Fuchsantenne] Eine Fuchsantenne ist eine endgespeiste Halbwellen-Drahtantenne, die ihren Namen von ihrem Erfinder, dem österreichischen Funkamateur Josef Fuchs (OE1JF), erhielt, der sie Anfang des 20. Jahrhunderts (Patent 1928) entwickelte.
+        Die Anpassung an die Impedanz des Koaxialkabels erfolgt über eine spezielle Resonanzschaltung, die als \textbf{Fuchskreis} bekannt ist. Diese Schaltung besteht typischerweise aus einem Parallelschwingkreis (Spule und Kondensator), der induktiv an den Transceiver angekoppelt wird, um ein optimales Stehwellenverhältnis (SWR) zu erreichen.
+\end{description}
+Wie fangen direkt mit den Fragen an umd klären Vor- und Nachteile.
 \end{ohmchapter}
 
 

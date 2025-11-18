@@ -1,0 +1,21 @@
+\documentclass[12pt]{standalone}
+\usepackage[siunitx]{circuitikz} 
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{amsmath}
+
+\begin{document}
+\begin{circuitikz}
+%\draw[style=help lines] (-3,-3) grid (10,5);  
+\ctikzset{inductors/scale=1, inductor=american}
+\draw (0,0) -- ++(3,0) to[short,-o] ++(0,-0.5) ++(0.25,0) coordinate(SP) ++(0.25,0)
+to[short,o-] ++(0,0.5) -- ++(7,0) 
+(SP) 
+++(1,-0.2) node[right]{1:6 Balun}
+(SP) -- ++(0.5,0) -- ++(0,-0.5) -- ++(-0.5,0) coordinate(coax) -- ++(-0.5,0) -- ++(0,0.5) -- ++(0.5,0)
+(coax) ++(1,-1) node[right]{Koaxialkabel}
+; 
+\draw[ultra thick] (coax) -- ++(0,-2);
+\end{circuitikz}
+\end{document}    
