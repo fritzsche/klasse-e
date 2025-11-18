@@ -22,7 +22,8 @@ Ein LPF im Einsatz:
 https://fritzsche.github.io/klasse-e/lpf.html
 
 
-Digi:
+## Digi
+Binärzahlen 
 https://fritzsche.github.io/klasse-e/binary.html
 
 
