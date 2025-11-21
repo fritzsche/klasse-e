@@ -1,0 +1,115 @@
+\setcounter{section}{5}
+\section{Reihen- und Parallelschaltung von Bauelementen}
+
+\subsection{Widerstand in Reihen- und Parallelschaltung}
+
+\begin{sol}{ED104}
+Wir rechnen:   $$ R_G = \frac{R_1\cdot R_2}{R_1 + R_2}  = \frac{\SI{100}{\ohm}\cdot \SI{400}{\ohm}}{\SI{100}{\ohm} + \SI{400}{\ohm}}=\frac{\SI{400}{\ohm}}{5}=\SI{80}{\ohm} $$.
+\end{sol}
+
+
+\begin{sol}{ED105}
+Wir rechnen:   $$ R_G = \frac{R_1\cdot R_2}{R_1 + R_2}  = \frac{\SI{50}{\ohm}\cdot \SI{200}{\ohm}}{\SI{50}{\ohm} + \SI{200}{\ohm}}=\frac{\SI{10000}{\ohm}}{250}=\SI{40}{\ohm} $$.
+\end{sol}
+
+\begin{sol}{ED106}
+Wie parallelen Widerstände haben alle den selben Widerstand. Also können wir rechnen:   $$ \SI{1.7}{\kilo\ohm}\cdot 3=\SI{5.1}{\kilo\ohm}$$.
+\end{sol}
+
+\begin{sol}{ED107}
+Wie parallelen Widerstände haben alle den selben Widerstand. Durch jeden der Widerstände geht ein Teil des Stroms:  
+ $$ \SI{1}{\watt}\cdot 3=\SI{3}{\watt}$$.
+\end{sol}
+
+\begin{sol}{ED108}
+In der Regel ist es zunächst einfacher die Widerstände in Reihe zu berechnen: 
+ $$ R_1 + R_2 = \SI{500}{\ohm} + \SI{500}{\ohm} = \SI{1}{\kilo\ohm} $$.
+ Also gilt $R_1 + R_2 = R_3$ für die verbleibende  Parallelschaltung:wir rechnen vereinfacht.
+ $$ \frac{\SI{1000}{\ohm}}{2} = \SI{500}{\ohm} $$ 
+\end{sol}
+
+
+\begin{sol}{ED109}
+In der Regel ist es zunächst einfacher die Widerstände in Reihe zu berechnen: 
+ $$ R_1 + R_2 = \SI{500}{\ohm} + \SI{1,5}{\kilo\ohm} = \SI{2}{\kilo\ohm} $$.
+ Also gilt $R_1 + R_2 = R_3$ für die verbleibende  Parallelschaltung:wir rechnen vereinfacht.
+ $$ \frac{\SI{2000}{\ohm}}{2} = \SI{1}{\kilo\ohm} $$ 
+\end{sol}
+
+\begin{sol}{ED110}
+$R_2$ und $R_3$ haben den selben Widerstand, wir können also vereinfacht rechnen:
+ $$ \frac{\SI{1000}{\ohm}}{2} = \SI{500}{\ohm} $$ 
+
+ Jetzt nur noch die verbleibende Reihenschaltung aus $R_1$ und der Parallelschaltung von $R_2$ und $R_3$ die wir mit $\SI{500}{\ohm}$ errechnet haben:
+ $\SI{500}{\ohm}+ \SI{500}{\ohm} = \SI{1000}{\ohm} $
+\end{sol}
+
+
+\begin{sol}{ED111}
+$R_2$ und $R_3$ haben den selben Widerstand, wir können also vereinfacht rechnen:
+ $$ \frac{\SI{2000}{\ohm}}{2} = \SI{1000}{\ohm} $$ 
+
+ Jetzt nur noch die verbleibende Reihenschaltung aus $R_1$ und der Parallelschaltung von $R_2$ und $R_3$ die wir mit $\SI{500}{\ohm}$ errechnet haben:
+ $\SI{1}{\kilo\ohm}+ \SI{1}{\kilo\ohm} = \SI{2}{\kilo\ohm} $
+\end{sol}
+
+
+
+\begin{sol}{ED112}
+Wir rechnen:
+ $$
+ \frac{R_2\cdot R_3}{R_2 + R_3} 
+ = \frac{\SI{3}{\kilo\ohm}\cdot \SI{1,5}{\kilo\ohm}}{\SI{3}{\kilo\ohm} + \SI{1,5}{\kilo\ohm}} = \frac{\SI{4,5}{\kilo\ohm}}{\SI{4,5}{\kilo\ohm}} = \SI{1}{\kilo\ohm}$$
+ 
+ Jetzt nur noch die verbleibende Reihenschaltung aus $R_1$ und der Parallelschaltung von $R_2$ und $R_3$ die wir mit $\SI{1000}{\ohm}$ errechnet haben:
+ $\SI{1}{\kilo\ohm}+ \SI{1}{\kilo\ohm} = \SI{2}{\kilo\ohm} $
+\end{sol}
+
+
+\begin{sol}{ED113}
+Wir rechnen:
+ $$
+ \frac{R_2\cdot R_3}{R_2 + R_3} 
+ = \frac{\SI{2,5}{\kilo\ohm}\cdot \SI{0,5}{\kilo\ohm}}{\SI{2,5}{\kilo\ohm} + \SI{0,5}{\kilo\ohm}} = \frac{\SI{1,25}{\kilo\ohm}}{\SI{3}{\kilo\ohm}} \approx \SI{0,4}{\kilo\ohm}$$
+ 
+
+ $$
+ \frac{R_1\cdot 0,4}{R_1 + 0,4} 
+ = \frac{\SI{10}{\kilo\ohm}\cdot \SI{0,4}{\kilo\ohm}}{\SI{10}{\kilo\ohm} + \SI{0,4}{\kilo\ohm}} = \frac{\SI{4}{\kilo\ohm}}{\SI{10,4}{\kilo\ohm}} \approx \SI{0,38}{\kilo\ohm}$$
+
+ Jetzt nur noch die verbleibende Reihenschaltung aus $R_4$ den parallelen Widerständen::
+ $\SI{0,38}{\kilo\ohm}+ \SI{0,6}{\kilo\ohm} \approx \SI{1}{\kilo\ohm} $
+\end{sol}
+
+
+
+\begin{ohmchapter}
+
+    In der Formelsammlung finden wir um Kapitel Widerstände alles was wir wissen müssen.
+    Es geht hier um Parallelschaltung und Reihenschaltung und bevor wir mit den Formel starten zunächst die Überlegung, was passieren sollte, wenn wir mehrere Widerstände in Reihe (also Hintereinander) schalten. Der Strom muss durch beide Widerstände und damit entspricht der Widerstand der Summe der einzelnen Widerstände. 
+
+    \textbf{Reihenschaltung}
+    $$ R_G = R_1+ R_2 + R_3 + \ldots + R_N$$
+    oder für 2 Widerstände Gleichrichter
+    $$ R_G = R_1+ R_2 $$
+
+   In Parallelschaltung hat der Strom quasi die Auswahl durch welchen widerstand er fließen will. Haben alle Widerstände den selben Wert können wir also durch die Anzahl der Widerstände teilen. 
+
+     \textbf{Parallelschaltung}. 
+     Haben $N$ Parallelgeschalteten Widerstände den gleichen Wert $R_1$, so gilt offenbar:
+   $$ R_G = \frac{R_1}{N} $$ oder im Fall von 2 Widerständen:
+  $$ R_G = \frac{R_1}{2} $$.
+
+   Haben wir nur genau 2 Widerstände $R_1$ und $R_2$ in Parallelschaltung, so gilt laut Formelsammlung:
+   $$ R_G = \frac{R_1\cdot R_2}{R_1 + R_2} $$.
+
+  
+  
+ 
+
+
+
+
+
+
+\end{ohmchapter}
