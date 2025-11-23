@@ -177,7 +177,143 @@ Es bleibt daher übrig:
     \end{center}   
  In Summe haben wir den Widerstand: 
  $\SI{100}{\ohm}+
- \SI{50}{\ohm}+\SI{50}{\ohm}+\SI{50}{\ohm} = \SI{250}{\ohm}$ 
+ \SI{50}{\ohm}+\SI{50}{\ohm}+\SI{50}{\ohm} = \SI{250}{\ohm}$. 
+
+\end{sol}
+
+\begin{sol}{ED115}
+  Analog zur Frage \qref{ED114}. Wir vereinfachen diesen Teil der Schaltung:
+     \begin{center}           
+     \begin{circuitikz}[scale=0.5]
+        \ctikzset{inductors/scale=0.8, inductor=american}
+        \ctikzset{capacitors/scale=0.8}
+        \ctikzset{european resistors}
+
+         \draw (0,0) -- ++(1,0) coordinate(start)  to[short,*-] ++(0,-4) 
+         to[R=$\SI{100}{\ohm}$] ++(4,0)
+         to[R,l_=$\SI{100}{\ohm}$,-*] ++(0,4) coordinate(ende) 
+         -- ++(1,0)
+         (ende) -- ++(0,1) 
+         (start) to[R,l=$\SI{200}{\ohm}$] (ende);
+        \end{circuitikz}
+    \end{center}  
+Wird zu:
+     \begin{center}           
+     \begin{circuitikz}[scale=0.5]
+        \ctikzset{inductors/scale=0.8, inductor=american}
+        \ctikzset{capacitors/scale=0.8}
+        \ctikzset{european resistors}
+
+         \draw (0,0) -- ++(1,0) coordinate(start)  to[short,*-] ++(0,-4) 
+         to[R=$\SI{200}{\ohm}$] ++(4,0)
+         -- ++(0,4) coordinate(ende) 
+         -- ++(1,0)
+         (ende) -- ++(0,1) 
+         (start) 
+         to[R,l=$\SI{200}{\ohm}$,-*] (ende);
+        \end{circuitikz}
+    \end{center}
+    Weiter:
+         \begin{center}           
+     \begin{circuitikz}[scale=0.5]
+        \ctikzset{inductors/scale=0.8, inductor=american}
+        \ctikzset{capacitors/scale=0.8}
+        \ctikzset{european resistors}
+         \draw (0,0) to[short,-*] ++(1,0) coordinate(start)  to[R=$\SI{100}{\ohm}$,-*] ++(4,0) coordinate(ende) -- ++(1,0)
+         (ende) -- ++(0,1) 
+         ;
+        \end{circuitikz}
+    \end{center}
+Es bleibt daher übrig:
+     \begin{center}           
+     \begin{circuitikz}[scale=0.5]
+        \ctikzset{inductors/scale=0.8, inductor=american}
+        \ctikzset{capacitors/scale=0.8}
+        \ctikzset{european resistors}
+         \draw (0,0) 
+          to[short,o-] ++(1,0)
+          to[R=$\SI{200}{\ohm}$,o-,-*] ++(4,0)  
+          to[R=$\SI{100}{\ohm}$,-*] ++(4,0)  
+          to[R=$\SI{100}{\ohm}$,-*] ++(4,0)
+          -- ++(0,-6) -- ++(-4,0)
+          to[R=$\SI{150}{\ohm}$] ++(-4,0)
+          to[short,-o] ++(-5,0)
+          
+         ;
+        \end{circuitikz}
+    \end{center}      
+ In Summe haben wir den Widerstand: 
+ $\SI{200}{\ohm}+
+ \SI{100}{\ohm}+\SI{100}{\ohm}+\SI{150}{\ohm} = \SI{150}{\ohm}$.     
+\end{sol}
+
+\begin{sol}{ED116}
+   Analog zur Frage \qref{ED114} und Frage \qref{ED115}. 
+Wir vereinfachen diesen Teil der Schaltung:
+     \begin{center}           
+     \begin{circuitikz}[scale=0.5]
+        \ctikzset{inductors/scale=0.8, inductor=american}
+        \ctikzset{capacitors/scale=0.8}
+        \ctikzset{european resistors}
+
+         \draw (0,0) -- ++(1,0) coordinate(start)  to[short,*-] ++(0,-4) 
+         to[R=$\SI{200}{\ohm}$] ++(4,0)
+         to[R,l_=$\SI{200}{\ohm}$,-*] ++(0,4) coordinate(ende) 
+         -- ++(1,0)
+         (ende) -- ++(0,1) 
+         (start) to[R,l=$\SI{400}{\ohm}$] (ende);
+        \end{circuitikz}
+    \end{center}  
+Zunächst:
+     \begin{center}           
+     \begin{circuitikz}[scale=0.5]
+        \ctikzset{inductors/scale=0.8, inductor=american}
+        \ctikzset{capacitors/scale=0.8}
+        \ctikzset{european resistors}
+
+         \draw (0,0) -- ++(1,0) coordinate(start)  to[short,*-] ++(0,-4) 
+         to[R=$\SI{400}{\ohm}$] ++(4,0)
+         -- ++(0,4) coordinate(ende) 
+         -- ++(1,0)
+         (ende) -- ++(0,1) 
+         (start) 
+         to[R,l=$\SI{400}{\ohm}$,-*] (ende);
+        \end{circuitikz}
+    \end{center}
+    Weiter:
+         \begin{center}           
+     \begin{circuitikz}[scale=0.5]
+        \ctikzset{inductors/scale=0.8, inductor=american}
+        \ctikzset{capacitors/scale=0.8}
+        \ctikzset{european resistors}
+         \draw (0,0) to[short,-*] ++(1,0) coordinate(start)  to[R=$\SI{200}{\ohm}$,-*] ++(4,0) coordinate(ende) -- ++(1,0)
+         (ende) -- ++(0,1) 
+         ;
+        \end{circuitikz}
+    \end{center}
+
+Es bleibt daher übrig:
+     \begin{center}           
+     \begin{circuitikz}[scale=0.5]
+        \ctikzset{inductors/scale=0.8, inductor=american}
+        \ctikzset{capacitors/scale=0.8}
+        \ctikzset{european resistors}
+         \draw (0,0) 
+          to[short,o-] ++(1,0)
+          to[R=$\SI{400}{\ohm}$,o-,-*] ++(4,0)  
+          to[R=$\SI{200}{\ohm}$,-*] ++(4,0)  
+          to[R=$\SI{200}{\ohm}$,-*] ++(4,0)
+          -- ++(0,-6) -- ++(-4,0)
+          to[R=$\SI{150}{\ohm}$] ++(-4,0)
+          to[short,-o] ++(-5,0)
+          
+         ;
+        \end{circuitikz}
+    \end{center}   
+ In Summe haben wir den Widerstand: 
+ $\SI{400}{\ohm}+
+ \SI{200}{\ohm}+\SI{200}{\ohm}+\SI{150}{\ohm} = \SI{950}{\ohm}$. 
+
 
 \end{sol}
 
