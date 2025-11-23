@@ -99,17 +99,89 @@ Wir rechnen:
      Haben $N$ Parallelgeschalteten Widerstände den gleichen Wert $R_1$, so gilt offenbar:
    $$ R_G = \frac{R_1}{N} $$ oder im Fall von 2 Widerständen:
   $$ R_G = \frac{R_1}{2} $$.
-
    Haben wir nur genau 2 Widerstände $R_1$ und $R_2$ in Parallelschaltung, so gilt laut Formelsammlung:
-   $$ R_G = \frac{R_1\cdot R_2}{R_1 + R_2} $$.
+   $$ R_G = \frac{R_1\cdot R_2}{R_1 + R_2}. $$
 
   
   
- 
+\end{ohmchapter}
 
 
+\subsection{Widerstandsnetzwerke I}
 
+\begin{sol}{ED114}
+Wir vereinfachen Stück für Stück die Schaltung. Schauen wir uns zunächst nur diesen Teil der Schaltung an:
+     \begin{center}           
+     \begin{circuitikz}[scale=0.5]
+        \ctikzset{inductors/scale=0.8, inductor=american}
+        \ctikzset{capacitors/scale=0.8}
+        \ctikzset{european resistors}
 
+         \draw (0,0) -- ++(1,0) coordinate(start)  to[short,*-] ++(0,-4) 
+         to[R=$\SI{50}{\ohm}$] ++(4,0)
+         to[R,l_=$\SI{50}{\ohm}$,-*] ++(0,4) coordinate(ende) 
+         -- ++(1,0)
+         (ende) -- ++(0,1) 
+         (start) to[R,l=$\SI{100}{\ohm}$] (ende);
+        \end{circuitikz}
+    \end{center}
+Es fällt auf, dass wir die beiden $\SI{50}{\ohm}$ in Reihenschaltung einfach durch einen $\SI{100}{\ohm}$
+Widerstand ersetzen können:
 
+     \begin{center}           
+     \begin{circuitikz}[scale=0.5]
+        \ctikzset{inductors/scale=0.8, inductor=american}
+        \ctikzset{capacitors/scale=0.8}
+        \ctikzset{european resistors}
 
+         \draw (0,0) -- ++(1,0) coordinate(start)  to[short,*-] ++(0,-4) 
+         to[R=$\SI{100}{\ohm}$] ++(4,0)
+         -- ++(0,4) coordinate(ende) 
+         -- ++(1,0)
+         (ende) -- ++(0,1) 
+         (start) 
+         to[R,l=$\SI{100}{\ohm}$,-*] (ende);
+        \end{circuitikz}
+    \end{center}
+Nun haben wir eine Parallelschaltung von zwei gleichen  $\SI{100}{\ohm}$ Widerständen.
+
+     \begin{center}           
+     \begin{circuitikz}[scale=0.5]
+        \ctikzset{inductors/scale=0.8, inductor=american}
+        \ctikzset{capacitors/scale=0.8}
+        \ctikzset{european resistors}
+         \draw (0,0) to[short,-*] ++(1,0) coordinate(start)  to[R=$\SI{50}{\ohm}$,-*] ++(4,0) coordinate(ende) -- ++(1,0)
+         (ende) -- ++(0,1) 
+         ;
+        \end{circuitikz}
+    \end{center}
+Schauen wir den Schaltplan weiter an, so erkennen wir noch eine Kombination aus 
+$\SI{50}{\ohm}$ und $\SI{100}{\ohm}$  Widerstände die auch insgesamt einen Widerstand von $\SI{50}{\ohm}$ haben sollte.
+Es bleibt daher übrig:
+     \begin{center}           
+     \begin{circuitikz}[scale=0.5]
+        \ctikzset{inductors/scale=0.8, inductor=american}
+        \ctikzset{capacitors/scale=0.8}
+        \ctikzset{european resistors}
+         \draw (0,0) 
+          to[short,o-] ++(1,0)
+          to[R=$\SI{100}{\ohm}$,o-,-*] ++(4,0)  
+          to[R=$\SI{50}{\ohm}$,-*] ++(4,0)  
+          to[R=$\SI{50}{\ohm}$,-*] ++(4,0)
+          -- ++(0,-6) -- ++(-4,0)
+          to[R=$\SI{50}{\ohm}$] ++(-4,0)
+          to[short,-o] ++(-5,0)
+          
+         ;
+        \end{circuitikz}
+    \end{center}   
+ In Summe haben wir den Widerstand: 
+ $\SI{100}{\ohm}+
+ \SI{50}{\ohm}+\SI{50}{\ohm}+\SI{50}{\ohm} = \SI{250}{\ohm}$ 
+
+\end{sol}
+
+\begin{ohmchapter}
+In diesem Kapitel wenden wir nur an was wir bereits im vorherigen Kapitel zu Reihen- und Parallelschaltung von Widerständen bereits gelernt haben.
+Hierbei ist es wichtig in der richtigen Reihenfolge vorgehen: Die Fragen sind so konstruiert, dass sie mit den vereinfachten Formeln zu lösen sind.
 \end{ohmchapter}
