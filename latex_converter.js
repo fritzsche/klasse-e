@@ -26,6 +26,10 @@ function escape(text) {
 
     escapedText = escapedText.replace(/<u>nicht<\/u>/g, '\\underline{nicht}')
 
+// μF
+   escapedText = escapedText.replace(/μF/g, '\\si{\\micro\\farad}')// '$\\text{\\mu F}$')
+
+
     escapedText = escapedText.replace(/~/g, '\\textasciitilde{}')
     escapedText = escapedText.replace(/\^/g, '\\textasciicircum{}')
    // escapedText = escapedText.replace(/"/g, '""')
