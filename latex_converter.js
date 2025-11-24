@@ -28,6 +28,11 @@ function escape(text) {
 
 // μF
    escapedText = escapedText.replace(/μF/g, '\\si{\\micro\\farad}')// '$\\text{\\mu F}$')
+   escapedText = escapedText.replace(/μH/g, '\\si{\\micro\\henry}')// '$\\text{\\mu F}$')
+
+
+      escapedText = escapedText.replace(/\\milliOhm/g, '\\si{\\milli\\ohm}')// '$\\text{\\mu F}$')
+
 
 
     escapedText = escapedText.replace(/~/g, '\\textasciitilde{}')
