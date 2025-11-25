@@ -30,12 +30,119 @@
   Siehe Frage \qref{EC203}.
 \end{sol}
 
+\begin{sol}{EC206}
+  Schau Dir das Bild des Drehkondensator am Anfang dieses Kapitels an.
+\end{sol}
+
+\begin{sol}{EC207}
+ Ein Elektrolytkondensator ist ein gepolter Kondensator. Ist die Spannung falsch angelegt, kann durch elektrochemische Prozesse das Dielektrikum zerstört werden.
+\end{sol}
+
+
+\begin{sol}{ED216}
+ Wie beschrieben haben von allem Keramik- und Luftdrehkondensatoren viele gute Eigenschaften bei hohen Frequenzen.
+\end{sol}
+
 \begin{ohmchapter}
+  Den Kondensator ist eines der wichtigsten Bauelemente das wir im Amateurfunk kennen.
+  Solch ein Kondensator sieht in etwa wie folgt aus:
+  \pic[1]{kondensator}
+  Zwischen zwei \qq{Elektroden}, den Kondensatorplatten befindet sich eine isolierende Schicht, die der Fachmann \textbf{Dielektrikum} nennt.
+  Verschiedene Kondensatoren verwenden unterschiedliche isolierende Schichten:
+  \begin{itemize}
+    \item Luft beim Luftdrehkondensator oder Lufttrimmer
+    \item Kunststofffolie beim Folienwickelkondensator
+    \item Keramik für HF-Kondensatoren mit hoher Güte und bei SMD-Kondensatoren
+    \item Metalloxid beim Elektrolytkondensator.
+  \end{itemize}
+  Als ich das erste mal dieses Darstellung eines Kondensator's gesehen habe, dachte ich nur wie nutzlos solch ein Kondensator ist: wegen der isolierenden Schicht, kann ja kein Strom fließen!
+  Dies im für Gleichspannung auch ganz richtig, der Widerstand ist idealer Weise unendlich groß. Für Wechselstrom stimmt es aber nicht: es wird ein elektrisches Feld aufgebaut und so auf die andere Kondensatorplatte übertragen.
+  Mit steigender Frequenz sinkt der \textbf{Wechselstromwiderstand}.
+  
+  Das elektrische Feld bestimmt wie viel Energie ein Kondensator speichern kann, wir sprechen von der \textbf{Kapazität} des Kondensators. Du kannst Dir dies das in etwas wie ein Akku vorstellen, der zunächst geladen wird, wenn eine Spannung angelegt wird. Diese Energie wird abgegeben, wenn fällt die Spannung. Deshalb kannst Du einen Kondensator auch zur Stabilisierung von Spannungen verwenden.
+
+  Die Stärke des elektrischen Feldes hängt im wesentlichen davon Plattenabstand, der Plattenfläche und dem Dielektrikum ab. Klar: größere Platten die näher beieinander sind führen zu einem stärkerem elektrischem Feld.
+
+  Wenn Du bereits mal ein altes Radio auseinander gebaut hast, hast Du bestimmt schon mal einen solchen Drehkondensator gesehen:
+  \begin{center}
+    \includegraphics[max width=5cm]{bilder/drehkondensator.jpeg}    
+  \end{center}
+  Die isolierende Schicht ist die Luft, und durch eine Drehbewegung können die Platten übereinander gebracht werden. Dadurch steigt die Kapazität des Kondensators.
+
+  \textbf{Keramik- und Luftkondensatoren} haben gut Eigenschaften bei hohen Frequenzen. Keramikkondensatoren bieten eine hohe Spannungsfestigkeit, sind kompakt und in vielen Bereichen einsetzbar, während Luftkondensatoren eine sehr niedrige dielektrische Absorption und hohe Stabilität aufweisen. Sie sind deshalb für den Aufbau von HF-Filtern gut geeignet.
+
+  Noch eine besonderer Kondensator ist der \textbf{Elektrolytkondensator}. Ein Elektrolytkondensator ist ein sogenannter gepolter Kondensator, der sich durch seine hohe Kapazität auszeichnet und hauptsächlich in Gleichstromkreisen verwendet wird. Die Polarisation ist entscheidend, weil eine falsche Polung den Kondensator aufgrund der elektrochemischen Zerstörung des Dielektrikums zerstören kann. Sie eignen sich hervorragend für Anwendungen wie das Glätten von Gleichspannungen in Netzteilen.
+
 \end{ohmchapter}
 
 \subsection{Spule I}
 
+\begin{sol}{EA102}
+  Die Einheit Henry (H) musst Du Dir merken.
+\end{sol}
+
+\begin{sol}{EC301}
+ In Frage \qref{EC202} hatten wir dies für den Kondensator beantwortet. Mit der Spule sind viele Vorgänge genau gegenläufig.
+
+ Du kannst also die einfach das \qq{umgekehrte} Diagramm zum Kondensator merken.
+
+ Physikalisch liegt der Effekt an der Lenzschen Regel angewendet auf diesen Fall:
+
+ Die Spule erzeugt eine Selbstinduktionsspannung, die der Ursache, also dass ein Strom fließen soll, entgegenwirkt, deshalb wird der Einschaltstrom nur langsam ansteigen. 
+ 
+ Die Details brauchst Du Dir nicht für die Prüfung.
+
+\end{sol}
+
+
+\begin{sol}{EC302}
+  Wie in Frage \qref{EC301} gesehen hast steigt die Spannung wegen der Eigeninduktion der Spule an Lampe 2 langsamer an also bei Lampe 1. Lampe 1 leuchtet also zuerst.
+\end{sol}
+
+\begin{sol}{EC303}
+  Wie in Frage \qref{EC202} zum Kondensator können wir uns überlegen wie es bei Gleichspannung also Frequenz \SI{0}{\hertz} aussieht: hier leitet die Spule. Erst bei höheren Frequenzen wirkt der Spule der Wechselstromwiderstand entgegen.
+\end{sol}
+
+\begin{sol}{EC304}
+  Jeder Leiter hat zunächst unabhängig von der Form eine Induktivität.
+\end{sol}
+
+\begin{sol}{EC305}
+  Wir haben die zylindrische Spule am Anfang des Kapitels besprochen. Das stauchen der Spule führt dazu, dass die Windungen näher beieinander liegen. Die Induktivität steigt.
+  Die anderen Optionen sind schnell ausgeschlossen. Kupfer ist kein geeignetes magnetisches Material und führt eher dazu, dass die Induktivität abnimmt.
+\end{sol}
+
+\begin{sol}{EC306}
+  Die Induktivität der Spule nimmt ja ab je mehr wir die Spule stauchen. Sie dazu auch Frage \qref{EC305}. 
+  Da die Spule doppelt so lang ist, kommt Du schnell darauf, dass die Induktivität die Hälfte ist: $$\SI{12}{\micro\henry} / 2 = \SI{6}{\micro\henry}$$
+
+  In der Formelsammlung findest Du die konkrete Formel im Kapitel Induktivität/Spule, bei der in der Tat durch die Länge der Spule $l$ geteilt wird.
+\end{sol}
+
+\begin{sol}{EC307}
+ Nachdem Du in Frage \qref{EC306} gerade gesehen hast, dass die Verdoppelung der Spulenlänge zu einer Halbierung der Induktivität geführt hat, bist Du vielleicht versucht anzunehmen, dass die Verdoppelung der Windungszahl auch die Induktivität verdoppelt. 
+ 
+ Leider geht die Windungszahl quadratisch in die Induktivität ein.
+ Die genaue Formel findest Du in der Formelsammlung im Abschnitt Induktivität/Spule mit der Windungszahl $N^2$ in der Formel für die Induktivität. D.h. eine Verdoppelung der Windungszahl vervierfacht die Induktivität. Also $$\SI{12}{\micro\henry} \cdot 4 = \SI{48}{\pico\henry}$$
+\end{sol}
+
+
 \begin{ohmchapter}
+  In diesem Kapitel geht es um die Spule, die in vieler Art und Weise ein komplementärer Partner des Kondensators ist. Viele Sachverhalte sind mit einer Spule oft umgekehrte zum Kondensator.
+  In einer Spule wird ein magnetisches Feld aufgebaut. Die stärke dieses magentischen Feldes ist die \textbf{Induktivität} der Spule und wird in Henry (H) angegeben.
+
+  Eine der einfachsten Formen der Spule ist die \qq{gerade Zylinderspule}.
+
+  \pic[0.8]{spule}
+
+  Mit dieser Grafik kannst Du dir verdeutlichen was die Induktivität einer Spule beeinflussen kann:
+
+  \begin{itemize}
+    \item Je mehr Windungen eine Spule hat, je höher ist die Induktivität.
+    \item Je dichter die Windungen sind, desto höher ist die Induktivität.
+    \item Das Magnetfeld kann durch ein geeignetes magnetisch leitfähiges Material (z.B. Eisen) verstärkt werden und somit die Induktivität erhöhen.
+  \end{itemize}
+
 \end{ohmchapter}
 
 \subsection{Übertrager I}
