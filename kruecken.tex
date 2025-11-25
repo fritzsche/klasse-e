@@ -1,6 +1,7 @@
-\documentclass[10pt,a4paper,ngerman]{article}
+\documentclass[10pt,a4paper]{article}
+\usepackage[export]{adjustbox}
 \usepackage[utf8]{inputenc}
-\usepackage{tkz-euclide}
+%\usepackage{tkz-euclide}
 \usepackage[T1]{fontenc}
 
 %\usepackage[]{ntheorem}
@@ -11,13 +12,10 @@
 \usepackage{cleveref}
 
 \usepackage{amsthm}
-\usepackage{thmtools}
+%\usepackage{thmtools}
 \usepackage{amsfonts}
 \usepackage{amssymb}
-%\usepackage{babel}
 \usepackage{textcomp}
-
-\usepackage{adjustbox}
 
 
 \newtheoremstyle{mytheorem}
@@ -50,9 +48,10 @@
 
 %*****************************************
 \usepackage[ngerman]{babel}
-\usepackage{adjustbox}
+\usepackage[export]{adjustbox}
 %\usepackage{stackengine}
 %\usepackage{paralist}
+
 \usepackage{xfp}
 \usepackage{siunitx} % Wichtig für Zahlenformatierung
 \usepackage{xparse}
@@ -150,12 +149,20 @@
 \newlength{\imgwidth}
 \newlength{\imgheight}
 
+%\newcommand{\agrafic}[2]{%
+%  \resizebox{!}{3cm}{
+%    \begin{tikzpicture}[scale=1.5]
+%        \input{pic/#1_#2.tex}        
+%    \end{tikzpicture}
+%  }
+%}
+
 \newcommand{\agrafic}[2]{%
-\resizebox{!}{3cm}{
-  \begin{tikzpicture}[scale=1.5]
-      \input{pic/#1_#2.tex}        
-  \end{tikzpicture}
-}
+  \adjustbox{max totalheight=3cm,valign=c}{
+    \begin{tikzpicture}[scale=1.5]
+        \input{pic/#1_#2.tex}        
+    \end{tikzpicture}
+  }
 }
 
 
@@ -183,19 +190,19 @@
   \ifdim 2\imgwidth>0.9\linewidth
     % ---------- Wide layout: 1×4 ----------
     \begin{enumerate}[label=(\Alph*)]
-      \item \adjustbox{valign=c}{\agrafic{#1}{a}}
-      \item \adjustbox{valign=c}{\agrafic{#1}{b}}
-      \item \adjustbox{valign=c}{\agrafic{#1}{c}}
-      \item \adjustbox{valign=c}{\agrafic{#1}{d}}
+      \item \agrafic{#1}{a}
+      \item \agrafic{#1}{b}
+      \item \agrafic{#1}{c}
+      \item \agrafic{#1}{d}
     \end{enumerate}
   \else
     % ---------- Normal layout: 2×2 ----------
     \begin{tabular}{cc}
-      (A) \adjustbox{valign=c}{\agrafic{#1}{a}} &
-      (B) \adjustbox{valign=c}{\agrafic{#1}{b}} \\
+      (A) \agrafic{#1}{a} &
+      (B) \agrafic{#1}{b} \\
       \multicolumn{2}{c}{\vspace{10pt}} \\
-      (C) \adjustbox{valign=c}{\agrafic{#1}{c}} &
-      (D) \adjustbox{valign=c}{\agrafic{#1}{d}} \\
+      (C) \agrafic{#1}{c} &
+      (D) \agrafic{#1}{d} \\
     \end{tabular}
   \fi
 
@@ -264,17 +271,17 @@
 %%%%%%%%%%%%%%%%%
 
 
-%\input{kapitel_0.tex}
-\input{kapitel_5.tex}
-%\input{kapitel_6.tex}
-%\input{kapitel_7.tex}
-%\input{kapitel_8.tex}
-%\input{kapitel_9.tex}
-%\input{kapitel_10.tex}
-%\input{kapitel_11.tex}
-%\input{kapitel_12.tex}
-%\input{kapitel_13.tex}
-%\input{kapitel_14.tex}
-%\input{kapitel_15.tex}
-%\input{kapitel_16.tex}
+%  \input{kapitel_0.tex}
+  \input{kapitel_5.tex}
+%  \input{kapitel_6.tex}
+%  \input{kapitel_7.tex}
+%  \input{kapitel_8.tex}
+%  \input{kapitel_9.tex}
+%  \input{kapitel_10.tex}
+%  \input{kapitel_11.tex}
+%  \input{kapitel_12.tex}
+%  \input{kapitel_13.tex}
+%  \input{kapitel_14.tex}
+%  \input{kapitel_15.tex}
+%  \input{kapitel_16.tex}
 \end{document}
