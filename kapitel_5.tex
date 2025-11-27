@@ -313,6 +313,7 @@ Leistungsformel:
     $$R=\frac{U}{I} = \frac{\SI{9.1}{\volt}}{\SI{0.045}{A}} \approx  \SI{202}{\ohm}$$     
 \end{sol}
 
+
 \begin{ohmchapter}
   Die Diode haben wir ja bereits in der Klasse N kennengelernt.
   In der Klasse E sollten wir Diodenkennlinien wie diese verstehen:
@@ -344,7 +345,75 @@ Leistungsformel:
 
 \end{ohmchapter}
 
+
+
 \subsection{Transistor I}
 
+\begin{sol}{EC602}
+Transistoren ist ein Halbleiter, weil er aus speziellen Halbleiter-Materialien wie Silizium besteht. Deren elektrische Leitfähigkeit zwischen der eines Leiters und eines Isolators liegt. Transistoren nutzen diese Eigenschaft, um als steuerbarer Schalter oder zur Signalverstärkung zu fungieren.
+\end{sol}
+
+\begin{sol}{EC603}
+Schau dir die Analogie mit dem Wasserwehr noch mal an, falls dir die Antwort unklar ist.
+\end{sol}
+
+\begin{sol}{EC604}
+Du findest die Beschreibung von NPN und PNP am Anfang dieses Kapitel.
+\end{sol}
+
+\begin{sol}{EC605}
+Du solltest das Schaltzeichen als NPN Transistor erkennen können.
+\end{sol}
+
+
 \begin{ohmchapter}
+In diesem Kapitel geht es um den Transistor, einem Halbleiterbauelement und hier hauptsächlich um dem Bipolartransistor.
+Aber wie funktioniert so ein Transistor?
+Du kennst vielleicht diese Analogie mit einem kleinen und einem großen Wasserkanal.
+Ein Wasserwehr versperrt dem Wasser den Weg:
+    \pic[2]{tr1}
+Wenn etwas Wasser durch den kleinen Kanal fließt wird damit eine Steuervorrichtung betätigt, die das große Wehr öffnet:
+    \pic[2]{tr2}
+Fließt genügend Wasser durch den Steuerkanal öffnet dich das Wehr im großen Kanal komplett:     
+    \pic[2]{tr3}
+
+Übertragen wir dies nun auf einen Bipolartransistor. Das Schaltzeichen eines \textbf{NPN-Transistor} ist:
+
+     \begin{center}           
+     \begin{circuitikz}[scale=0.5]
+        \ctikzset{inductors/scale=0.8, inductor=american}
+        \ctikzset{capacitors/scale=0.8}
+        \ctikzset{european resistors}
+         \draw (0,0) node[npn,tr circle] (npn) {} 
+         (npn.base) node[anchor=east] {Base(B)}
+         (npn.collector) node[anchor=south] {Collector(C)}
+         (npn.emitter) node[anchor=north] {Emitter(E)};    
+        \end{circuitikz}
+    \end{center} 
+
+    Ein solcher Transistor hat 3 Anschlüsse, die Basis, Kollektor und Emitter genannt werden. Oder auf Englisch auch Basis(B), Collector(C) and Emitter(E). Ein Pfeil deutet an, dass der Strom Richtung Emitter fliesst. (Technische Stromrichtung)
+    Der große Strom der mit dem Transistor geregelt wird entspricht der Stecke von Kollektor nach Emitter. Die Basis entspricht dem kleinen Steuer Kanal. Ein im Verhältnis sehr kleiner Strom fließt aber auch von Basis zu Emitter.
+
+ 
+     \begin{center}           
+     \begin{circuitikz}[scale=0.5]
+        \ctikzset{inductors/scale=0.8, inductor=american}
+        \ctikzset{capacitors/scale=0.8}
+        \ctikzset{european resistors}
+         \draw (0,0) node[pnp,tr circle,yscale=-1 ] (pnp) {} 
+         (pnp.base) node[anchor=east] {B}
+         (pnp.collector) node[anchor=south] {C}
+         (pnp.emitter) node[anchor=north] {E};    
+        \end{circuitikz}
+    \end{center}     
+
+    Es gibt neben dem NPN Transistor noch einen PNP Transistor.
+    PNP- und NPN-Transistoren sind komplementäre Bauteile, die sich primär in der Polarität der Versorgungsspannung und der Richtung des Stromflusses unterscheiden. Bei NPN-Transistoren wird der Laststrom geschaltet, indem eine positive Spannung an die Basis angelegt wird, wobei der Strom von Kollektor zu Emitter fließt. Im Gegensatz dazu erfordert ein PNP-Transistor eine negative Spannung an der Basis, um den Stromfluss von Emitter zu Kollektor zu ermöglichen.
+
+   \noindent Merksprüche: 
+    \begin{description}
+      \item[PNP] \qq{Tut der Pfeil der Basis weh, handelt's sich um pnp.}
+      \item[NPN] \qq{Will der Pfeil sich von der Basis trenn', handelt sich's um npn.}   
+    \end{description}
+
 \end{ohmchapter}
