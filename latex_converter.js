@@ -33,8 +33,8 @@ function escape(text) {
    escapedText = escapedText.replace(/μs/g, '\\si{\\micro\\second}')// '\\si{\\micro\\seconds}')
 
    escapedText = escapedText.replace(/\\milliOhm/g, '\\si{\\milli\\ohm}')// '$\\text{\\mu F}$')
-
-
+// μW
+   escapedText = escapedText.replace(/μW/g, '\\si{\\micro\\watt}')
 
   //  escapedText = escapedText.replace(/~/g, '\\textasciitilde{}')
 //    escapedText = escapedText.replace(/\^/g, '\\textasciicircum{}')
