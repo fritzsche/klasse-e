@@ -1,15 +1,113 @@
 \setcounter{section}{2}
 \section{Strom, Spannung, Widerstand, Leistung, Energie}
 \subsection{Strom- und Spannungsmessung II}
+
+\begin{sol}{EI101}
+  Sie Beschreibung am Anfang dieses Kapitels.
+\end{sol}
+
+\begin{sol}{EI102}
+  Die mit \qq{A}(Ampere) markierte Strommessung muss in den Stromkreis eingeschleift sein. Die mit \qq{V}(Volt) markierte Spannungsmessung muss parallel zum Messobjekt verwendet werden. Dies ist nur bei Antwort (A) der Fall.
+\end{sol}
+
 \begin{ohmchapter}
+
+    \begin{description}
+        \item[Spannungsmessung] Parallel zum Messobjekt und hochohmig.
+        \item[Strommessung] In den Stromkreis eingeschleift und niederohmig.  
+    \end{description}
+
+    Zum Merken: Die Spannungsmessung erfolgt parallel zum Messobjekt, deshalb muss die hochohmig sein, sonst würde der Strom nicht durch unsere Schaltung sondern durch das Messgerät fließen. Bei der Strommessung muss dass Messgerät Teil der Schaltung sein damit der Stromfuss gemessen werden kann. Hier sollte das Messgerät die Schaltung in keinster Weise beeinflussen, deshalb sollte es möglichst wenig Widerstand haben: niederohmig. 
 \end{ohmchapter}   
 
 \subsection{Zeigerinstrumente ablesen}
+
+
+
+\begin{sol}{EI103}
+  Da \SI{10}{\volt} eingestellt sind, verwendest Du am einfachsten die obere Skala die Werte bis 100 anzeigt.
+  Auf der Skala kannst Du den Wert 29 ablesen. Diesen Wert musst Du noch durch 10 teilen, da die Skala ja bis 100 geht.
+  Also $29 / 10 = \SI{2.9}{\volt}$
+\end{sol}
+
+\begin{sol}{EI104}
+ Wir verwenden die untere Skala die bis zum Wert 30 anzeigt und lesen den Wert 8,8 ab. Da das Messinstrument auf \SI{300}{\volt} eingestellt ist und die Skala bis 30 geht müssen wir mit Faktor 10 multiplizieren.
+ $8,8 \cdot 19 = \SI{88}{\volt}$
+\end{sol}
+
 \begin{ohmchapter}
+Beim Ablesen von analogen Messgeräten stehen oft unterschiedliche Skalen bereit. Du solltest die Skala auswählen die möglichst gut zu dem Messbereich passt den Du verwendest, d.g. dass Du nur einen Faktor 10/100 etc. berücksichtigen muss.
 \end{ohmchapter}   
 
 \subsection{Spitzen- und Effektivwert}
+
+\begin{sol}{EB401}
+ Rechnung:
+   $$\hat{U} = U_\text{eff} \cdot \sqrt{2} = \SI{230}{\volt} \cdot \sqrt{2} \approx \SI{325}{\volt}$$
+\end{sol}
+
+\begin{sol}{EB402}
+ Wie in Frage \qref{EB401} errechnen wir $\hat{U} \approx \SI{325}{\volt}$.
+
+ Rechnung: $$U_\text{SS} = 2 \cdot \hat{U} = 2 \cdot \SI{325}{\volt} \approx  \SI{651}{\volt}$$
+\end{sol}
+
+
+\begin{sol}{EB403}
+ Rechnung:
+   $$\hat{U} = U_\text{eff} \cdot \sqrt{2} = \SI{12}{\volt} \cdot \sqrt{2} \approx \SI{17}{\volt}$$
+   $$U_\text{SS} = 2 \cdot \hat{U} = 2 \cdot \SI{17}{\volt} = \SI{34}{\volt} $$
+\end{sol}
+
+
+\begin{sol}{EB404}
+ Rechnung:
+   $$U_\text{eff} = \frac{\hat{U}}{\sqrt{2}} = \frac{\SI{12}{\volt}}{\sqrt{2}}  \approx \SI{8.5}{\volt}$$
+\end{sol}
+
+
+\begin{sol}{EB405}
+ Rechnung:
+   $$U_\text{eff} = \frac{\hat{U}}{\sqrt{2}} = \frac{\SI{1}{\volt}}{\sqrt{2}}  \approx \SI{0.7}{\volt}$$
+\end{sol}
+
+\begin{sol}{EB406}
+ Du kannst ablesen, dass der Spitze-Spitze-Wert 4 Einteilungen entspricht. Jede Einteilung entspricht \SI{3}{\volt}.
+ Somit ist $U_\text{SS} = 4 \cdot \SI{3}{\volt} = \SI{12}{\volt}$
+\end{sol}
+
+
+\begin{sol}{EB406}
+    Analog zu Frage \qref{EB406}.
+ Du kannst ablesen, dass der Spitze-Spitze-Wert 4 Einteilungen entspricht. Jede Einteilung entspricht \SI{10}{\volt}.
+ Somit ist $U_\text{SS} = 4 \cdot \SI{10}{\volt} = \SI{40}{\volt}$
+\end{sol}
+
 \begin{ohmchapter}
+    In diesem Kapitel geht es um Wechselspannung. Die Spannung ändert sich die ganze Zeit wie eine Sinus-Funktion.
+    Welche Angaben können wir über solch eine Wechselspannung machen?
+
+    \begin{description}
+        \item[Spitzenspannung] Die Spitzenspannung $\hat{U}$ gibt den höchsten Spannungswert der Wechselspannung an.
+        \item[Spitze-Spitze-Wert] Der Spitze-Spitze-Wert $U_\text{SS}$ gibt die Spannung von niedrigsten zum höchsten Punkt der Wechselspannung an.            
+    \end{description}
+    
+    Dies sieht wie folgt aus:
+
+    \pic[1.1]{U_SS}
+    In der Formelsammlung findest Du im Abschnitt \qq{Wechselspannung} die Formel $U_\text{SS} = 2 \cdot \hat{U}$, d.h. wie verdoppeln die Spitzenspannung einfach um den Spitze-Spitze-Wert zu erhalten.
+
+    Die Spitzenwerte der Spannung werden allerdings immer nur ganz kurz erreicht und liegt im Kurvenverlaub deutlich darunter. Wie können wir so etwas wie eine Art \qq{Durchschnitt} für die Spannung angeben? 
+    Tatsächlich gibt es so etwas ähnliches wie den Durchschnitt, es ist der sogenannte \textbf{Effektivwert} der Spannung und der wird in Formeln als $U_\text{eff}$ bezeichnet. Wenn mit diesem Effektivwert gerechnet gilt das Ohmsche Gesetzt weiter. Er gibt quasi den Spannungswert an, der gleichviel Energie besitzt wie die Wechselspannung.
+
+    Dies sieht etwas so aus:
+    \pic[1.1]{U_EFF}
+
+    In der Formelsammlung findest zur Umrechnung die folgende Formel:
+    $$\hat{U} = U_\text{eff} \cdot \sqrt{2}$$
+    Umgekehrt gilt natürlich: 
+    $$U_\text{eff} = \frac{\hat{U}}{\sqrt{2}}. $$
+
 \end{ohmchapter}   
 
 \subsection{Oszilloskop I }
