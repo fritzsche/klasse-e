@@ -36,8 +36,8 @@ function escape(text) {
 
 
 
-    escapedText = escapedText.replace(/~/g, '\\textasciitilde{}')
-    escapedText = escapedText.replace(/\^/g, '\\textasciicircum{}')
+  //  escapedText = escapedText.replace(/~/g, '\\textasciitilde{}')
+//    escapedText = escapedText.replace(/\^/g, '\\textasciicircum{}')
    // escapedText = escapedText.replace(/"/g, '""')
     return escapedText
 }

@@ -284,7 +284,76 @@ Zehnerpotenz angibt.
 \end{ohmchapter}  
 
 \subsection{Leistung II}
-\begin{ohmchapter}
+
+  \begin{sol}{EB501}    
+    Die Abkürzung PEP steht für den Englischen Ausdruck \qq{peak envelope power}.
+    Es geht auf Deutsch übersetzt um die \textbf{Modulationshüllkurve}. Du solltest Dir auch merken, dass PEP immer direkt am Ausgang des Funkgeräts bestimmt wird (d.h. ohne Berücksichtigung von Dämpfung oder Antennengewinn). Gemessen wird an einem sogenannten \textbf{reellem Abschlusswiderstand}. Du kannst Dir unter reellem Abschlusswiderstand vereinfacht eine Dummyload vorstellen. Tatsächlich ist dies im Gegensatz zu einem Blindwiderstand definiert, diesen werden wir aber erste in der Klasse A genau definieren. Zum beantworten der Frage habe ich Dir Schlüsselworte markiert.
+  \end{sol}  
+
+
+    \begin{sol}{EB502}    
+ Bei der \qq{mittlere(n) Leistung} geht es, wie der Name bereits vermuten lässt um eine \textbf{durchschnittliche Leistung}. D.h. es wird über einen Zeitraum gemittelt und der Zeitraum sollte ausreichend lang sein, in der Musterantwort soll sie \textbf{ im Verhältnis zur Periode der tiefsten Modulationsfrequenz } ausreichend lang sein. 
+  \end{sol}  
+
+   \begin{sol}{EB503}    
+    Wir hatten uns damit bereits im Kapitel zur Wechselspannung beschäftigt. Dies ist auch einer der Gründe warum die Effektive Spannung $U_\text{eff}$ für uns wichtig war.
+   \end{sol}  
+
+
+   \begin{sol}{EB504}    
+    Die richtige Antwort $U=\sqrt{P\cdot R}$ steht in der Formelsammlung im Abschnitt \qq{Leistung}.
+   \end{sol}  
+
+   \begin{sol}{EB505}    
+    Die richtigen Formeln $I=\frac{P}{R}$ und $U=\sqrt{P\cdot R}$ stehen in der Formelsammlung im Abschnitt \qq{Leistung}.
+   \end{sol}  
+
+   \begin{sol}{EB506}    
+    Die richtigen Formeln stehen so nicht in der Formelsammlung, da hier nicht nach $R$ aufgelöst wurde.
+    Dies lässt sich aber mit den Formeln in der Formelsammlung in Abschnitt \qq{Leistung} schnell erledigen:
+    $$ P = \frac{U^2}{R} \Rightarrow R = \frac{U^2}{P} $$
+    $$ P = I^2 \cdot R \Rightarrow R = \frac{P}{I^2} $$
+   \end{sol}  
+
+
+\begin{sol}{EB507}  
+$$P = \frac{U^2}{R} = \frac{\SI{100}{\volt}^2}{\SI{50}{\ohm}} = \SI{200}{\watt}$$
+\end{sol}  
+
+\begin{sol}{EB508}  
+$$P = I^2\cdot R= \SI{2}{\ampere}^2\cdot \SI{50}{\ohm} = \SI{200}{\watt}$$
+\end{sol}  
+
+\begin{sol}{EB509}  
+$$P = \frac{U^2}{R} = \frac{\SI{10}{\volt}^2}{\SI{100}{\ohm}}= \SI{1}{\watt}$$
+\end{sol} 
+
+
+\begin{sol}{EB510}  
+$$U = \sqrt{P\cdot R} = \sqrt{\SI{1}{\watt}\cdot \SI{10000}{\ohm}}  =\SI{100}{\volt} $$
+\end{sol} 
+
+
+\begin{sol}{EB511}  
+$$U = \sqrt{P\cdot R} = \sqrt{\SI{6}{\watt}\cdot \SI{100000}{\ohm}}  \approx \SI{775}{\volt}$$
+\end{sol} 
+
+\begin{sol}{EB512}      
+$$I = \sqrt{\frac{P}{R}} = \sqrt{\frac{\SI{23}{\watt}}{\SI{120}{\ohm}}}  = \SI{438}{\milli\ampere}$$
+\end{sol} 
+
+
+\begin{sol}{EB513}  
+    $$\hat{U} = \SI{25}{\volt} / 2 = \SI{12.5}{\volt} $$
+    $$U_\text{eff} = \frac{\hat{U}}{\sqrt{2}} = \frac{\SI{12.5}{\volt}}{\sqrt{2}}  = \SI{8.8}{\volt}$$
+$$I = \frac{U}{R} = \frac{ \SI{8.8}{\volt}}{\SI{1000}{\ohm}}= \SI{8.8}{\milli\ampere}$$
+\end{sol} 
+
+\begin{sol}{EB514}  
+ Jeder der 11 Widerstände ist mit jeweils \SI{5}{\watt} belastbar. Also $11\cdot \SI{5}{\watt} = \SI{55}{\watt}$
+\end{sol} 
+
+\begin{ohmchapter}    
 \end{ohmchapter}  
 
 \subsection{Dezibel I}
