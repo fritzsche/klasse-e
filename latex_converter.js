@@ -16,7 +16,10 @@ function escape(text) {
  //   escapedText = escapedText.replace(/\\/g, '\\textbackslash{}')
 
     escapedText = escapedText.replace(/\"Short Skip\"/g, '\\qq{Short Skip}')
+// \"Short-Skip\"    
+escapedText = escapedText.replace(/\"Short-Skip\"/g, '\\qq{Short-Skip}')
     escapedText = escapedText.replace(/\"Sporadic-E\"/g, '\\qq{Sporadic-E}')
+        escapedText = escapedText.replace(/\"VK\"/g, '\\qq{VK}')
     escapedText = escapedText.replace(/&/g, '\\&')
 
 
