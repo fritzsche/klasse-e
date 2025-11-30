@@ -14,6 +14,9 @@ function escape(text) {
     }
     let escapedText = text
  //   escapedText = escapedText.replace(/\\/g, '\\textbackslash{}')
+
+    escapedText = escapedText.replace(/\"Short Skip\"/g, '\\qq{Short Skip}')
+    escapedText = escapedText.replace(/\"Sporadic-E\"/g, '\\qq{Sporadic-E}')
     escapedText = escapedText.replace(/&/g, '\\&')
 
 
@@ -35,12 +38,16 @@ function escape(text) {
    escapedText = escapedText.replace(/\\milliOhm/g, '\\si{\\milli\\ohm}')// '$\\text{\\mu F}$')
 // μW
    escapedText = escapedText.replace(/μW/g, '\\si{\\micro\\watt}')
-
+// "A"
+escapedText = escapedText.replace(/"A"/g, '\\qq{A}')
   //  escapedText = escapedText.replace(/~/g, '\\textasciitilde{}')
 //    escapedText = escapedText.replace(/\^/g, '\\textasciicircum{}')
    // escapedText = escapedText.replace(/"/g, '""')
-    return escapedText
+// \"Short Skip\"
+
+   return escapedText
 }
+
 
 
 // --- Hauptfunktion ---
