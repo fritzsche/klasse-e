@@ -19,6 +19,7 @@ function escape(text) {
 // \"Short-Skip\"    
 escapedText = escapedText.replace(/\"Short-Skip\"/g, '\\qq{Short-Skip}')
     escapedText = escapedText.replace(/\"Sporadic-E\"/g, '\\qq{Sporadic-E}')
+    escapedText = escapedText.replace(/\"Skin-Effekt\"/g, '\\qq{Skin-Effekt}')
         escapedText = escapedText.replace(/\"VK\"/g, '\\qq{VK}')
     escapedText = escapedText.replace(/&/g, '\\&')
 
