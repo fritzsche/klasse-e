@@ -50,12 +50,12 @@ Da sich Gewinn und Verlust ausgleichen kommen auch \SI{70}{\watt} EIRP heraus.
 
 \begin{sol}{EG508}
     Ähnlich zu Frage \qref{EG507}!
-    Aus Kebelverlust und Antennengewinn haben wir \SI{3}{\dB} also ein Faktor 2 laut der Umrechnungstabelle. Aus \SI{5}{\watt} werden mit dem Faktor 2 also \SI{10}{\watt}.
+    Aus Kabelverlust und Antennengewinn haben wir \SI{3}{\dB} also ein Faktor 2 laut der Umrechnungstabelle. Aus \SI{5}{\watt} werden mit dem Faktor 2 also \SI{10}{\watt}.
     Jetzt aber aufpassen: der Antennengewinn was in dB (also in Bezug auf Dipol) angegeben. Um auf EIRP (Bezug Isotropenstrahler) zu kommen müssen wir den Gewinn des Dipols mit dem Faktor 1,64 berücksichtigen. Das Ergebnis ist also auch $\SI{10}{\watt} \cdot 1,64 = \SI{16,4}{\watt}$.
 \end{sol}
 
 \begin{sol}{EG509}
-    Aus Antennengewinn und Kebelverlust ergeben sind \SI{10}{\dB}, also Faktor 10 Gewinn. Aus \SI{0,6}{\watt} werden also \SI{6}{\watt}. Wir berücksichtigen aber noch den Dipol Gewinnfaktor von 1,64 und erhalten: $\SI{6}{\watt} \cdot 1,64 = \SI{9,84}{\watt}$
+    Aus Antennengewinn und Kabelverlust ergeben sind \SI{10}{\dB}, also Faktor 10 Gewinn. Aus \SI{0,6}{\watt} werden also \SI{6}{\watt}. Wir berücksichtigen aber noch den Dipol Gewinnfaktor von 1,64 und erhalten: $\SI{6}{\watt} \cdot 1,64 = \SI{9,84}{\watt}$
 \end{sol}
 
 \begin{sol}{EG510}
@@ -80,7 +80,7 @@ Da sich Gewinn und Verlust ausgleichen kommen auch \SI{70}{\watt} EIRP heraus.
 
     Zunächst die Lösung mit \textbf{Überschlagsrechnung}:
     Die \SI{5,15}{dBi} sind annähernd \SI{5}{dBi} und die können wir zerlegen in $\SI{5}{dBi} = \SI{3}{dBi} + \SI{1}{dBi} + \SI{1}{dBi}$. Als Gewinnfaktor haben wir also etwa: $2*1,26*1,26=3,1752$. 
-    Rechnen wir von den maximal \SI{10}{\watt} EIRP zurück, ergibt sich: $$10/3,1752 \approx \SI{3,1494}{\watt}$$ die wir maximal aussengen können.
+    Rechnen wir von den maximal \SI{10}{\watt} EIRP zurück, ergibt sich: $$10/3,1752 \approx \SI{3,1494}{\watt}$$ die wir maximal aussenden können.
     D.h., auch wenn das Ergebnis denkbar knapp ist, \SI{3}{\watt} können wir senden.
     
     Eine \textbf{exakte Lösung}:   
@@ -99,9 +99,8 @@ Da sich Gewinn und Verlust ausgleichen kommen auch \SI{70}{\watt} EIRP heraus.
 \subsection{Personenschutzabstand II }
 
 \begin{sol}{EK104}
-    Nach all den Fragen in vorherigen Kapitel, sollte unmittelbar klar sein, dass der enorme Antennengewinn von 13 dBd der Yagi Uda Antenne. Problemlos ausreichen um bei 6 W Ausgangsleistung über den Grenzwert zu kommen. Selbst wenn wir den Gewinn mit 10 dBd etwas abrunden und den Gewinn des Dipols unberücksichtigt lassen, sind mit (Gewinnfaktor 10) schon über 10 W EIRP.
+    Nach all den Fragen in vorherigen Kapitel, sollte unmittelbar klar sein, dass der enorme Antennengewinn von 13 dBd der Yagi Uda Antenne. Problemlos ausreichen um bei 6 W Ausgangsleistung über den Grenzwert zu kommen. Selbst wenn wir den Gewinn mit 10 dBd etwas abrunden und den Gewinn des Dipols unberücksichtigt lassen, sind mit (Gewinnfaktor 10) schon über \SI{10}{\watt} EIRP.
     D.h. ohne Rechnung ist bereits klar, dass wir in dieser Situation die Einhaltung der Personenschutzgrenzwerte nachzuweisen haben.
-
 \end{sol}
 
 \begin{sol}{EK107}
@@ -111,7 +110,7 @@ Eine Frage der Vorschriften die Du lernen musst, die aber auch Sinn macht.
 
 
 \begin{ohmchapter}
- Es geht in diesem Kapitel mal wieder um die 10 W EIRP Strahlungsleistung.
+ Es geht in diesem Kapitel mal wieder um die \SI{10}{\watt} EIRP Strahlungsleistung.
 \end{ohmchapter}
 
 
@@ -177,10 +176,10 @@ Da die Rechnung erst ab \SI{13,64}{\meter} gültig ist, wir aber laut Frage \SI{
     $$ d = \frac{\sqrt{\SI{30}{\ohm}\cdot P_{\text{EIRP}}}}{E}$$
 
     Wir haben \SI{7,5}{\dB} - \SI{1,5}{\dB} = \SI{6}{\dB}. Laut Tabelle in der Formelsammlung entspricht dies einem Faktor 4. Da die Antenne mit einem Gewinn in dBd angegeben ist müssen wir noch den Dipol Gewinnfaktor von 1,64 berücksichtigen: $4\cdot 1.64 = 6,56$.
-    Mit der Senderausgangsleistung von \SI{100}{\watt}. Also $$P_{\text{EIRP}} = \SI{100}{\watt} \cdot 6,56 = \SI{653}{\watt}$$
+    Mit der Senderausgangsleistung von \SI{100}{\watt}. Also $$P_{\text{EIRP}} = \SI{100}{\watt} \cdot 6,56 = \SI{656}{\watt}$$
 
     Wir setzen ein 
-     $$ d = \frac{\sqrt{\SI{30}{\ohm}\cdot \SI{653}{\watt}}}{28 V/m} = \SI{5,01}{\meter}$$     
+     $$ d = \frac{\sqrt{\SI{30}{\ohm}\cdot \SI{656}{\watt}}}{28 V/m} \approx \SI{5}{\meter}$$     
 
 \end{sol}
 
