@@ -27,10 +27,16 @@ Binärzahlen
 https://fritzsche.github.io/klasse-e/binary.html
 
 
+## Version
+
+* 0.1-Alpha - Weihnachten 2025 Ausgabe 
+   Initiale Version.
 
 ## Lernkrücken
-Work in progress:
-https://github.com/fritzsche/klasse-e/blob/main/kruecken.pdf
+Neueste Version:
+https://raw.githubusercontent.com/fritzsche/klasse-e/latest/kruecken.pdf
+
+
 
 ## License
 * Der Fragenkatalog wird unter der Lizenz der BNetzA weitergegeben: https://www.govdata.de/dl-de/by-2-0
