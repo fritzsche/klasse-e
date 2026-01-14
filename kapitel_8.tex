@@ -29,7 +29,7 @@
 
 \begin{ohmchapter}
 In einem Mischer werden zwei Eingangssignale zu einem Ausgangssignal gemischt. Das Blockschaltdiagramm eines Mischers sieht aus wie eine Waschmaschine. Tatsächlich soll uns das Kreuz in der Mitte des Symbols an ein Multiplikationszeichen erinnern, da es sich um meine multiplikative Mischung von Frequenzen handelt.
-Beim Mischen entsteht aus den beiden Eingangsfrequenzen die Summe und Differenz Frequenz:
+Beim Mischen entstehen aus den beiden Eingangsfrequenzen die Summen- und Differenzfrequenz:
 
 
 \begin{center}
@@ -50,7 +50,7 @@ $\begin{aligned}
 
 
 
-Wie solch ein Mischer funktioniert kannst Du mit dieser \href{https://fritzsche.github.io/klasse-e/mischer.html}{App auf Github}
+Wie solch ein Mischer funktioniert, kannst Du mit dieser \href{https://fritzsche.github.io/klasse-e/mischer.html}{App auf Github}
 \footnote{ \href{https://fritzsche.github.io/klasse-e/mischer.html}{https://fritzsche.github.io/klasse-e/mischer.html}} interaktiv ausprobieren.
 
 
@@ -58,9 +58,9 @@ Wie solch ein Mischer funktioniert kannst Du mit dieser \href{https://fritzsche.
 %Als Blockschaltdiagramm sieht es folgendermaßen aus:
 
 
-Hier nur eine kurze Erklärung wie sich dies Mathematisch herleiten lässt. Für die Prüfung brauchst Du diese Details nicht wissen!
+Hier nur eine kurze Erklärung, wie sich dies mathematisch herleiten lässt. Für die Prüfung brauchst Du diese Details nicht zu wissen!
 In unserem Beispiel haben wir ein empfangenes Signal $S_{\text{empf}}$ 
-und das Signal eines lokalen Oszillator  $S_{\text{LO}}$.
+und das Signal eines lokalen Oszillators $S_{\text{LO}}$.
 
 % --- Definition der Eingangssignale ---
 \begin{align*}
@@ -68,7 +68,7 @@ und das Signal eines lokalen Oszillator  $S_{\text{LO}}$.
     S_{\text{LO}}(t) &= A_{\text{LO}} \cdot \sin(\omega_{\text{LO}} t)
 \end{align*}
 
-Ein Multiplikativer Mixer wird unser Signal zu einem  wie eine einfache Ausgangssignal $S_{\text{out}}$ multiplizieren:
+Ein multiplikativer Mixer wird unser Signal zu einem einfachen Ausgangssignal $S_{\text{out}}$ multipliziert:
 
 % --- Mischer-Multiplikation ---
 \begin{equation*}
@@ -76,7 +76,7 @@ Ein Multiplikativer Mixer wird unser Signal zu einem  wie eine einfache Ausgangs
 \end{equation*}
 
 % --- Produkt-zu-Summe-Formel (Trigonometrie) ---
-Wir verwenden die folgende Trigonometrie Formel:
+Wir verwenden die folgende trigonometrische Formel:
 \begin{equation*}
     \label{eq:sin_prod}
     \sin(A) \cdot \sin(B) = \frac{1}{2} \left[ \cos(A-B) - \cos(A+B) \right]
@@ -104,10 +104,10 @@ Summe und Differenz entstehen also einfach aus unserer Formel.
 
 \end{sol}
 \begin{sol}{EF502}
-    Im letzten Kapitel haben wir über den Mixer gesprochen. Hier wird Summe und Differenz Frequenz gebildet.
+    Im letzten Kapitel haben wir über den Mixer gesprochen. Hier werden Summe und Differenz Frequenz gebildet.
 \end{sol}
 \begin{sol}{EF503}
-    Im Blockschaltbild können wir die Sende-/Empfangsumschaltung erkennen wie zwischen RX und TX umschaltet. Es ist also der \textbf{Transverter}.
+    Im Blockschaltbild können wir die Sende-/Empfangsumschaltung erkennen, wie zwischen RX und TX umgeschaltet wird. Es ist also der \textbf{Transverter}.
 \end{sol}
 
 \begin{sol}{EF504}
@@ -115,16 +115,16 @@ Summe und Differenz entstehen also einfach aus unserer Formel.
 \end{sol}
 
 \begin{sol}{EF505}
-    Diese Fragen hat viele ähnlich Antworten. Liess dies alle genau durch!
-    Es geht um den Satellitenbetrieb über die hohe Frequenz von 2,4 GHz. Wir müssen also die Sendefrequenz vervielfachen und damit vervielfachen wir auch Frequenzabweichungen.
+    Diese Frage hat viele ähnliche Antworten. Lies Dir alle genau durch!
+    Es geht um den Satellitenbetrieb über die hohe Frequenz von 2,4 GHz. Wir müssen also die Sendefrequenz vervielfachen, und damit vervielfachen wir auch Frequenzabweichungen.
 \end{sol}
 
 \begin{sol}{ED403}
-    Die Antwort sollte klar sein, die alternativen Antworten (B),(C),(D) machen überhaupt keinen Sinn.
+    Die Antwort sollte klar sein, die alternativen Antworten (B), (C) und (D) machen überhaupt keinen Sinn.
 \end{sol}
 
 \begin{sol}{EF307}
-    Hier geht es um Audio Signale vom Mikrofon. Das Menschliche Ohr kann bis maximal ca. 20k Hz hören, allerdings verwenden wird im Amateurfunk nur die untersten 2700Hz davon um nicht unnötig Bandbreite zu verschwenden. Die untersten 300Hz können wir nicht hören, deshalb kann ein Mikrofonverstärker mit der Kennlinie (A) auch als extra Filter dienen. 
+    Hier geht es um Audiosignale vom Mikrofon. Das menschliche Ohr kann bis maximal ca. 20 kHz hören, allerdings verwenden wir im Amateurfunk nur die untersten 2700Hz davon, um nicht unnötig Bandbreite zu verschwenden. Die untersten 300Hz können wir nicht hören, deshalb kann ein Mikrofonverstärker mit der Kennlinie (A) auch als extra Filter dienen.
 \end{sol}
 
 \subsection{Konverter und Transverter}
@@ -138,25 +138,20 @@ Summe und Differenz entstehen also einfach aus unserer Formel.
 \end{ohmchapter}
 
 \begin{sol}{ED401}
- Die Frage ist einfach zu beantworten, hat aber mal wider viele ähnlich Antworten.
- Zunächst schließen wir Antwort (C) und (D) aus, da wir ja mit dem Verstärker die Ausgangsleistung erhöhen wollen. Der unterschied von (A) und (B) ist nur ab eine Spannungsquelle notwendig ist und auch dies ist einleuchtend, dass für ein Verstärkung Energie zugeführt werden muss. Deshalb brauchen wir ein Spannungsquelle.  
-\end{sol}
-
-\begin{sol}{ED401}
- Die Frage ist einfach zu beantworten, hat aber mal wider viele ähnlich Antworten.
- Zunächst schließen wir Antwort (C) und (D) aus, da wir ja mit dem Verstärker die Ausgangsleistung erhöhen wollen. Der unterschied von (A) und (B) ist nur ab eine Spannungsquelle notwendig ist und auch dies ist einleuchtend, dass für ein Verstärkung Energie zugeführt werden muss. Deshalb brauchen wir ein Spannungsquelle.  
+ Die Frage ist einfach zu beantworten, hat aber mal wieder viele ähnliche Antworten.
+ Zunächst schließen wir die Antworten (C) und (D) aus, da wir ja mit dem Verstärker die Ausgangsleistung erhöhen wollen. Der Unterschied von (A) und (B) ist nur, dass eine Spannungsquelle notwendig ist, und auch dies ist einleuchtend: Für eine Verstärkung muss Energie zugeführt werden. Deshalb brauchen wir eine Spannungsquelle. 
 \end{sol}
 
 \begin{sol}{ED402}
- In der Schaltung finden wir ganz Zentral den Transistor, der ja typisch ist für den Verstärker, also schließen wir schon mal (D) aus. Weiterhin finden wir das Schaltzeichen eines Lautsprechers im Schema, es geht also um Audio (NF).   
+ In der Schaltung finden wir ganz zentral den Transistor, der ja typisch ist für den Verstärker, also schließen wir schon mal (D) aus. Weiterhin finden wir das Schaltzeichen eines Lautsprechers im Schema, es geht also um Audio (NF).
 \end{sol}
 
 \begin{sol}{EF308}
-  Bereits aus der Frage erfahren wir, dass es um einen NF-Verstärker geht, auch wenn zur Verwirrung noch Mixer und Bandpass eingezeichnet sind. Die Bezeichnungen SSB und LSB/USB lässt uns erkennen, dass es um das gewünschte Audiospektrum von ca. 2,5 kHz geht.
+  Bereits aus der Frage erfahren wir, dass es um einen NF-Verstärker geht, auch wenn zur Verwirrung noch Mixer und Bandpass eingezeichnet sind. Die Bezeichnungen SSB und LSB/USB lassen uns erkennen, dass es um das gewünschte Audiospektrum von ca. 2,5 kHz geht.
 \end{sol}
 
 \begin{sol}{EF403}
- Wichtig ist, dass wir uns merken, dass ein SSB Verstärker die Signale \textbf{linear} verstärken soll. Er muss dabei z.B. die gesamte Bandbreite des Signals gleichmäßig abdecken und sollte nicht bei gewünschten Frequenzen (SSB) oder Amplituden einbrechen (die Amplitude eines SSB Signals hängt von der Lautstärke des NF Signals ab).
+ Wichtig ist, dass wir uns merken, dass ein SSB-Verstärker die Signale \textbf{linear} verstärken soll. Er muss dabei z.B. die gesamte Bandbreite des Signals gleichmäßig abdecken und sollte nicht bei gewünschten Frequenzen (SSB) oder Amplituden einbrechen (die Amplitude eines SSB-Signals hängt von der Lautstärke des NF-Signals ab).
 \end{sol}
 
 \begin{sol}{EF405}
@@ -165,6 +160,6 @@ Summe und Differenz entstehen also einfach aus unserer Formel.
 
 \subsection{Verstärker}
 \begin{ohmchapter}
-Der Transistor ist für moderne Verstärker das Entscheidende Bauelement, dass uns hilft die Schaltungen aufeinander halten zu können. Für viele Jahre wurden auch Röhren verwendet, die auch heute noch viele Amateurfunker verwenden. Allerdings kommen sie nicht mehr im Fragenkatalog vor.
+Der Transistor ist für moderne Verstärker das entscheidende Bauelement, das uns hilft, die Schaltungen aufeinanderhalten zu können. Für viele Jahre wurden auch Röhren verwendet, die auch heute noch viele Amateurfunker verwenden. Allerdings kommen sie nicht mehr im Fragenkatalog vor.
 \end{ohmchapter}  
 
