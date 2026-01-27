@@ -31,6 +31,7 @@ https://fritzsche.github.io/klasse-e/binary.html
 
 * 0.1-Alpha - Weihnachten 2025 Ausgabe 
    Initiale Version.
+* 0.1.1-Alpha - Viele Tippfehler beseitigt - Vielen Dank an Denis!
 
 ## Lernkrücken
 Neueste Version:
