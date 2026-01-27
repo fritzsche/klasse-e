@@ -5,7 +5,7 @@
 \setcounter{subsection}{1}
 
 \begin{sol}{EF601}
-Wie eingangs des Kapitels beschrieben können brauchen wie zunächst einen A/D-Umsetzer und nach der Digitalen Verarbeitung einen D/A-Umsetzer.
+Wie eingangs des Kapitels beschrieben brauchen wir zunächst einen A/D-Umsetzer und nach der digitalen Verarbeitung einen D/A-Umsetzer.
 \end{sol}
 
 \begin{sol}{EF602}
@@ -13,21 +13,21 @@ digitalisiert werden.
 \end{sol}
 
 \begin{sol}{EF603}
-Die Abkürzung SDR steht für Software Defined Radio. Hier wird mindestens ein Teil der Signalverarbeitung in Software realisiert. Manchmal wird dazu bereits sehr früh im HF-Teil des Empfängers digitalisiert, manchmal wird auch ein Teil z.B. die IF in klassischen Schaltungen realisiert und nur der NF Bereich ist Digital.
+Die Abkürzung SDR steht für Software Defined Radio. Hier wird mindestens ein Teil der Signalverarbeitung in Software realisiert. Manchmal wird dazu bereits sehr früh im HF-Teil des Empfängers digitalisiert, manchmal wird auch ein Teil, z. B. die IF, in klassischen Schaltungen realisiert und nur der NF-Bereich ist digital.
 
 Einige SDR's sind über das Internet kostenlos erreichbar, z.B. über sogenannte \href{http://websdr.org}{WebSDR}.
 
 \end{sol}
 
 \begin{ohmchapter}
-Um ein Signal digital verarbeiten zu können müssen wir es zunächst digitalisieren.  
-Um ein analoges Signal zu Digitalisieren brauchen wir einen sogenannten \textbf{A/D-Umsetzer}. Das Blockschaltdiagramm sieht folgendermaßen aus:
+Um ein Signal digital verarbeiten zu können, müssen wir es zunächst digitalisieren.  
+Um ein analoges Signal zu digitalisieren, brauchen wir einen sogenannten \textbf{A/D-Umsetzer}. Das Blockschaltdiagramm sieht folgendermaßen aus:
 \begin{center}
 \begin{circuitikz}
 \draw (0, 0) node[adcshape,box]{} (0, 0);
 \end{circuitikz}
 \end{center}
-Natürlich können wir auch umgekehrt ein Digitales Signal in ein analoges umsetzen. Dies ist ein \textbf{D/A-Umsetzer} und das Blockschaltdiagramm sieht folgendermaßen aus.
+Natürlich können wir auch umgekehrt ein digitales Signal in ein analoges umsetzen. Dies ist ein \textbf{D/A-Umsetzer} und das Blockschaltdiagramm sieht folgendermaßen aus:
 \begin{center}
 \begin{circuitikz}
 \draw (0, 0) node[dacshape,box]{} (0, 0);
@@ -35,8 +35,8 @@ Natürlich können wir auch umgekehrt ein Digitales Signal in ein analoges umset
 \end{center}
 
 
-Zunehmend wird im in unseren Funkgeräten mit digitaler Signalverarbeitung gearbeitet. 
-Empfänger/Transceiver die einen signifikanten Anteil der Verarbeitung in Software machen nennt man auch Software Defined Radio (SDR).
+Zunehmend wird in unseren Funkgeräten mit digitaler Signalverarbeitung gearbeitet. 
+Empfänger/Transceiver, die einen signifikanten Anteil der Verarbeitung in Software machen, nennt man auch Software Defined Radio (SDR).
 Die Signale können auch über das Internet verteilt werden und werden von einem WebClient empfangen. Dies sind sogenannte WebSDR's.
 Die Webseite der Universität Twente stellt einen Empfänger für die gesamte Kurzwelle zur Verfügung:
 \href{http://websdr.org}{WebSDR}
