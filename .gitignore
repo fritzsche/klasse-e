@@ -11,6 +11,8 @@ cspell.json
 *.dvi
 *.toc
 
+kruecken.pdf
+
 # Logs
 logs
 *.log
