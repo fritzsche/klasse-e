@@ -38,8 +38,15 @@ Neueste Version:
 https://raw.githubusercontent.com/fritzsche/klasse-e/latest/kruecken.pdf
 
 
+## Dank
+An der Stelle möchte ich mich beim DARC 50ohm.de Autoren Team und beim Fragenkatalog Team bedanken.
+Die Autoren sind hier zu finden:
+https://github.com/DARC-e-V/50ohm-contents-dl
 
-## License
+Dieses kleine Skript baut auf diesen starken Inhalten auf. Vielen Dank!
+
+## Lizenzen
 * Der Fragenkatalog wird unter der Lizenz der BNetzA weitergegeben: https://www.govdata.de/dl-de/by-2-0
+* Für die Bilder (Ordner Bilder) werden Bilder von 50ohm.de unter CC BY verwendet: https://github.com/DARC-e-V/50ohm-contents-dl
 * Das Projekt selbst unterliegt der Public Domain (Unlicense).
 
